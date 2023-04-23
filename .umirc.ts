@@ -7,4 +7,10 @@ export default defineConfig({
   ],
   npmClient: 'yarn',
   links: [{ rel: 'icon', href: '/vite.svg' }],
+  plugins: [
+    '@umijs/plugins/dist/initial-state',
+    '@umijs/plugins/dist/model',
+  ],
+  initialState: {},
+  model: {},
 });

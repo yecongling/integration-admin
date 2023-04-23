@@ -4,10 +4,12 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import * as Icons from "@ant-design/icons";
 import favicon from "@/assets/images/favicon.png";
 import SvgIcon from "@/component/SvgIcon";
+import {useModel} from "umi";
 
 const {Sider} = Layout;
 
 const LeftMenu: React.FC = () => {
+  const {initialState} = useModel("@@initialState");
   // 定义 menu 类型
   type MenuItem = Required<MenuProps>["items"][number];
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
@@ -104,7 +106,7 @@ const LeftMenu: React.FC = () => {
         zIndex: 1000
       }}
       theme={"dark"}
-      collapsed={false}
+      collapsed={initialState?.setting.isCollapse}
       collapsible
     >
       <div className="layout-sider">
@@ -113,13 +115,13 @@ const LeftMenu: React.FC = () => {
             <Link to="/home">
               <div className="hd-64 mgr-01 dis-fl ai-ct jc-ct">
                 <Image width={25} src={favicon} preview={false}/>
-                {<p style={{
+                {initialState?.setting.isCollapse ? '' : <p style={{
                   fontWeight: 'bold',
                   margin: '0 12px',
                   fontSize: '20px',
                   color: '#fff'
                 }}>
-                  集成中心
+                  {initialState?.setting.title}
                 </p>
                 }
               </div>

@@ -18,9 +18,10 @@ import {useNavigate} from "umi";
 import Setting from "@/layouts/Setting";
 import FullScreen from "@/component/header/FullScreen";
 import BreadcrumbNav from "@/component/header/BreadcrumbNav";
-
-const Header: React.FC = ({global}: any) => {
-  const [isCollapse, setCollapse] = useState(false);
+import {useModel} from "umi";
+const Header: React.FC = () => {
+  const {initialState,refresh, setInitialState} = useModel("@@initialState");
+  const [isCollapse, setCollapse] = useState(initialState?.setting.isCollapse);
   const [modal, contextHolder] = Modal.useModal();
   const navigate = useNavigate()
   const items: MenuProps['items'] = [
@@ -87,7 +88,12 @@ const Header: React.FC = ({global}: any) => {
           marginLeft: '6px'
         }}
         onClick={() => {
-          setCollapse(!isCollapse)
+          setCollapse(!isCollapse);
+          if (initialState?.setting) {
+            initialState.setting.isCollapse = !isCollapse;
+          }
+          setInitialState(initialState);
+          refresh();
         }}
         className="btnbor"
       >

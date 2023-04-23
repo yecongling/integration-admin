@@ -1,3 +1,16 @@
+import defaultSettings from "../config/defaultSetting";
+
+export async function getInitialState(): Promise<{
+  setting?: any;
+  currentUser?:any;
+  loading?: boolean;
+}> {
+  return {
+    setting: defaultSettings
+  }
+}
+
+
 let normalizedRoutes: any = [];
 
 // umi3.x 需要将 routes 选项从第一个参数中解构: patchRoutes({ routes }) {}
