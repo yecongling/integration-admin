@@ -2,7 +2,8 @@ import { defineConfig } from "umi";
 
 export default defineConfig({
   routes: [
-    { path: "/", component: "Home" },
+    { path: "/", redirect: "/home" },
+    { path: "/home", component: "Home" },
     { path: "/docs", component: "docs" },
   ],
   npmClient: 'yarn',
@@ -13,4 +14,11 @@ export default defineConfig({
   ],
   initialState: {},
   model: {},
+  proxy: {
+    "/api": {
+      target: "http://localhost:8080",
+      changeOrigin: true,
+      pathRewrite: { '^/api' : '' }
+    },
+  }
 });
