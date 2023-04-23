@@ -1,21 +1,24 @@
-import { Link, Outlet } from 'umi';
-import styles from './index.less';
+import {Layout} from 'antd';
+import React from "react";
+import Header from "@/layouts/Header";
+import Content from "@/layouts/Content";
+import LeftMenu from "@/layouts/LeftMenu";
 
-export default function Layout() {
+const Layouts: React.FC = () => {
   return (
-    <div className={styles.navs}>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/docs">Docs</Link>
-        </li>
-        <li>
-          <a href="https://github.com/umijs/umi">Github</a>
-        </li>
-      </ul>
-      <Outlet />
-    </div>
+    <Layout style={{height: '100%'}}>
+      {/* 左边菜单 */}
+      <LeftMenu/>
+      <Layout>
+        {/* 顶部 */}
+        <Header/>
+        {/*<div className="tagsView-container">
+                        <TagList/>
+                    </div>*/}
+        <Content/>
+      </Layout>
+    </Layout>
   );
 }
+
+export default Layouts;
