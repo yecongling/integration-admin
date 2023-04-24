@@ -20,11 +20,11 @@ export default {
       },
       {
         "redirect": null,
-        "path": "/system",
+        "path": "/sys",
         "component": "",
         "route": "1",
         "children": [{
-          "path": "/system/menu",
+          "path": "/sys/menu",
           "component": "system/Menu",
           "route": "1",
           "meta": {
@@ -37,7 +37,7 @@ export default {
           "name": "system-menu",
           "id": "1170592628746878978"
         }, {
-          "path": "/system/role",
+          "path": "/sys/role",
           "component": "system/Role",
           "route": "1",
           "meta": {
@@ -50,7 +50,7 @@ export default {
           "name": "system-role",
           "id": "190c2b43bec6a5f7a4194a85db67d96a"
         }, {
-          "path": "/system/user",
+          "path": "/sys/user",
           "component": "system/User",
           "route": "1",
           "meta": {
