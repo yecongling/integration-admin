@@ -1,5 +1,5 @@
 import defaultSettings from "../config/defaultSetting";
-
+import {matchRoutes} from "umi";
 export async function getInitialState(): Promise<{
   setting?: any;
   currentUser?:any;
@@ -10,6 +10,13 @@ export async function getInitialState(): Promise<{
   }
 }
 
+// @ts-ignore
+export function onRouteChange({clientRoutes, location}) {
+  const route = matchRoutes(clientRoutes, location.pathname)?.pop()?.route;
+  if (route) {
+    document.title = route.title || '';
+  }
+}
 
 let normalizedRoutes: any = [];
 
