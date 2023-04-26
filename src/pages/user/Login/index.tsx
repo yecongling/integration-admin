@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Checkbox, Col, Form, Input, Row} from "antd";
 import {useNavigate} from "umi";
 import logo from "@/assets/images/logo.png";
-import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import {LockOutlined, SecurityScanOutlined, UserOutlined} from "@ant-design/icons";
 import "./login.less";
 import {loginApi} from "@/services/system/user/login";
 
@@ -75,7 +75,7 @@ const Login: React.FC = () => {
                       noStyle
                       rules={[{required: false, message: '请输入验证码'}]}
                     >
-                      <Input size="large" placeholder="输入右侧验证码" prefix={<LockOutlined />}/>
+                      <Input size="large" placeholder="输入右侧验证码" prefix={<SecurityScanOutlined />}/>
                     </Form.Item>
                   </Col>
                   <Col span={6}>
