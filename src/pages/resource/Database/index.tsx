@@ -31,16 +31,18 @@ const Database: React.FC = () => {
         inputRef.current.focus();
       }, 0);
     }
-    const param = form.getFieldValue('name');
-    getDbSource(param);
   }, [open]);
+
+  useEffect(() => {
+    getDbSource({});
+  }, [])
 
   /**
    * 表单检索
    * @param value
    */
   const onFinish = (value: any) => {
-    alert(value);
+    getDbSource(value);
   }
 
   /**
@@ -101,7 +103,12 @@ const Database: React.FC = () => {
    * 确认
    */
   const handleOk = (values: DataType) => {
-    setOpen(true);
+    // 保存数据
+
+    // 更新表格数据
+    setOpen(false);
+    const param = form.getFieldsValue();
+    getDbSource(param);
   }
 
   /**
@@ -197,9 +204,10 @@ const Database: React.FC = () => {
               </Form.Item>
             </Col>
             <Col span={6}>
-              <Form.Item label="数据库类型" name="databaseType" initialValue="-1" style={{marginBottom: 0}}>
+              <Form.Item label="数据库类型" name="databaseType" initialValue="-1"
+                         style={{marginBottom: 0}}>
                 <Select options={[
-                  {value: '-1', label: '请选择……'},
+                  {value: '0', label: '请选择……'},
                   {value: '1', label: 'MySQL5.5'},
                   {value: '2', label: 'MySQL5.7+'},
                   {value: '3', label: 'Oracle'},
@@ -314,7 +322,8 @@ const Database: React.FC = () => {
           <Form.Item label="连接超时时间" extra="等待数据库连接可用的最长时间（秒）" name="connectionTimeout">
             <Input/>
           </Form.Item>
-          <Form.Item label="闲置超时时间" extra="连接池中数据库连接允许的最长闲置时间（秒），设为0使得该连接永远不会被移除"
+          <Form.Item label="闲置超时时间"
+                     extra="连接池中数据库连接允许的最长闲置时间（秒），设为0使得该连接永远不会被移除"
                      name="idleTimeout">
             <Input/>
           </Form.Item>

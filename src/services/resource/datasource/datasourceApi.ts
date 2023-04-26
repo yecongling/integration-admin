@@ -1,3 +1,3 @@
 export enum datasourceApi {
-  getDatasource = '/datasourceApi/integration/sys/datasource/queryDatasource'
+  getDatasource = '/api/integration/sys/datasource/queryDatasource'
 }
