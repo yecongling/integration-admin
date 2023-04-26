@@ -1,14 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Checkbox, Col, Form, Input, Row} from "antd";
 import {useNavigate} from "umi";
 import logo from "@/assets/images/logo.png";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import "./login.less";
+import {loginApi} from "@/services/system/user/login";
 
 const Login: React.FC = () => {
+  const [form] = Form.useForm();
   const navigate = useNavigate();
-  const submit = () => {
-    navigate("/home");
+  // 加载状态
+  const [loading, setLoading] = useState<boolean>(false);
+  const submit = async (loginForm: any) => {
+    try {
+      setLoading(true);
+      const {token} = await loginApi(loginForm);
+      debugger
+      // 这里需要修改为将获取到的信息设置到全局状态中，供后续用户是否登录做验证
+      // 暂时用返回值处理
+      navigate("/home");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -39,6 +52,12 @@ const Login: React.FC = () => {
           </div>
           <div className="form" style={{marginTop: "40px"}}>
             <Form
+              form={form}
+              name="login"
+              labelCol={{span: 5}}
+              initialValues={{remember: true}}
+              size="large"
+              autoComplete="off"
               onFinish={submit}
             >
               <Form.Item name="username" rules={[{required: true, message: "请输入用户名"}]}>
@@ -54,7 +73,7 @@ const Login: React.FC = () => {
                     <Form.Item
                       name="captcha"
                       noStyle
-                      rules={[{required: true, message: '请输入验证码'}]}
+                      rules={[{required: false, message: '请输入验证码'}]}
                     >
                       <Input size="large" placeholder="输入右侧验证码" prefix={<LockOutlined />}/>
                     </Form.Item>
@@ -69,7 +88,7 @@ const Login: React.FC = () => {
                 <Checkbox>记住密码</Checkbox>
               </Form.Item>
               <Form.Item>
-                <Button size="large" style={{width: "100%"}} type="primary" htmlType="submit">
+                <Button loading={loading} size="large" style={{width: "100%"}} type="primary" htmlType="submit">
                   登录
                 </Button>
               </Form.Item>
