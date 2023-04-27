@@ -15,7 +15,6 @@ const Login: React.FC = () => {
     try {
       setLoading(true);
       const {token} = await loginApi(loginForm);
-      debugger
       // 这里需要修改为将获取到的信息设置到全局状态中，供后续用户是否登录做验证
       // 暂时用返回值处理
       navigate("/home");

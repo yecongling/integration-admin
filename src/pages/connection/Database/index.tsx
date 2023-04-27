@@ -1,0 +1,344 @@
+import React, {useEffect, useRef, useState} from "react";
+import {Button, Card, Col, Form, Input, Modal, Row, Select, Space, Table} from "antd";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  PlusOutlined,
+  SearchOutlined,
+  SyncOutlined
+} from "@ant-design/icons";
+import {ColumnsType} from "antd/es/table";
+import TextArea from "antd/es/input/TextArea";
+import {DataType} from "@/pages/connection/Database/DataType";
+import {getDatasource} from "@/services/resource/datasource/datasource";
+
+const Database: React.FC = () => {
+
+  const [form] = Form.useForm();
+  const [data] = Form.useForm();
+  const [open, setOpen] = useState(false);
+  const [dbSource, setDbSource] = useState<DataType[]>([]);
+  const [title, setTitle] = useState('新增数据源');
+  const inputRef = useRef(null);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
+  useEffect(() => {
+    if (open && inputRef.current) {
+      setTimeout(() => {
+        // @ts-ignore
+        inputRef.current.focus();
+      }, 0);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    getDbSource({});
+  }, [])
+
+  /**
+   * 表单检索
+   * @param value
+   */
+  const onFinish = (value: any) => {
+    getDbSource(value);
+  }
+
+  /**
+   * 新增
+   */
+  const add = () => {
+    setTitle('新增数据源');
+    setOpen(true);
+  }
+
+  /**
+   * 行选中改变事件
+   * @param newSelectedRowKeys 选中行的key
+   */
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
+  /**
+   * 编辑
+   *
+   * @param value
+   */
+  const edit = (value: DataType) => {
+    setTitle('编辑数据源');
+    data.setFieldsValue(value);
+    setOpen(true);
+  }
+
+  const del = () => {
+    alert("删除");
+  }
+
+  /**
+   * 导出
+   */
+  const exportExcel = () => {
+    alert("导出");
+  }
+
+  /**
+   * 导入
+   */
+  const importExcel = () => {
+    alert("导入")
+  }
+
+  /**
+   * 测试数据库连接
+   *
+   * @param values
+   */
+  const testQuery = (values: DataType) => {
+    console.log("测试连接");
+  }
+
+  /**
+   * 确认
+   */
+  const handleOk = (values: DataType) => {
+    // 保存数据
+
+    // 更新表格数据
+    setOpen(false);
+    const param = form.getFieldsValue();
+    getDbSource(param);
+  }
+
+  /**
+   * 取消
+   */
+  const handCancel = () => {
+    data.resetFields();
+    setOpen(false);
+  }
+
+  /**
+   * 行选中
+   */
+  const rowSelection = {
+    fixed: true,
+    columnWidth: 50,
+    selectedRowKeys,
+    onChange: onSelectChange,
+  }
+
+  /**
+   * 获取数据
+   * @param param
+   */
+  const getDbSource = async (param: any) => {
+    const resource = await getDatasource(param);
+    setDbSource(resource);
+  }
+
+  // 定义列
+  const columns: ColumnsType<DataType> = [
+    {
+      title: '数据源名称',
+      dataIndex: 'name',
+      width: '10%',
+      align: 'center'
+    },
+    {
+      title: '数据库类型',
+      dataIndex: 'datasourceType',
+      width: '10%',
+      align: 'center',
+      render: (text) => {
+        switch (text?.datasourceType) {
+          case '1':
+            return 'MySQL5.5';
+          default:
+            return 'SqlServer';
+        }
+      }
+    },
+    {
+      title: '测试SQL',
+      dataIndex: 'testQuery',
+      width: '15%',
+      align: 'center'
+    },
+    {
+      title: '连接地址',
+      dataIndex: 'url',
+      width: 'calc(50% - 10px)',
+      align: 'center'
+    },
+    {
+      title: '用户名',
+      dataIndex: 'username',
+      width: '5%',
+      align: 'center'
+    },
+    {
+      title: '操作',
+      dataIndex: 'operation',
+      width: '10%',
+      align: 'center',
+      render: (text, record) => (
+        <Space size="small">
+          <Button type="primary" size="small" onClick={() => edit(record)}>编辑</Button>
+          <Button type="primary" danger size="small">删除</Button>
+        </Space>
+      )
+    },
+  ];
+
+  return (
+    <>
+      {/* 查询区域 */}
+      <Card>
+        <Form form={form} onFinish={onFinish}>
+          <Row gutter={24}>
+            <Col span={6}>
+              <Form.Item label="数据源名称" name="name" initialValue="" style={{marginBottom: 0}}>
+                <Input autoFocus autoComplete="false"/>
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item label="数据库类型" name="databaseType" initialValue="-1"
+                         style={{marginBottom: 0}}>
+                <Select options={[
+                  {value: '0', label: '请选择……'},
+                  {value: '1', label: 'MySQL5.5'},
+                  {value: '2', label: 'MySQL5.7+'},
+                  {value: '3', label: 'Oracle'},
+                  {value: '4', label: 'SqlServer'},
+                ]}/>
+              </Form.Item>
+            </Col>
+            <Col span={4}>
+              <Button type="primary" htmlType="submit"><SearchOutlined/>查询</Button>
+              <Button htmlType="reset" style={{margin: '0 8px'}}><SyncOutlined/>重置</Button>
+            </Col>
+          </Row>
+        </Form>
+      </Card>
+      <Card style={{marginTop: '6px'}}>
+        <Space>
+          <Button type="primary" onClick={add}><PlusOutlined/>新增</Button>
+          <Button type="primary" onClick={importExcel}><LoginOutlined/>导入</Button>
+          <Button type="primary" onClick={exportExcel}><LogoutOutlined/>导出</Button>
+        </Space>
+        <Table
+          style={{marginTop: '6px'}}
+          bordered
+          size="middle"
+          columns={columns}
+          dataSource={dbSource}
+          rowSelection={rowSelection}
+          rowKey={record => record.id}
+        />
+      </Card>
+      {/* 编辑弹窗 */}
+      <Modal open={open}
+             centered
+             maskClosable={false}
+             title={title}
+             okText="确认"
+             okButtonProps={{icon: <CheckCircleOutlined/>}}
+             cancelButtonProps={{icon: <CloseCircleOutlined/>}}
+             cancelText="取消"
+             onOk={() => {
+               data.validateFields().then((values) => {
+                 data.resetFields();
+                 handleOk(values);
+               });
+             }}
+             style={{top: '20px'}}
+             onCancel={handCancel}
+             width={1000}
+             bodyStyle={{padding: '10px 40px'}}
+      >
+        <Form
+          form={data}
+          layout="horizontal"
+          name="basic"
+          size="middle"
+          labelCol={{span: 4}}
+          initialValues={{
+            datasourceType: '2',
+            connectionTimeout: 30,
+            idleTimeout: 600,
+            maxLifetime: 1800,
+            maxPoolSize: 30,
+            minIdle: 3
+          }}
+        >
+          <Form.Item name="name" label="数据源名称" extra="数据源名称必须是唯一的"
+                     rules={[{required: true, message: '请输入数据源名称'}]}>
+            <Input ref={inputRef}/>
+          </Form.Item>
+          <Form.Item name="datasourceType" label="数据库类型" extra="数据源的类型"
+                     rules={[{required: true, message: '请选择数据库类型'}]}>
+            <Select options={[
+              {value: '-1', label: '请选择……'},
+              {value: '1', label: 'MySQL5.5'},
+              {value: '2', label: 'MySQL5.7+'},
+              {value: '3', label: 'Oracle'},
+              {value: '4', label: 'SqlServer'},
+            ]}/>
+          </Form.Item>
+          <Form.Item name="url" label="数据源地址" extra="数据源连接字符串"
+                     rules={[{required: true, message: '请输入数据源地址'}]}>
+            <Input/>
+          </Form.Item>
+          <Form.Item name="testQuery" label="测试语句" extra="测试数据库状态的语句"
+                     rules={[{required: true, message: '测试语句'}]}>
+            <Input/>
+          </Form.Item>
+          <Form.Item name="username" label="用户名" extra="数据源用户名"
+                     rules={[{required: true, message: '请输入用户名'}]}>
+            <Input/>
+          </Form.Item>
+          <Form.Item label="密码">
+            <Form.Item name="password" style={{
+              width: 'calc(100% - 96px)',
+              display: 'inline-block',
+              marginBottom: '0',
+              marginRight: '6px'
+            }}
+                       rules={[{required: true, message: '请输入用户名'}]}>
+              <Input/>
+            </Form.Item>
+            <Form.Item style={{width: '90px', display: 'inline-block', marginBottom: '0'}}>
+              <Button type="primary" onClick={() => data.validateFields().then((values) => {
+                testQuery(values);
+              })}>测试连接</Button>
+            </Form.Item>
+          </Form.Item>
+          <Form.Item name="description" label="描述">
+            <TextArea rows={4}/>
+          </Form.Item>
+          {/* 数据源连接池配置 */}
+          <Form.Item label="连接超时时间" extra="等待数据库连接可用的最长时间（秒）" name="connectionTimeout">
+            <Input/>
+          </Form.Item>
+          <Form.Item label="闲置超时时间"
+                     extra="连接池中数据库连接允许的最长闲置时间（秒），设为0使得该连接永远不会被移除"
+                     name="idleTimeout">
+            <Input/>
+          </Form.Item>
+          <Form.Item label="连接存活时间" extra="" name="maxLifetime">
+            <Input/>
+          </Form.Item>
+          <Form.Item label="最小闲置连接数量" name="minIdle">
+            <Input/>
+          </Form.Item>
+          <Form.Item label="最大连接池数量" name="maxPoolSize">
+            <Input/>
+          </Form.Item>
+        </Form>
+      </Modal>
+    </>
+  )
+}
+export default Database;

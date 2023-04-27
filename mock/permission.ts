@@ -182,7 +182,7 @@ export default {
             "id": "11239",
             "name": "sys-resource",
             "path": "/resource/ssl",
-            "component": "resource/Ssl",
+            "component": "resource/SSL",
             "route": "1",
             "meta": {
               "keepAlive": false,
