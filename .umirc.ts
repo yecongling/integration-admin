@@ -9,7 +9,8 @@ export default defineConfig({
     {path: "/sys/role", component: "system/Role", title: '角色管理'},
     {path: "/sys/user", component: "system/User", title: '用户管理'},
     {path: "/resource/database", component: "resource/Database", title: '数据源管理'},
-    {path: "/emr/editor", component: "emr/Editor", title: '病历设计器'},
+    {path: "/emr/designer", component: "emr/Designer", title: '病历设计'},
+    {path: "*", component: "@/pages/404"}
   ],
   npmClient: 'yarn',
   links: [{rel: 'icon', href: '/vite.svg'}],

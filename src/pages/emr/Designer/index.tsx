@@ -4,7 +4,7 @@ import Search from "antd/lib/input/Search";
 import ITree from "@/component/emr/ITree";
 import {SaveOutlined} from "@ant-design/icons";
 
-const Editor: React.FC = () => {
+const Designer: React.FC = () => {
 
   const onSearchEmr = (value: string) => {
     console.log(value);
@@ -121,4 +121,4 @@ const Editor: React.FC = () => {
     </>
   )
 }
-export default Editor;
+export default Designer;
