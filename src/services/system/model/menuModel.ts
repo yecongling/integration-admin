@@ -7,6 +7,7 @@ export interface RouteItem {
   path: string;
   component: string;
   meta: RouteMeta,
+  route?: boolean;
   name?: string;
   alias?: string | string[];
   redirect?: string;
