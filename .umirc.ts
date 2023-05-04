@@ -25,11 +25,12 @@ export default defineConfig({
     '@umijs/plugins/dist/initial-state',
     '@umijs/plugins/dist/model',
   ],
+  // mock: false,
   initialState: {},
   model: {},
   proxy: {
     "/api": {
-      target: "http://localhost:8080",
+      target: "http://localhost:8080/integration",
       changeOrigin: true,
       pathRewrite: {'^/api': ''}
     },

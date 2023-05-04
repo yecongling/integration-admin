@@ -29,7 +29,7 @@ export function patchRoutes(routes: any) {
 
 // oldRender 至少需要被调用一次
 export function render(oldRender: () => void) {
-  fetch('/api/system/routes')
+  fetch('/api/sys/permission/getUserPermissionByToken')
     .then((res) => res.json())
     .then((res) => {
       normalizedRoutes = res.data;
