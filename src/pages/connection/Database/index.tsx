@@ -256,7 +256,7 @@ const Database: React.FC = () => {
              style={{top: '20px'}}
              onCancel={handCancel}
              width={1000}
-             bodyStyle={{padding: '10px 40px', height: '600px', overflowY: 'scroll'}}
+             bodyStyle={{padding: '10px 40px', height: '600px', overflowY: 'auto'}}
       >
         <Form
           form={data}
