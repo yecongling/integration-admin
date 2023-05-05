@@ -1,5 +1,5 @@
 export default {
-  "POST /api/integration/sys/login": {
+  "POST /api/sys/login": {
     code: 200,
     success: true,
     message: '',

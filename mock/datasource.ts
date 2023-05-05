@@ -1,5 +1,5 @@
 export default {
-  "POST /api/integration/sys/datasource/queryDatasource": {
+  "POST /api/sys/datasource/queryDatasource": {
     code: 200,
     success: true,
     message: '',
