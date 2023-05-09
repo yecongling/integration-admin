@@ -68,7 +68,7 @@ const Header: React.FC = () => {
    * 跳转到github
    */
   const routeGitHub = () => {
-    window.open('https://github.com/yecongling/ant-integration', '_blank');
+    window.open('https://github.com/yecongling/integration-admin', '_blank');
   }
 
   return (

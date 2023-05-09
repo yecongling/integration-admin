@@ -6,13 +6,13 @@ import {CloseOutlined, SettingOutlined} from "@ant-design/icons";
 /* 系统配置界面 */
 const Setting: React.FC = () => {
   const [open, changeOpen] = useState(false);
-  const [right, setRight] = useState(4);
+  const [right, setRight] = useState(0);
   const changeDrawer = () => {
     changeOpen(!open);
     if (!open) {
       setRight(330);
     } else {
-      setRight(5);
+      setRight(0);
     }
   }
 
