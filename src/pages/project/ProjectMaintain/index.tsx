@@ -1,6 +1,8 @@
 import React from "react";
-import {Button, Card, Col, Form, Input, Row, Select, Space} from "antd";
+import {Button, Card, Col, Form, Input, Row, Select, Space, Table} from "antd";
 import {SearchOutlined, SyncOutlined} from "@ant-design/icons";
+import { ColumnsType } from "antd/es/table";
+import { Project } from "./Project";
 const ProjectMaintain: React.FC = ()=> {
   const [searchForm] = Form.useForm();
 
@@ -20,11 +22,19 @@ const ProjectMaintain: React.FC = ()=> {
 
   }
 
+  const columns: ColumnsType<Project> =[
+    {
+      title: "项目名称"
+    }
+  ];
+
+  const data: Project[] = [];
+
   return (
     <>
     {/* 查询区域 */}
       <Card>
-        <Form form={searchForm} onFinish={onSearch}>
+        <Form form={searchForm} onFinish={onSearch} initialValues={{type: '-1'}}>
           <Row gutter={24}>
             <Col span={6}>
               <Form.Item label="项目名称" name="name" style={{marginBottom: 0}}>
@@ -32,7 +42,7 @@ const ProjectMaintain: React.FC = ()=> {
               </Form.Item>
             </Col>
             <Col span={6}>
-              <Form.Item label="项目类型" name="type" style={{marginBottom: 0}} initialValue="-1">
+              <Form.Item label="项目类型" name="type" style={{marginBottom: 0}}>
                 <Select options={[
                   {value: '-1', label: '请选择……'},
                   {value: '0', label: '集成项目'},
@@ -51,6 +61,14 @@ const ProjectMaintain: React.FC = ()=> {
         <Space>
           <Button type="primary" onClick={addProject}>新增项目</Button>
         </Space>
+        <Table
+          style={{marginTop: '6px'}}
+          scroll={{ x: 1500, y: 300 }}
+          bordered
+          size="middle"
+          columns={columns}
+          dataSource={data}
+        />
       </Card>
     </>
   );

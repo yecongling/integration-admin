@@ -254,6 +254,7 @@ const Menu: React.FC = () => {
         <Button type="primary" onClick={add}><PlusOutlined/>新增</Button>
         <Table
           style={{marginTop: '6px'}}
+          scroll={{ x: 'max-content', y:'calc(100vh - 400px)' }}
           bordered
           size="middle"
           columns={columns}
