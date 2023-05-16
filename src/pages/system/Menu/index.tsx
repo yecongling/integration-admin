@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Card, Col, Form, Input, Modal, Radio, Row, Select, Space, Table} from "antd";
 import {ColumnsType} from "antd/es/table";
 import * as Icons from "@ant-design/icons";
+import './menu.less';
 import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined} from "@ant-design/icons";
 
 /**
@@ -254,6 +255,7 @@ const Menu: React.FC = () => {
         <Button type="primary" onClick={add}><PlusOutlined/>新增</Button>
         <Table
           style={{marginTop: '6px'}}
+          className="table"
           scroll={{ x: 'max-content', y:'calc(100vh - 400px)' }}
           bordered
           size="middle"
