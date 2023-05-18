@@ -204,7 +204,7 @@ const Database: React.FC = () => {
               </Form.Item>
             </Col>
             <Col span={6}>
-              <Form.Item label="数据库类型" name="databaseType" initialValue="-1"
+              <Form.Item label="数据库类型" name="databaseType" initialValue="0"
                          style={{marginBottom: 0}}>
                 <Select options={[
                   {value: '0', label: '请选择……'},
