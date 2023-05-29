@@ -3,7 +3,7 @@ import {Button, Card, Col, Form, Input, Modal, Radio, Row, Select, Space, Table}
 import {ColumnsType} from "antd/es/table";
 import * as Icons from "@ant-design/icons";
 import './menu.less';
-import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined} from "@ant-design/icons";
 
 /**
  * 菜单维护界面
@@ -273,7 +273,7 @@ const Menu: React.FC = () => {
              cancelButtonProps={{icon: <CloseCircleOutlined/>}}
              cancelText="取消"
              style={{top: '20px'}}
-             width={1000}
+             width={600}
              onCancel={onCancel}
              bodyStyle={{padding: '10px 40px'}}
       >
@@ -283,10 +283,29 @@ const Menu: React.FC = () => {
           name="basic"
           size="middle"
           labelCol={{span: 4}}
+          initialValues={{
+            menu_type: '1'
+          }}
         >
-            <Form.Item name="name" label="菜单类型">
-                <Radio.Group options={menuType} defaultValue={1}></Radio.Group>
+            <Form.Item name="menu_type" label="菜单类型">
+                <Radio.Group>
+                  <Radio value={1}>一级菜单</Radio>
+                  <Radio value={2}>二级菜单</Radio>
+                  <Radio value={3}>按钮</Radio>
+                </Radio.Group>
             </Form.Item>
+          <Form.Item name="name" label="菜单名称" rules={[{required: true, message: '请输入菜单名称！'}]}>
+            <Input autoFocus placeholder="菜单名称"/>
+          </Form.Item>
+          <Form.Item name="url" label="菜单路径" rules={[{required: true, message: '请输入菜单路径！'}]}>
+            <Input placeholder="菜单路径"/>
+          </Form.Item>
+          <Form.Item name="component" label="前端组件" rules={[{required: true, message: '请输入前端组件！'}]}>
+            <Input placeholder="请输入前端组件"/>
+          </Form.Item>
+          <Form.Item name="icon" label="菜单图标">
+            <Input addonAfter={<SettingOutlined/>}/>
+          </Form.Item>
         </Form>
       </Modal>
     </>
