@@ -2,7 +2,7 @@ import {defineConfig} from "umi";
 
 export default defineConfig({
   routes: [
-    {path: "/", redirect: "/login"},
+    {path: "/", redirect: "/login", layout: false},
     {path: "/login", component: "user/Login", title: '登录'},
     {path: "/home", component: "Home", title: '首页'},
     {path: "/system/menu", component: "system/Menu", title: '菜单管理'},
