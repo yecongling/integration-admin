@@ -54,7 +54,7 @@ const Login: React.FC = () => {
               form={form}
               name="login"
               labelCol={{span: 5}}
-              initialValues={{remember: true}}
+              initialValues={{captcha: '', remember: true}}
               size="large"
               autoComplete="off"
               onFinish={submit}
@@ -63,7 +63,7 @@ const Login: React.FC = () => {
                 <Input size="large" autoFocus placeholder="用户名：admin" prefix={<UserOutlined/>}/>
               </Form.Item>
               <Form.Item name="password" rules={[{required: true, message: "请输入密码"}]}>
-                <Input.Password size="large" autoComplete="new-password" placeholder="密码：123456"
+                <Input.Password size="large" autoComplete="new-password" placeholder="密码：123123"
                                 prefix={<LockOutlined/>}/>
               </Form.Item>
               <Form.Item>
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
                 </Row>
               </Form.Item>
               {/* 记住密码 */}
-              <Form.Item name="remeber" valuePropName="checked">
+              <Form.Item name="remember" valuePropName="checked">
                 <Checkbox>记住密码</Checkbox>
               </Form.Item>
               <Form.Item>
