@@ -27,6 +27,7 @@ const Setting: React.FC = () => {
                 zIndex: '2000',
                 top: '40%',
                 position: 'fixed',
+                transition: 'all 0.3s',
                 right: `${right}` + 'px'
               }}>
         {open ? <CloseOutlined style={{fontSize: '18px'}}/> : <SettingOutlined style={{fontSize: '18px'}}/>}
@@ -41,7 +42,13 @@ const Setting: React.FC = () => {
             setInitialState(initialState);
             refresh();
           }}/>
-          <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked/>
+          <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked onChange={(checked)=> {
+            if (initialState?.setting) {
+              initialState.setting.colorPrimary = checked ? '#1890ff' : '#00b96b';
+            }
+            setInitialState(initialState);
+            refresh();
+          }}/>
         </Space>
       </Drawer>
     </>
