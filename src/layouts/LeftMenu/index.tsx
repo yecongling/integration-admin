@@ -119,7 +119,8 @@ const LeftMenu: React.FC = () => {
           {initialState?.setting.isCollapse ? '' : <p style={{
             fontWeight: 'bold',
             margin: '0 12px',
-            fontSize: '20px'
+            fontSize: '20px',
+            color: initialState?.setting.colorPrimary
           }}>
             {initialState?.setting.title}
           </p>
