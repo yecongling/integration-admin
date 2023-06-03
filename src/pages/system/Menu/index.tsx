@@ -284,7 +284,7 @@ const Menu: React.FC = () => {
           size="middle"
           labelCol={{span: 4}}
           initialValues={{
-            menu_type: '1'
+            menu_type: 1
           }}
         >
             <Form.Item name="menu_type" label="菜单类型">
