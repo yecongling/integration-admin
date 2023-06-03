@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {Image, Layout, Menu, MenuProps, Spin} from "antd";
-import {useNavigate, useLocation, Link} from "umi";
+import {Link, useLocation, useModel, useNavigate} from "umi";
 import * as Icons from "@ant-design/icons";
 import favicon from "@/assets/images/favicon.png";
 import SvgIcon from "@/component/SvgIcon";
-import {useModel} from "umi";
 import {RouteItem} from "@/services/system/model/menuModel";
 import {getOpenKeys, handleRouter} from "@/utils/util";
 import {getMenuList} from "@/services/system/permission/permission";
+import './index.less';
 
 const {Sider} = Layout;
 
@@ -106,44 +106,37 @@ const LeftMenu: React.FC = () => {
       className="scroll ant-menu"
       style={{
         overflowX: 'hidden',
-        zIndex: 1000
+        zIndex: 1000,
+        boxShadow: '2px 0 8px 0 rgba(29,35,41,.1)'
       }}
-      theme={"dark"}
+      theme={initialState?.setting.navTheme}
       collapsed={initialState?.setting.isCollapse}
       collapsible
     >
-      <div className="layout-sider">
-        <div className="pro-sider scroll">
-          <div className="menu">
-            <Link to="/home">
-              <div className="hd-64 mgr-01 dis-fl ai-ct jc-ct">
-                <Image width={25} src={favicon} preview={false}/>
-                {initialState?.setting.isCollapse ? '' : <p style={{
-                  fontWeight: 'bold',
-                  margin: '0 12px',
-                  fontSize: '20px',
-                  color: '#fff'
-                }}>
-                  {initialState?.setting.title}
-                </p>
-                }
-              </div>
-            </Link>
-            <Spin spinning={loading} tip="Loading...">
-              <Menu
-                theme="dark"
-                mode="inline"
-                selectedKeys={selectedKeys}
-                openKeys={openKeys}
-                items={menuList}
-                onClick={clickMenu}
-                onOpenChange={onOpenChange}
-              ></Menu>
-            </Spin>
-          </div>
+      <Link to="/home">
+        <div className="hd-64 mgr-01 dis-fl ai-ct jc-ct">
+          <Image width={25} src={favicon} preview={false}/>
+          {initialState?.setting.isCollapse ? '' : <p style={{
+            fontWeight: 'bold',
+            margin: '0 12px',
+            fontSize: '20px'
+          }}>
+            {initialState?.setting.title}
+          </p>
+          }
         </div>
-      </div>
-
+      </Link>
+      <Spin wrapperClassName="side-menu" spinning={loading} tip="Loading...">
+        <Menu
+          theme={initialState?.setting.navTheme}
+          mode="inline"
+          selectedKeys={selectedKeys}
+          openKeys={openKeys}
+          items={menuList}
+          onClick={clickMenu}
+          onOpenChange={onOpenChange}
+        ></Menu>
+      </Spin>
     </Sider>
   );
 }

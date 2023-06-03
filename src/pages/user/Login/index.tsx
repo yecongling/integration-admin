@@ -11,6 +11,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   // 加载状态
   const [loading, setLoading] = useState<boolean>(false);
+  const [code, setCode] = useState(Math.floor(Math.random()*10000).toString());
   const submit = async (loginForm: any) => {
     try {
       setLoading(true);
@@ -21,6 +22,13 @@ const Login: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  }
+
+  /**
+   * 获取验证码
+   */
+  const getCode = ()=> {
+    setCode(Math.floor(Math.random()*10000).toString());
   }
 
   return (
@@ -72,13 +80,13 @@ const Login: React.FC = () => {
                     <Form.Item
                       name="captcha"
                       noStyle
-                      rules={[{required: false, message: '请输入验证码'}]}
+                      rules={[{required: true, message: '请输入验证码'}]}
                     >
                       <Input size="large" placeholder="输入右侧验证码" prefix={<SecurityScanOutlined />}/>
                     </Form.Item>
                   </Col>
                   <Col span={6}>
-                    <Button size="large" style={{width: "100%", backgroundColor: "#f0f0f0"}}>验证码</Button>
+                    <Button size="large" onClick={getCode} style={{width: "100%", backgroundColor: "#f0f0f0"}}>{code}</Button>
                   </Col>
                 </Row>
               </Form.Item>
