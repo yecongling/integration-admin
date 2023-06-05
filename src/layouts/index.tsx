@@ -9,11 +9,8 @@ import {useModel} from "@@/exports";
 import ZhCN from "antd/es/locale/zh_CN";
 
 const Layouts: React.FC = () => {
-  const {initialState, refresh, setInitialState} = useModel("@@initialState");
+  const {initialState} = useModel("@@initialState");
   const location = useLocation();
-  if (location.pathname === '/login') {
-    return <Login/>;
-  }
   return (
     <ConfigProvider
       theme={{
@@ -23,7 +20,7 @@ const Layouts: React.FC = () => {
       }}
       locale={ZhCN}
     >
-      <Layout style={{height: '100%'}}>
+      {location.pathname === '/login' ? <Login/> : <Layout style={{height: '100%'}}>
         {/* 左边菜单 */}
         <LeftMenu/>
         <Layout>
@@ -34,7 +31,8 @@ const Layouts: React.FC = () => {
                     </div>*/}
           <Content/>
         </Layout>
-      </Layout>
+      </Layout>}
+
     </ConfigProvider>
 
   );
