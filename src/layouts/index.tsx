@@ -6,6 +6,7 @@ import LeftMenu from "@/layouts/LeftMenu";
 import {useLocation} from "umi";
 import Login from "@/pages/user/Login";
 import {useModel} from "@@/exports";
+import ZhCN from "antd/es/locale/zh_CN";
 
 const Layouts: React.FC = () => {
   const {initialState, refresh, setInitialState} = useModel("@@initialState");
@@ -20,6 +21,7 @@ const Layouts: React.FC = () => {
           colorPrimary: initialState?.setting.colorPrimary,
         },
       }}
+      locale={ZhCN}
     >
       <Layout style={{height: '100%'}}>
         {/* 左边菜单 */}
