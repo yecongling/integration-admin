@@ -24,14 +24,12 @@ const Database: React.FC = () => {
   const inputRef = useRef(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
-  useEffect(() => {
-    if (open && inputRef.current) {
-      setTimeout(() => {
-        // @ts-ignore
-        inputRef.current.focus();
-      }, 0);
+  const handleAfterOpen = ()=> {
+    if (inputRef.current) {
+      //@ts-ignore
+      inputRef.current.focus();
     }
-  }, [open]);
+  }
 
   useEffect(() => {
     getDbSource({});
@@ -255,6 +253,7 @@ const Database: React.FC = () => {
              }}
              style={{top: '20px'}}
              onCancel={handCancel}
+             afterOpenChange={handleAfterOpen}
              width={1000}
              bodyStyle={{padding: '10px 40px', height: '600px', overflowY: 'auto'}}
       >
