@@ -1,5 +1,5 @@
-import React, {useRef, useState} from "react";
-import {Button, Card, Col, Form, Input, Modal, Radio, Row, Select, Space, Table} from "antd";
+import React, {useEffect, useRef, useState} from "react";
+import {Button, Card, Col, Form, Input, InputNumber, Modal, Radio, Row, Select, Space, Switch, Table} from "antd";
 import {ColumnsType} from "antd/es/table";
 import * as Icons from "@ant-design/icons";
 import './menu.less';
@@ -10,11 +10,16 @@ import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined}
  * @constructor
  */
 const Menu: React.FC = () => {
-
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
   const [menuData] = Form.useForm();
   const inputRef = useRef(null);
+  const menuName = useRef(null);
+  useEffect(()=> {
+    // @ts-ignore
+    menuName.current && menuName.current.focus();
+  }, [])
+
   const menuType = [
       {label: '一级菜单', value: 1},
       {label: '子菜单', value: 2},
@@ -25,9 +30,16 @@ const Menu: React.FC = () => {
   }
 
   const handleAfterOpen = (open: boolean)=> {
-    if (inputRef.current) {
-      // @ts-ignore
-      inputRef.current.focus();
+    if (open) {
+      if (inputRef.current) {
+        // @ts-ignore
+        inputRef.current.focus();
+      }
+      return;
+    }
+    if (menuName.current) {
+      //@ts-ignore
+      menuName.current.focus();
     }
   }
 
@@ -187,43 +199,6 @@ const Menu: React.FC = () => {
           sort_no: 3
         }
       ]
-    }, {
-      key: 6,
-      name: '系统管理',
-      menu_type: 1,
-      icon: 'SettingOutlined',
-      component: '/system',
-      url: '/system',
-      sort_no: 2,
-      children: [
-        {
-          key: 7,
-          name: '菜单管理',
-          menu_type: 2,
-          icon: 'MenuOutlined',
-          component: '/system/Menu',
-          url: '/system/menu',
-          sort_no: 3
-        },
-        {
-          key: 8,
-          name: '角色管理',
-          menu_type: 2,
-          icon: 'UsergroupDeleteOutlined',
-          component: '/system/Role',
-          url: '/system/role',
-          sort_no: 3
-        },
-        {
-          key: 9,
-          name: '用户管理',
-          menu_type: 2,
-          icon: 'UserOutlined',
-          component: '/system/User',
-          url: '/system/user',
-          sort_no: 3
-        }
-      ]
     }
   ];
 
@@ -235,7 +210,7 @@ const Menu: React.FC = () => {
           <Row gutter={24}>
             <Col span={4}>
               <Form.Item label="菜单名称" name="name" initialValue="" style={{marginBottom: 0}}>
-                <Input autoFocus autoComplete="false"/>
+                <Input ref={menuName} autoComplete="false"/>
               </Form.Item>
             </Col>
             <Col span={4}>
@@ -291,9 +266,11 @@ const Menu: React.FC = () => {
           layout="horizontal"
           name="basic"
           size="middle"
-          labelCol={{span: 4}}
+          labelCol={{span: 5}}
           initialValues={{
-            menu_type: 1
+            menu_type: 1,
+            is_route: true,
+            internal_or_external: true
           }}
         >
             <Form.Item name="menu_type" label="菜单类型">
@@ -314,6 +291,18 @@ const Menu: React.FC = () => {
           </Form.Item>
           <Form.Item name="icon" label="菜单图标">
             <Input addonAfter={<SettingOutlined/>}/>
+          </Form.Item>
+          <Form.Item name="sort" label="序号">
+            <InputNumber/>
+          </Form.Item>
+          <Form.Item name="is_route" valuePropName="checked" label="是否路由菜单">
+            <Switch checkedChildren="是" unCheckedChildren="否"/>
+          </Form.Item>
+          <Form.Item name="hidden" valuePropName="checked" label="隐藏路由" >
+            <Switch checkedChildren="是" unCheckedChildren="否"/>
+          </Form.Item>
+          <Form.Item name="internal_or_external" valuePropName="checked" label="打开方式">
+            <Switch checkedChildren="内部" unCheckedChildren="外部"/>
           </Form.Item>
         </Form>
       </Modal>

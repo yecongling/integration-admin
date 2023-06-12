@@ -26,7 +26,7 @@ export default {
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "icon": "HomeOutlined",
+          "icon": "CalculatorOutlined",
           "title": "数据统计",
           "internal": false
         },
@@ -93,7 +93,7 @@ export default {
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "icon": "HomeOutlined",
+          "icon": "ApartmentOutlined",
           "title": "项目设计",
           "internal": false
         },
@@ -134,7 +134,7 @@ export default {
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "icon": "HomeOutlined",
+          "icon": "TeamOutlined",
           "title": "资源管理",
           "internal": false
         },
@@ -227,7 +227,7 @@ export default {
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "icon": "HomeOutlined",
+          "icon": "ControlOutlined",
           "title": "连接管理",
           "internal": false
         },
@@ -268,7 +268,7 @@ export default {
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "icon": "HomeOutlined",
+          "icon": "SlidersOutlined",
           "title": "数据处理",
           "internal": false
         },
@@ -441,7 +441,7 @@ export default {
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "icon": "HomeOutlined",
+          "icon": "MonitorOutlined",
           "title": "系统监控",
           "internal": false
         },
@@ -534,7 +534,7 @@ export default {
         "route": "1",
         "meta": {
           "keepAlive": false,
-          "icon": "HomeOutlined",
+          "icon": "MessageOutlined",
           "title": "消息中心",
           "internal": false
         },
