@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {Button, Card, Col, Form, Input, Modal, Radio, Row, Select, Space, Table} from "antd";
 import {ColumnsType} from "antd/es/table";
 import * as Icons from "@ant-design/icons";
@@ -14,6 +14,7 @@ const Menu: React.FC = () => {
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
   const [menuData] = Form.useForm();
+  const inputRef = useRef(null);
   const menuType = [
       {label: '一级菜单', value: 1},
       {label: '子菜单', value: 2},
@@ -21,6 +22,13 @@ const Menu: React.FC = () => {
   ];
   const onFinish = (value: any) => {
     alert(value);
+  }
+
+  const handleAfterOpen = (open: boolean)=> {
+    if (inputRef.current) {
+      // @ts-ignore
+      inputRef.current.focus();
+    }
   }
 
   /**
@@ -275,6 +283,7 @@ const Menu: React.FC = () => {
              style={{top: '20px'}}
              width={600}
              onCancel={onCancel}
+             afterOpenChange={handleAfterOpen}
              bodyStyle={{padding: '10px 40px'}}
       >
         <Form
@@ -295,7 +304,7 @@ const Menu: React.FC = () => {
                 </Radio.Group>
             </Form.Item>
           <Form.Item name="name" label="菜单名称" rules={[{required: true, message: '请输入菜单名称！'}]}>
-            <Input autoFocus placeholder="菜单名称"/>
+            <Input ref={inputRef} placeholder="菜单名称"/>
           </Form.Item>
           <Form.Item name="url" label="菜单路径" rules={[{required: true, message: '请输入菜单路径！'}]}>
             <Input placeholder="菜单路径"/>
