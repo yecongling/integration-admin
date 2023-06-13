@@ -8,14 +8,12 @@ const ITree: React.FC = (props) => {
     {
       title: 'parent 1',
       key: '0-0',
-      icon: <CarryOutOutlined/>,
       children: [
         {
           title: 'parent 1-0',
           key: '0-0-0',
-          icon: <CarryOutOutlined/>,
           children: [
-            {title: 'leaf', key: '0-0-0-0', icon: <CarryOutOutlined/>},
+            {title: 'leaf', key: '0-0-0-0', isLeaf: true},
             {
               title: (
                 <>
@@ -24,28 +22,23 @@ const ITree: React.FC = (props) => {
                 </>
               ),
               key: '0-0-0-1',
-              icon: <CarryOutOutlined/>,
             },
-            {title: 'leaf', key: '0-0-0-2', icon: <CarryOutOutlined/>},
+            {title: 'leaf', key: '0-0-0-2', isLeaf: true},
           ],
         },
         {
           title: 'parent 1-1',
           key: '0-0-1',
-          icon: <CarryOutOutlined/>,
-          children: [{title: 'leaf', key: '0-0-1-0', icon: <CarryOutOutlined/>}],
+          children: [{title: 'leaf', key: '0-0-1-0', isLeaf: true}],
         },
         {
           title: 'parent 1-2',
           key: '0-0-2',
-          icon: <CarryOutOutlined/>,
           children: [
-            {title: 'leaf', key: '0-0-2-0', icon: <CarryOutOutlined/>},
+            {title: 'leaf', key: '0-0-2-0', isLeaf: true},
             {
               title: 'leaf',
-              key: '0-0-2-1',
-              icon: <CarryOutOutlined/>,
-              switcherIcon: <FormOutlined/>,
+              key: '0-0-2-1'
             },
           ],
         },
@@ -54,15 +47,13 @@ const ITree: React.FC = (props) => {
     {
       title: 'parent 2',
       key: '0-1',
-      icon: <CarryOutOutlined/>,
       children: [
         {
           title: 'parent 2-0',
           key: '0-1-0',
-          icon: <CarryOutOutlined/>,
           children: [
-            {title: 'leaf', key: '0-1-0-0', icon: <CarryOutOutlined/>},
-            {title: 'leaf', key: '0-1-0-1', icon: <CarryOutOutlined/>},
+            {title: 'leaf', key: '0-1-0-0', isLeaf: true},
+            {title: 'leaf', key: '0-1-0-1', isLeaf: true},
           ],
         },
       ],
@@ -70,7 +61,7 @@ const ITree: React.FC = (props) => {
   ];
   return (
     <>
-      <Tree showLine showIcon defaultExpandAll treeData={treeData} style={{marginTop: '6px'}}></Tree>
+      <Tree.DirectoryTree showLine showIcon defaultExpandAll treeData={treeData} style={{marginTop: '6px'}}></Tree.DirectoryTree>
     </>
   )
 }

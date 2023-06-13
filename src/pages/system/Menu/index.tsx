@@ -256,7 +256,7 @@ const Menu: React.FC = () => {
              cancelButtonProps={{icon: <CloseCircleOutlined/>}}
              cancelText="取消"
              style={{top: '20px'}}
-             width={600}
+             width={800}
              onCancel={onCancel}
              afterOpenChange={handleAfterOpen}
              bodyStyle={{padding: '10px 40px'}}
@@ -270,7 +270,8 @@ const Menu: React.FC = () => {
           initialValues={{
             menu_type: 1,
             is_route: true,
-            internal_or_external: true
+            internal_or_external: true,
+            sort: 1
           }}
         >
             <Form.Item name="menu_type" label="菜单类型">
