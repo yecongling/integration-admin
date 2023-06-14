@@ -67,14 +67,17 @@ const ProjectMaintain: React.FC = () => {
       dataIndex: 'projectName',
       width: '15%',
       align: 'left',
-      key: 'projectName'
+      key: 'projectName',
+      sorter: true
     },
     {
       title: "优先级",
       dataIndex: 'level',
       width: '5%',
       align: 'left',
-      key: 'level'
+      key: 'level',
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => a.level - b.level,
     },
     {
       title: "描述",
