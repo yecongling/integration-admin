@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {
   Button,
   Card,
@@ -19,7 +19,8 @@ import {ColumnsType} from "antd/es/table";
 import * as Icons from "@ant-design/icons";
 import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined} from "@ant-design/icons";
 import './menu.less';
-import {MenuType} from "@/pages/system/Menu/Menu";
+import {permission} from "@/services/system/model/menuModel";
+import {getAllPermission} from "@/services/system/permission/permission";
 
 /**
  * 菜单维护界面
@@ -34,13 +35,17 @@ const Menu: React.FC = () => {
   const menuName = useRef(null);
   // 上级菜单
   const [value, setValue] = useState<string>();
-
+  // 表格分页信息
+  const [pageInfo, setPageInfo] = useState({page: 1, size: 10, total: 0});
+  // 表格数据
+  const [tableData, setTableData] = useState([]);
   const onChange = (newValue: string) => {
     setValue(newValue);
   };
   useEffect(() => {
     // @ts-ignore
     menuName.current && menuName.current.focus();
+    pageChange(pageInfo.page, pageInfo.size);
   }, [])
 
   const menuType = [
@@ -66,17 +71,17 @@ const Menu: React.FC = () => {
     }
   }
 
-    /**
-     * 菜单类型变换
-     * @param e
-     */
-    const changeMenuType = (e: RadioChangeEvent)=> {
-      if (e.target.value === 1) {
-        setShow(false);
-        return;
-      }
-      setShow(true);
+  /**
+   * 菜单类型变换
+   * @param e
+   */
+  const changeMenuType = (e: RadioChangeEvent) => {
+    if (e.target.value === 1) {
+      setShow(false);
+      return;
     }
+    setShow(true);
+  }
 
   /**
    * 编辑
@@ -108,7 +113,7 @@ const Menu: React.FC = () => {
     setOpen(false);
   }
 
-  const handleOk = (values: MenuType) => {
+  const handleOk = (values: permission) => {
     debugger
   }
 
@@ -190,56 +195,29 @@ const Menu: React.FC = () => {
     },
   ];
 
-  // 模拟数据
-  const data: menuType[] = [
-    {
-      key: 1,
-      name: '首页',
-      menu_type: 1,
-      icon: 'HomeOutlined',
-      component: '/Home',
-      url: '/home',
-      sort_no: 2,
-    },
-    {
-      key: 2,
-      name: '系统管理',
-      menu_type: 1,
-      icon: 'SettingOutlined',
-      component: '/system',
-      url: '/system',
-      sort_no: 2,
-      children: [
-        {
-          key: 3,
-          name: '菜单管理',
-          menu_type: 2,
-          icon: 'MenuOutlined',
-          component: '/system/Menu',
-          url: '/system/menu',
-          sort_no: 3
-        },
-        {
-          key: 4,
-          name: '角色管理',
-          menu_type: 2,
-          icon: 'UsergroupDeleteOutlined',
-          component: '/system/Role',
-          url: '/system/role',
-          sort_no: 3
-        },
-        {
-          key: 5,
-          name: '用户管理',
-          menu_type: 2,
-          icon: 'UserOutlined',
-          component: '/system/User',
-          url: '/system/user',
-          sort_no: 3
-        }
-      ]
+  /**
+   * 换页
+   */
+  const pageChange = useCallback(
+    (page: number, size: number) => {
+      console.log(page, size)
+      pageInfo.page = page;
+      pageInfo.size = size;
+      setPageInfo(pageInfo);
+      getAllMenus();
+    }, []
+  )
+
+  const getAllMenus = async () => {
+    let params = {pageInfo};
+    let result = await getAllPermission(params);
+    // @ts-ignore
+    if (result) {
+      // @ts-ignore
+      let tableData = [...result.data];
+      debugger
     }
-  ];
+  }
 
   const treeData = [
     {
@@ -301,9 +279,18 @@ const Menu: React.FC = () => {
           className="table"
           scroll={{x: 'max-content', y: 'calc(100vh - 400px)'}}
           bordered
+          pagination={{
+            showSizeChanger: true, pageSizeOptions: ['2', '5', '10'],
+            defaultPageSize: pageInfo.size, showTotal: () => {
+              return `共${pageInfo.total}条数据`
+            },
+            onChange: pageChange,
+            showQuickJumper: true,
+            current: pageInfo.page, total: pageInfo.total
+          }}
           size="middle"
           columns={columns}
-          dataSource={data}
+          dataSource={tableData}
         />
       </Card>
       {/* 编辑弹窗 */}
@@ -350,17 +337,18 @@ const Menu: React.FC = () => {
           <Form.Item name="name" label="菜单名称" rules={[{required: true, message: '请输入菜单名称！'}]}>
             <Input ref={inputRef} placeholder="菜单名称"/>
           </Form.Item>
-          {showParent && <Form.Item name="parent_id" label="上级菜单" rules={[{required: true, message: '请选择上级菜单！'}]}>
-              <TreeSelect
-                  style={{ width: '100%' }}
-                  value={value}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                  treeData={treeData}
-                  placeholder="请选择"
-                  treeDefaultExpandAll
-                  onChange={onChange}
-              />
-          </Form.Item>}
+          {showParent &&
+              <Form.Item name="parent_id" label="上级菜单" rules={[{required: true, message: '请选择上级菜单！'}]}>
+                  <TreeSelect
+                      style={{width: '100%'}}
+                      value={value}
+                      dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
+                      treeData={treeData}
+                      placeholder="请选择"
+                      treeDefaultExpandAll
+                      onChange={onChange}
+                  />
+              </Form.Item>}
           <Form.Item name="url" label="菜单路径" rules={[{required: true, message: '请输入菜单路径！'}]}>
             <Input placeholder="菜单路径"/>
           </Form.Item>

@@ -25,7 +25,7 @@ export default defineConfig({
     '@umijs/plugins/dist/initial-state',
     '@umijs/plugins/dist/model',
   ],
-  // mock: false,
+  mock: false,
   initialState: {},
   model: {},
   proxy: {
