@@ -1,7 +1,7 @@
 /**
  * 定义菜单字段类型
  */
-export interface Menu {
+export interface MenuType {
   id: string;
   parent_id: string;
   name: string;

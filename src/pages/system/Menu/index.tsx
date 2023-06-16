@@ -1,9 +1,25 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Button, Card, Col, Form, Input, InputNumber, Modal, Radio, Row, Select, Space, Switch, Table} from "antd";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Radio,
+  RadioChangeEvent,
+  Row,
+  Select,
+  Space,
+  Switch,
+  Table, TreeSelect
+} from "antd";
 import {ColumnsType} from "antd/es/table";
 import * as Icons from "@ant-design/icons";
-import './menu.less';
 import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined} from "@ant-design/icons";
+import './menu.less';
+import {MenuType} from "@/pages/system/Menu/Menu";
 
 /**
  * 菜单维护界面
@@ -12,24 +28,31 @@ import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined}
 const Menu: React.FC = () => {
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
+  const [showParent, setShow] = useState(false);
   const [menuData] = Form.useForm();
   const inputRef = useRef(null);
   const menuName = useRef(null);
-  useEffect(()=> {
+  // 上级菜单
+  const [value, setValue] = useState<string>();
+
+  const onChange = (newValue: string) => {
+    setValue(newValue);
+  };
+  useEffect(() => {
     // @ts-ignore
     menuName.current && menuName.current.focus();
   }, [])
 
   const menuType = [
-      {label: '一级菜单', value: 1},
-      {label: '子菜单', value: 2},
-      {label: '按钮/权限', value: 3},
+    {label: '一级菜单', value: 1},
+    {label: '子菜单', value: 2},
+    {label: '按钮/权限', value: 3},
   ];
   const onFinish = (value: any) => {
     alert(value);
   }
 
-  const handleAfterOpen = (open: boolean)=> {
+  const handleAfterOpen = (open: boolean) => {
     if (open) {
       if (inputRef.current) {
         // @ts-ignore
@@ -42,6 +65,18 @@ const Menu: React.FC = () => {
       menuName.current.focus();
     }
   }
+
+    /**
+     * 菜单类型变换
+     * @param e
+     */
+    const changeMenuType = (e: RadioChangeEvent)=> {
+      if (e.target.value === 1) {
+        setShow(false);
+        return;
+      }
+      setShow(true);
+    }
 
   /**
    * 编辑
@@ -71,6 +106,10 @@ const Menu: React.FC = () => {
    */
   const onCancel = () => {
     setOpen(false);
+  }
+
+  const handleOk = (values: MenuType) => {
+    debugger
   }
 
   interface menuType {
@@ -202,6 +241,27 @@ const Menu: React.FC = () => {
     }
   ];
 
+  const treeData = [
+    {
+      title: '系统管理',
+      value: '0-0',
+      children: [
+        {
+          title: '模块管理',
+          value: '0-0-1',
+        },
+        {
+          title: '项目管理',
+          value: '0-0-2',
+        },
+      ],
+    },
+    {
+      title: '监控中心',
+      value: '0-1',
+    },
+  ];
+
   return (
     <>
       {/* 查询区域 */}
@@ -239,7 +299,7 @@ const Menu: React.FC = () => {
         <Table
           style={{marginTop: '6px'}}
           className="table"
-          scroll={{ x: 'max-content', y:'calc(100vh - 400px)' }}
+          scroll={{x: 'max-content', y: 'calc(100vh - 400px)'}}
           bordered
           size="middle"
           columns={columns}
@@ -257,6 +317,12 @@ const Menu: React.FC = () => {
              cancelText="取消"
              style={{top: '20px'}}
              width={800}
+             onOk={() => {
+               menuData.validateFields().then((values) => {
+                 menuData.resetFields();
+                 handleOk(values);
+               });
+             }}
              onCancel={onCancel}
              afterOpenChange={handleAfterOpen}
              bodyStyle={{padding: '10px 40px'}}
@@ -274,16 +340,27 @@ const Menu: React.FC = () => {
             sort: 1
           }}
         >
-            <Form.Item name="menu_type" label="菜单类型">
-                <Radio.Group>
-                  <Radio value={1}>一级菜单</Radio>
-                  <Radio value={2}>二级菜单</Radio>
-                  <Radio value={3}>按钮</Radio>
-                </Radio.Group>
-            </Form.Item>
+          <Form.Item name="menu_type" label="菜单类型">
+            <Radio.Group onChange={changeMenuType}>
+              <Radio value={1}>一级菜单</Radio>
+              <Radio value={2}>子菜单</Radio>
+              <Radio value={3}>按钮</Radio>
+            </Radio.Group>
+          </Form.Item>
           <Form.Item name="name" label="菜单名称" rules={[{required: true, message: '请输入菜单名称！'}]}>
             <Input ref={inputRef} placeholder="菜单名称"/>
           </Form.Item>
+          {showParent && <Form.Item name="parent_id" label="上级菜单" rules={[{required: true, message: '请选择上级菜单！'}]}>
+              <TreeSelect
+                  style={{ width: '100%' }}
+                  value={value}
+                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                  treeData={treeData}
+                  placeholder="请选择"
+                  treeDefaultExpandAll
+                  onChange={onChange}
+              />
+          </Form.Item>}
           <Form.Item name="url" label="菜单路径" rules={[{required: true, message: '请输入菜单路径！'}]}>
             <Input placeholder="菜单路径"/>
           </Form.Item>
@@ -299,7 +376,7 @@ const Menu: React.FC = () => {
           <Form.Item name="is_route" valuePropName="checked" label="是否路由菜单">
             <Switch checkedChildren="是" unCheckedChildren="否"/>
           </Form.Item>
-          <Form.Item name="hidden" valuePropName="checked" label="隐藏路由" >
+          <Form.Item name="hidden" valuePropName="checked" label="隐藏路由">
             <Switch checkedChildren="是" unCheckedChildren="否"/>
           </Form.Item>
           <Form.Item name="internal_or_external" valuePropName="checked" label="打开方式">
