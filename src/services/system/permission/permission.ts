@@ -19,7 +19,7 @@ export const getMenuList = () => {
 
 export const getAllPermission = (params: any) => {
   return new Promise((resolve, reject) => {
-    defHttp.post<permissionResult>({url: Api.getAllPermission}).then((res) => {
+    defHttp.post<permissionResult>({url: Api.getAllPermission, data: params}).then((res) => {
       resolve(res);
     })
   })

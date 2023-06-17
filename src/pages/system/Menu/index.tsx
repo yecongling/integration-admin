@@ -21,6 +21,7 @@ import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined}
 import './menu.less';
 import {permission} from "@/services/system/model/menuModel";
 import {getAllPermission} from "@/services/system/permission/permission";
+import {any} from "prop-types";
 
 /**
  * 菜单维护界面
@@ -54,7 +55,7 @@ const Menu: React.FC = () => {
     {label: '按钮/权限', value: 3},
   ];
   const onFinish = (value: any) => {
-    alert(value);
+
   }
 
   const handleAfterOpen = (open: boolean) => {
@@ -143,12 +144,12 @@ const Menu: React.FC = () => {
     },
     {
       title: '菜单类型',
-      dataIndex: 'menu_type',
-      key: 'menu_type',
+      dataIndex: 'menuType',
+      key: 'menuType',
       width: '5%',
       align: 'center',
       render: (text) => {
-        return text === 1 ? "目录" : "一级菜单"
+        return text === 0 ? "一级菜单" : (text === 1 ? "子菜单" : "按钮");
       }
     },
     {
@@ -175,8 +176,8 @@ const Menu: React.FC = () => {
     },
     {
       title: '排序',
-      dataIndex: 'sort_no',
-      key: 'sort_no',
+      dataIndex: 'sortNo',
+      key: 'sortNo',
       width: '5%',
       align: 'center'
     },
@@ -200,7 +201,6 @@ const Menu: React.FC = () => {
    */
   const pageChange = useCallback(
     (page: number, size: number) => {
-      console.log(page, size)
       pageInfo.page = page;
       pageInfo.size = size;
       setPageInfo(pageInfo);
@@ -209,13 +209,15 @@ const Menu: React.FC = () => {
   )
 
   const getAllMenus = async () => {
-    let params = {pageInfo};
+    let formData = form.getFieldsValue();
+    // let params = {pageInfo, formData};
+    let params = Object.assign({}, pageInfo, formData);
     let result = await getAllPermission(params);
     // @ts-ignore
     if (result) {
       // @ts-ignore
-      let tableData = [...result.data];
-      debugger
+      let tableData:[] = [...result.data];
+      setTableData(tableData);
     }
   }
 
