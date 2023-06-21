@@ -1,6 +1,7 @@
 import {defHttp} from "@/utils/http";
 import {Api} from "@/services/system/permission/menuApi";
 import {getMenuListResultModel, permission, permissionResult} from "@/services/system/model/menuModel";
+import {Result} from "@/types/axios";
 
 /**
  * 获取菜单列表
@@ -23,4 +24,13 @@ export const getAllPermission = (params: any) => {
       resolve(res);
     })
   })
+}
+
+/**
+ * 字段校验
+ * @param param
+ */
+export function validateFields(param: permission) {
+  let result: Result = {success: true, code: 200, result: '', message: '', fieldName: ''};
+  return result;
 }

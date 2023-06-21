@@ -20,8 +20,7 @@ import * as Icons from "@ant-design/icons";
 import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined} from "@ant-design/icons";
 import './menu.less';
 import {permission} from "@/services/system/model/menuModel";
-import {getAllPermission} from "@/services/system/permission/permission";
-import {any} from "prop-types";
+import {getAllPermission, validateFields} from "@/services/system/permission/permission";
 
 /**
  * 菜单维护界面
@@ -71,6 +70,30 @@ const Menu: React.FC = () => {
       menuName.current.focus();
     }
   }
+
+  /**
+   * 字段校验
+   *
+   * @param values
+   */
+  const validate = async (values: permission) => {
+    try {
+      const res = await validateFields(values);
+      if (res.success) {
+        // 提交表单
+      } else {
+        form.setFields([
+          {
+            name: res.fieldName,
+            errors: [res.message],
+          },
+        ]);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 
   /**
    * 菜单类型变换

@@ -1,3 +1,5 @@
+import {NamePath} from "rc-field-form/es/interface";
+
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
 export type SuccessMessageMode = 'none' | 'success' | 'error' | undefined;
 
@@ -31,5 +33,6 @@ export interface Result<T = any> {
     success: boolean;
     message: string;
     result: T;
+    fieldName: string;
 
 }
