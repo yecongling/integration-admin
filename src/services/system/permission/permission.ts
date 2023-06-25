@@ -18,6 +18,10 @@ export const getMenuList = () => {
   });
 }
 
+/**
+ * 获取所有菜单
+ * @param params
+ */
 export const getAllPermission = (params: any) => {
   return new Promise((resolve, reject) => {
     defHttp.post<permissionResult>({url: Api.getAllPermission, data: params}).then((res) => {
@@ -31,6 +35,42 @@ export const getAllPermission = (params: any) => {
  * @param param
  */
 export function validateFields(param: permission) {
-  let result: Result = {success: true, code: 200, result: '', message: '', fieldName: ''};
+  let result: Result = {success: true, code: 200, result: '', msg: '', fieldName: ''};
   return result;
+}
+
+/**
+ * 添加菜单
+ * @param param
+ */
+export const addPermission = (param: permission) => {
+  return new Promise((resolve, reject) => {
+    defHttp.post<permissionResult>({url: Api.addPermission, data: param}).then((res) => {
+      resolve(res);
+    })
+  });
+}
+
+/**
+ * 编辑菜单
+ * @param param
+ */
+export const editPermission = (param: permission) => {
+  return new Promise((resolve, reject) => {
+    defHttp.post<permissionResult>({url: Api.editPermission, data: param}).then((res) => {
+      resolve(res);
+    })
+  });
+}
+
+/**
+ * 删除菜单
+ * @param id
+ */
+export const deletePermission = (id: string) => {
+  return new Promise((resolve, reject) => {
+    defHttp.get<permissionResult>({url: Api.deletePermission, data: {id}}).then((res) => {
+      resolve(res);
+    })
+  });
 }

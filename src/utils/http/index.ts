@@ -8,7 +8,7 @@ import {deepMerge, setObjToUrlParams} from "@/utils";
 import {AxiosResponse} from "axios";
 import {RequestOptions, Result} from "@/types/axios";
 import {ContentTypeEnum, RequestEnum, ResultEnum} from "@/enums/httpEnum";
-import {message as MessageApi, Modal} from "antd";
+import {message, Modal} from "antd";
 // import {setToken} from "@/stores/modules/global/action";
 import {isString} from "@/utils/is";
 import {joinTimestamp} from "@/utils/http/helper";
@@ -37,13 +37,13 @@ const transform: AxiosTransform = {
         if (!data) {
             throw new Error("api接口请求失败，没有返回数据");
         }
-        const {code, result, message, success} = data;
+        const {code, result, msg, success} = data;
         // 系统默认200状态码为正常成功请求，可在枚举中配置自己的
         const hasSuccess = data && Reflect.has(data, "code") && (code === ResultEnum.SUCCESS || code === 200);
         if (hasSuccess) {
-            if (success && message && options.successMessageMode === 'success') {
+            if (success && msg && options.successMessageMode === 'success') {
                 // 信息成功提示
-                MessageApi.success(message);
+                message.success(msg);
             }
             return result;
         }
@@ -55,14 +55,14 @@ const transform: AxiosTransform = {
                 window.location.href = "/login";
                 break;
             default:
-                if (message) {
-                    timeoutMsg = message;
+                if (msg) {
+                    timeoutMsg = msg;
                 }
         }
         if (options.errorMessageMode === 'modal') {
             Modal.error({title: "错误提示", content: timeoutMsg});
         } else if (options.errorMessageMode === 'message') {
-            MessageApi.error(timeoutMsg);
+            message.error(timeoutMsg);
         }
         throw new Error(timeoutMsg || "接口请求失败");
     },
@@ -142,7 +142,7 @@ const transform: AxiosTransform = {
                 errMessage = "网络异常"
             }
             if (errMessage) {
-                MessageApi.error(errMessage);
+                message.error(errMessage);
                 return Promise.reject(error);
             }
         } catch (error) {
