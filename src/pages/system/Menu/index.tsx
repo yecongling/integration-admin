@@ -273,12 +273,12 @@ const Menu: React.FC = () => {
           <Row gutter={24}>
             <Col span={4}>
               <Form.Item label="菜单名称" name="name" initialValue="" style={{marginBottom: 0}}>
-                <Input ref={menuName} autoComplete="false"/>
+                <Input ref={menuName} allowClear autoComplete="false"/>
               </Form.Item>
             </Col>
             <Col span={4}>
               <Form.Item label="菜单类型" name="menu_type" initialValue="" style={{marginBottom: 0}}>
-                <Input autoComplete="false"/>
+                <Input autoComplete="false" allowClear/>
               </Form.Item>
             </Col>
             <Col span={4}>
@@ -360,7 +360,7 @@ const Menu: React.FC = () => {
             </Radio.Group>
           </Form.Item>
           <Form.Item name="name" label="菜单名称" rules={[{required: true, message: '请输入菜单名称！'}]}>
-            <Input ref={inputRef} placeholder="菜单名称"/>
+            <Input ref={inputRef} allowClear placeholder="菜单名称"/>
           </Form.Item>
           {showParent &&
               <Form.Item name="parent_id" label="上级菜单" rules={[{required: true, message: '请选择上级菜单！'}]}>
@@ -375,13 +375,13 @@ const Menu: React.FC = () => {
                   />
               </Form.Item>}
           <Form.Item name="url" label="菜单路径" rules={[{required: true, message: '请输入菜单路径！'}]}>
-            <Input placeholder="菜单路径"/>
+            <Input allowClear placeholder="菜单路径"/>
           </Form.Item>
           <Form.Item name="component" label="前端组件" rules={[{required: true, message: '请输入前端组件！'}]}>
-            <Input placeholder="请输入前端组件"/>
+            <Input allowClear placeholder="请输入前端组件"/>
           </Form.Item>
           <Form.Item name="icon" label="菜单图标">
-            <Input addonAfter={<SettingOutlined/>}/>
+            <Input allowClear addonAfter={<SettingOutlined/>}/>
           </Form.Item>
           <Form.Item name="sort" label="序号">
             <InputNumber/>
