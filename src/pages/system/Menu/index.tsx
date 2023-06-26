@@ -21,6 +21,7 @@ import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined}
 import './menu.less';
 import {permission} from "@/services/system/model/menuModel";
 import {addPermission, getAllPermission, validateFields} from "@/services/system/permission/permission";
+import {handlePermission} from "@/utils/util";
 
 /**
  * 菜单维护界面
@@ -35,8 +36,6 @@ const Menu: React.FC = () => {
   const menuName = useRef(null);
   // 上级菜单
   const [value, setValue] = useState<string>();
-  // 表格分页信息
-  const [pageInfo, setPageInfo] = useState({page: 1, size: 10, total: 0});
   // 表格数据
   const [tableData, setTableData] = useState([]);
   const onChange = (newValue: string) => {
@@ -45,7 +44,7 @@ const Menu: React.FC = () => {
   useEffect(() => {
     // @ts-ignore
     menuName.current && menuName.current.focus();
-    pageChange(pageInfo.page, pageInfo.size);
+    getAllMenus();
   }, [])
 
   const menuType = [
@@ -53,8 +52,13 @@ const Menu: React.FC = () => {
     {label: '子菜单', value: 2},
     {label: '按钮/权限', value: 3},
   ];
-  const onFinish = (value: any) => {
 
+  /**
+   * 检索菜单
+   * @param value 检索调节
+   */
+  const onFinish = (value: any) => {
+    getAllMenus();
   }
 
   const handleAfterOpen = (open: boolean) => {
@@ -221,29 +225,15 @@ const Menu: React.FC = () => {
     },
   ];
 
-  /**
-   * 换页
-   */
-  const pageChange = useCallback(
-    (page: number, size: number) => {
-      pageInfo.page = page;
-      pageInfo.size = size;
-      setPageInfo(pageInfo);
-      getAllMenus();
-    }, []
-  )
-
   const getAllMenus = async () => {
     let formData = form.getFieldsValue();
-    // let params = {pageInfo, formData};
-    let params = Object.assign({}, pageInfo, formData);
-    let result = await getAllPermission(params);
+    let result = await getAllPermission(formData);
     // @ts-ignore
     if (result) {
       // @ts-ignore
       let tableData:[] = [...result.data];
       // 处理数据，当children没有时不要这个节点
-
+      handlePermission(tableData);
       setTableData(tableData);
     }
   }
@@ -281,8 +271,13 @@ const Menu: React.FC = () => {
               </Form.Item>
             </Col>
             <Col span={4}>
-              <Form.Item label="菜单类型" name="menu_type" initialValue="" style={{marginBottom: 0}}>
-                <Input autoComplete="false" allowClear/>
+              <Form.Item label="菜单类型" name="menu_type" initialValue="-1" style={{marginBottom: 0}}>
+                <Select options={[
+                  {value: '-1', label: '全部'},
+                  {value: '0', label: '一级菜单'},
+                  {value: '1', label: '字菜单'},
+                  {value: '2', label: '按钮'},
+                ]}/>
               </Form.Item>
             </Col>
             <Col span={4}>
@@ -308,15 +303,6 @@ const Menu: React.FC = () => {
           className="table"
           scroll={{x: 'max-content', y: 'calc(100vh - 400px)'}}
           bordered
-          pagination={{
-            showSizeChanger: true, pageSizeOptions: ['2', '5', '10'],
-            defaultPageSize: pageInfo.size, showTotal: () => {
-              return `共${pageInfo.total}条数据`
-            },
-            onChange: pageChange,
-            showQuickJumper: true,
-            current: pageInfo.page, total: pageInfo.total
-          }}
           size="middle"
           columns={columns}
           dataSource={tableData}

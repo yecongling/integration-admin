@@ -45,5 +45,11 @@ export const getOpenKeys = (path: string) => {
  * @param permissions 菜单数据
  */
 export const handlePermission = (permissions: permission[]) => {
-
+  permissions.forEach((item: permission) => {
+    if (item.children && item.children.length > 0) {
+      handlePermission(item.children);
+    } else {
+      delete item.children;
+    }
+  })
 }
