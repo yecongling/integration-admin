@@ -242,6 +242,8 @@ const Menu: React.FC = () => {
     if (result) {
       // @ts-ignore
       let tableData:[] = [...result.data];
+      // 处理数据，当children没有时不要这个节点
+
       setTableData(tableData);
     }
   }

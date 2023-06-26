@@ -1,5 +1,5 @@
 import {RouteObject} from "@/interface";
-import {RouteItem} from "@/services/system/model/menuModel";
+import {permission, RouteItem} from "@/services/system/model/menuModel";
 
 /**
  * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断
@@ -38,3 +38,12 @@ export const getOpenKeys = (path: string) => {
   }
   return newArr;
 };
+
+/**
+ * 处理菜单数据，对没有children的，移除children节点，不然表格会有展开的图标
+ *
+ * @param permissions 菜单数据
+ */
+export const handlePermission = (permissions: permission[]) => {
+
+}
