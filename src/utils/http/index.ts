@@ -132,10 +132,10 @@ const transform: AxiosTransform = {
      */
     responseInterceptorsCatch: (error: any) => {
         const err: string = error?.toString?.() ?? '';
-        const {code, message} = error || {};
+        const {code, msg} = error || {};
         let errMessage = '接口请求错误';
         try {
-            if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
+            if (code === 'ECONNABORTED' && msg.indexOf('timeout') !== -1) {
                 errMessage = '接口请求超时';
             }
             if (err?.includes('Network Error')) {
