@@ -141,6 +141,10 @@ const Menu: React.FC = () => {
     setOpen(false);
   }
 
+  /**
+   * 确认框
+   * @param values
+   */
   const handleOk = async (values: permission) => {
     const result = await addPermission(values);
 
