@@ -1,8 +1,9 @@
 import React, {useRef, useState} from "react";
 import {Button, Card, Col, Form, Input, Modal, Row, Select, Space, Switch, Table} from "antd";
 import {
+  ArrowLeftOutlined,
   CheckCircleOutlined,
-  CloseCircleOutlined,
+  CloseCircleOutlined, CompressOutlined,
   FullscreenOutlined,
   QuestionCircleOutlined,
   SearchOutlined,
@@ -10,10 +11,12 @@ import {
 } from "@ant-design/icons";
 import {ColumnsType} from "antd/es/table";
 import {Project} from "./Project";
+import "./index.less";
 
 const ProjectMaintain: React.FC = () => {
   const [searchForm] = Form.useForm();
   const [open, setOpen] = useState(false);
+  const [projectType, setProjectType] = useState(false);
   const [projectData] = Form.useForm();
   const projectName = useRef(null);
   const inputRef = useRef(null);
@@ -30,8 +33,28 @@ const ProjectMaintain: React.FC = () => {
    * 新增项目
    */
   const addProject = () => {
-    setOpen(true);
+    setProjectType(true);
   }
+
+  /**
+   * 改变窗口
+   * @param type
+   */
+  const changeModal = (type: string) => {
+    switch (type) {
+      case "1":
+        setOpen(true);
+        setProjectType(false);
+        break;
+      case "3":
+        setOpen(false);
+        setProjectType(true);
+        break;
+      default:
+        break;
+    }
+  }
+
 
   /**
    * 编辑项目
@@ -98,7 +121,7 @@ const ProjectMaintain: React.FC = () => {
     {
       title: "优先级",
       dataIndex: 'level',
-      width: '5%',
+      width: '4%',
       align: 'left',
       key: 'level',
       defaultSortOrder: 'descend',
@@ -212,11 +235,56 @@ const ProjectMaintain: React.FC = () => {
           dataSource={data}
         />
       </Card>
+
+      {/* 选择项目类型 */}
+      <Modal open={projectType}
+             centered
+             maskClosable={false}
+             title="选择项目类型"
+             width={600}
+             footer={[
+               <Button key="cancel" type="default" onClick={() => {
+                 setProjectType(false)
+               }}>取消</Button>
+             ]}
+      >
+        <Row align="middle">
+          <Col span={12} style={{textAlign: 'center', padding: '6px'}} className="projectType"
+               onClick={() => changeModal("1")}>
+            <CompressOutlined style={{fontSize: '64px', color: '#5b5858'}}/>
+            <h3>集成项目</h3>
+            <span style={{color: '#989292', fontSize: '12px'}}>系统间消息集成，保证传输</span>
+            <ul>
+              <li>记录消息内容以及处理流程</li>
+              <li>保证消息传输以及消息顺序</li>
+              <li>支持消息重新处理</li>
+              <li>终端和路由可单独开关</li>
+              <li>终端可以在不同项目中复用</li>
+            </ul>
+          </Col>
+          <Col span={12} style={{textAlign: 'center', padding: '6px'}} className="projectType"
+               onClick={() => changeModal("1")}>
+            <FullscreenOutlined style={{fontSize: '64px', color: '#5b5858'}}/>
+            <h3>接口项目</h3>
+            <span style={{color: '#989292', fontSize: '12px'}}>高性能请求应答（request-response）模式</span>
+            <ul>
+              <li>高性能路由处理</li>
+              <li>消息内容以及处理流程记录可选择性开关</li>
+              <li>同步消息处理、支持事务</li>
+              <li>终端及路由以项目味单位统一开关</li>
+              <li>终端不可和其他项目共享</li>
+            </ul>
+          </Col>
+        </Row>
+
+      </Modal>
       {/* 编辑弹窗 */}
       <Modal open={open}
              centered
              maskClosable={false}
-             title="编辑项目"
+             title={<><Button size="middle" style={{marginRight: '12px'}} icon={<ArrowLeftOutlined/>}
+                              onClick={() => changeModal("3")}></Button><span
+               className="title">创建新的集成项目</span></>}
              okText="确认"
              okButtonProps={{icon: <CheckCircleOutlined/>}}
              cancelButtonProps={{icon: <CloseCircleOutlined/>}}
