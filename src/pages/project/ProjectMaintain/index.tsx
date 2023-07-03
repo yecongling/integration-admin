@@ -1,11 +1,12 @@
-import React, {useState} from "react";
-import {Button, Card, Col, Form, Input, InputNumber, Modal, Radio, Row, Select, Space, Switch, Table} from "antd";
+import React, {useRef, useState} from "react";
+import {Button, Card, Col, Form, Input, Modal, Row, Select, Space, Switch, Table} from "antd";
 import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  FullscreenOutlined,
   QuestionCircleOutlined,
   SearchOutlined,
-  SyncOutlined,
-  FullscreenOutlined,
-  CheckCircleOutlined, CloseCircleOutlined, SettingOutlined
+  SyncOutlined
 } from "@ant-design/icons";
 import {ColumnsType} from "antd/es/table";
 import {Project} from "./Project";
@@ -13,7 +14,9 @@ import {Project} from "./Project";
 const ProjectMaintain: React.FC = () => {
   const [searchForm] = Form.useForm();
   const [open, setOpen] = useState(false);
-  const [menuData] = Form.useForm();
+  const [projectData] = Form.useForm();
+  const projectName = useRef(null);
+  const inputRef = useRef(null);
   /**
    * 检索
    *
@@ -30,8 +33,30 @@ const ProjectMaintain: React.FC = () => {
     setOpen(true);
   }
 
-  const handleAfterOpen = (open: boolean) => {
+  /**
+   * 编辑项目
+   */
+  const editProject = (value: Project) => {
+    projectData.setFieldsValue(value);
+    setOpen(true);
+  }
 
+  /**
+   * 窗口打开关闭
+   * @param open
+   */
+  const handleAfterOpen = (open: boolean) => {
+    if (open) {
+      if (inputRef.current) {
+        // @ts-ignore
+        inputRef.current.focus();
+      }
+      return;
+    }
+    if (projectName.current) {
+      //@ts-ignore
+      projectName.current.focus();
+    }
   }
 
   /**
@@ -49,7 +74,7 @@ const ProjectMaintain: React.FC = () => {
       align: 'center',
       key: 'status',
       render: function (text, record, index) {
-        return text === '1' ? <Switch checked/> : <Switch/>;
+        return text === '1' ? <Switch defaultChecked/> : <Switch/>;
       }
     },
     {
@@ -113,7 +138,7 @@ const ProjectMaintain: React.FC = () => {
       align: 'center',
       render: function (text, record, index) {
         return <Space size={8}>
-          <a>编辑</a>
+          <a onClick={() => editProject(record)}>编辑</a>
           <a type="link">复制</a>
           <a type="link">设计</a>
           <a type="link">转换</a>
@@ -124,6 +149,7 @@ const ProjectMaintain: React.FC = () => {
 
   const data: Project[] = [
     {
+      id: '1234123',
       key: '1234123',
       status: '1',
       warning: true,
@@ -134,6 +160,7 @@ const ProjectMaintain: React.FC = () => {
       chart: 2
     },
     {
+      id: '23423',
       key: '23423',
       status: '2',
       warning: false,
@@ -153,7 +180,7 @@ const ProjectMaintain: React.FC = () => {
           <Row gutter={24}>
             <Col span={6}>
               <Form.Item label="项目名称" name="name" style={{marginBottom: 0}}>
-                <Input autoFocus autoComplete="false"/>
+                <Input ref={projectName} autoFocus allowClear autoComplete="false"/>
               </Form.Item>
             </Col>
             <Col span={6}>
@@ -201,7 +228,7 @@ const ProjectMaintain: React.FC = () => {
              bodyStyle={{padding: '10px 40px'}}
       >
         <Form
-          form={menuData}
+          form={projectData}
           layout="horizontal"
           name="basic"
           size="middle"
@@ -214,7 +241,7 @@ const ProjectMaintain: React.FC = () => {
           }}
         >
           <Form.Item name="projectName" label="项目名称" rules={[{required: true, message: '请输入项目名称'}]}>
-            <Input placeholder="项目名称"/>
+            <Input ref={inputRef} placeholder="项目名称"/>
           </Form.Item>
 
         </Form>

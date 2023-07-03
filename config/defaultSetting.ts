@@ -1,5 +1,5 @@
 const Settings: any = {
-  navTheme: 'light',
+  navTheme: 'dark',
   // 拂晓蓝
   // colorPrimary: '#00b96b',
   colorPrimary: '#1890ff',
