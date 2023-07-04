@@ -249,7 +249,7 @@ const ProjectMaintain: React.FC = () => {
              ]}
       >
         <Row align="middle">
-          <Col span={12} style={{textAlign: 'center', padding: '6px'}} className="projectType"
+          <Col span={12} style={{textAlign: 'center', padding: '16px 6px'}} className="projectType"
                onClick={() => changeModal("1")}>
             <CompressOutlined style={{fontSize: '64px', color: '#5b5858'}}/>
             <h3>集成项目</h3>
@@ -262,7 +262,7 @@ const ProjectMaintain: React.FC = () => {
               <li>终端可以在不同项目中复用</li>
             </ul>
           </Col>
-          <Col span={12} style={{textAlign: 'center', padding: '6px'}} className="projectType"
+          <Col span={12} style={{textAlign: 'center', padding: '16px 6px'}} className="projectType"
                onClick={() => changeModal("1")}>
             <FullscreenOutlined style={{fontSize: '64px', color: '#5b5858'}}/>
             <h3>接口项目</h3>
