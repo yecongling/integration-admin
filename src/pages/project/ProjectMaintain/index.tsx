@@ -18,6 +18,8 @@ const ProjectMaintain: React.FC = () => {
   const [searchForm] = Form.useForm();
   const [open, setOpen] = useState(false);
   const [projectType, setProjectType] = useState(false);
+  const [editInfo, setEditInfo] = useState({title: '集成', opr: '创建新的', projectType: '1'});
+  const [isEdit, setIsEdit] = useState(false);
   const [projectData] = Form.useForm();
   const projectName = useRef(null);
   const inputRef = useRef(null);
@@ -43,17 +45,28 @@ const ProjectMaintain: React.FC = () => {
    */
   const changeModal = (type: string) => {
     switch (type) {
+      // 接口项目
       case "1":
+        setEditInfo((prevState) => ({...prevState, title: '接口', opr: '创建新的', projectType: '1'}));
         setOpen(true);
         setProjectType(false);
+        projectData.resetFields();
+        break;
+      // 集成项目
+      case "2":
+        setEditInfo((prevState) => ({...prevState, title: '集成', opr: '创建新的', projectType: '2'}));
+        setOpen(true);
+        setProjectType(false);
+        projectData.resetFields();
         break;
       case "3":
         setOpen(false);
         setProjectType(true);
-        break;
+        break
       default:
         break;
     }
+    setIsEdit(false);
   }
 
 
@@ -62,6 +75,8 @@ const ProjectMaintain: React.FC = () => {
    */
   const editProject = (value: Project) => {
     projectData.setFieldsValue(value);
+    setIsEdit(true);
+    setEditInfo((prevState) => ({...prevState, title: '接口', opr: '编辑'}));
     setOpen(true);
   }
 
@@ -251,7 +266,7 @@ const ProjectMaintain: React.FC = () => {
       >
         <Row align="middle">
           <Col span={12} style={{textAlign: 'center', padding: '16px 6px'}} className="projectType"
-               onClick={() => changeModal("1")}>
+               onClick={() => changeModal("2")}>
             <CompressOutlined style={{fontSize: '64px', color: '#5b5858'}}/>
             <h3>集成项目</h3>
             <span style={{color: '#989292', fontSize: '12px'}}>系统间消息集成，保证传输</span>
@@ -283,9 +298,9 @@ const ProjectMaintain: React.FC = () => {
       <Modal open={open}
              centered
              maskClosable={false}
-             title={<><Button size="middle" style={{marginRight: '12px'}} icon={<ArrowLeftOutlined/>}
-                              onClick={() => changeModal("3")}></Button><span
-               className="title">创建新的集成项目</span></>}
+             title={<> {!isEdit && <Button size="middle" style={{marginRight: '12px'}} icon={<ArrowLeftOutlined/>}
+                                           onClick={() => changeModal("3")}></Button>}
+               <span className="title">{editInfo.opr}{editInfo.title}项目</span></>}
              okText="确认"
              okButtonProps={{icon: <CheckCircleOutlined/>}}
              cancelButtonProps={{icon: <CloseCircleOutlined/>}}
@@ -303,7 +318,8 @@ const ProjectMaintain: React.FC = () => {
           size="middle"
           labelCol={{span: 4}}
           initialValues={{
-            level: '0'
+            level: '0',
+            log: '1'
           }}
         >
           <Form.Item name="projectName" label="项目名称" rules={[{required: true, message: '请输入项目名称'}]}>
@@ -312,6 +328,14 @@ const ProjectMaintain: React.FC = () => {
           <Form.Item name="description" label="描述">
             <Input.TextArea rows={4} placeholder="描述"/>
           </Form.Item>
+          {editInfo.projectType === '1' ?
+            <Form.Item name="log" label="消息日志记录">
+              <Select options={[
+                {value: '1', label: '打开'},
+                {value: '2', label: '关闭'},
+                {value: '3', label: '仅在发生错误是记录'}
+              ]}/>
+            </Form.Item> : ''}
           <Form.Item name="level" label="优先级" rules={[{required: true, message: '请输入项目名称'}]}>
             <Select placeholder="项目名称" options={[
               {value: '0', label: '0'},

@@ -6,6 +6,7 @@ export interface Project {
   warning: boolean;
   projectName: string;
   level: number;
+  log?: number;
   description?: string;
   type: number;
   chart: number;
