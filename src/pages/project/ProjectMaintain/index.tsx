@@ -3,7 +3,8 @@ import {Button, Card, Col, Form, Input, Modal, Row, Select, Space, Switch, Table
 import {
   ArrowLeftOutlined,
   CheckCircleOutlined,
-  CloseCircleOutlined, CompressOutlined,
+  CloseCircleOutlined,
+  CompressOutlined,
   FullscreenOutlined,
   QuestionCircleOutlined,
   SearchOutlined,
@@ -130,7 +131,7 @@ const ProjectMaintain: React.FC = () => {
     {
       title: "描述",
       dataIndex: 'description',
-      width: '15%',
+      width: '16%',
       align: 'left',
       key: 'description'
     },
@@ -300,18 +301,27 @@ const ProjectMaintain: React.FC = () => {
           layout="horizontal"
           name="basic"
           size="middle"
-          labelCol={{span: 5}}
+          labelCol={{span: 4}}
           initialValues={{
-            menu_type: 1,
-            is_route: true,
-            internal_or_external: true,
-            sort: 1
+            level: '0'
           }}
         >
           <Form.Item name="projectName" label="项目名称" rules={[{required: true, message: '请输入项目名称'}]}>
             <Input ref={inputRef} placeholder="项目名称"/>
           </Form.Item>
-
+          <Form.Item name="description" label="描述">
+            <Input.TextArea rows={4} placeholder="描述"/>
+          </Form.Item>
+          <Form.Item name="level" label="优先级" rules={[{required: true, message: '请输入项目名称'}]}>
+            <Select placeholder="项目名称" options={[
+              {value: '0', label: '0'},
+              {value: '1', label: '1'},
+              {value: '2', label: '2'},
+              {value: '3', label: '3'},
+              {value: '4', label: '4'},
+              {value: '5', label: '5'},
+            ]}/>
+          </Form.Item>
         </Form>
       </Modal>
     </>
