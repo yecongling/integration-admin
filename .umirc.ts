@@ -9,14 +9,15 @@ export default defineConfig({
     {path: "/system/role", component: "system/Role", title: '角色管理'},
     {path: "/system/user", component: "system/User", title: '用户管理'},
     {path: "/connection/database", component: "connection/Database", title: '数据源连接'},
-    {path: "/emr/designer", component: "emr/Designer", title: '病历设计'},
+    {path: "/emr/index", component: "emr/Designer", title: '病历设计'},
     {path: "*", component: "@/pages/404", title: "未知页面"},
     {path: "/dataStatics/messageSearch", component: "dataStatics/MessageSearch",title: "消息检索"},
     {path: "/dataStatics/errorStatics", component: "dataStatics/ErrorStatics",title: "错误统计"},
     {path: "/dataStatics/terminal", component: "dataStatics/Terminal",title: "终端监控"},
     {path: "/dataStatics/testMessage", component: "dataStatics/TestMessage",title: "测试消息"},
-
     {path: "/project/projectMaintain", component: "project/ProjectMaintain",title: "项目维护"},
+    // 三级路由
+    {path: "/project/projectMaintain/designer", component: "project/ProjectMaintain/Designer",title: "项目设计"},
     {path: "/project/terminalManager", component: "project/TerminalManager",title: "终端管理"}
   ],
   npmClient: 'yarn',

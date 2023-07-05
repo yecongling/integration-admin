@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Button, Card, Col, Form, Input, Modal, Row, Select, Space, Switch, Table} from "antd";
 import {
   ArrowLeftOutlined,
@@ -13,6 +13,7 @@ import {
 import {ColumnsType} from "antd/es/table";
 import {Project} from "./Project";
 import "./index.less";
+import {useNavigate} from "@@/exports";
 
 const ProjectMaintain: React.FC = () => {
   const [searchForm] = Form.useForm();
@@ -23,13 +24,19 @@ const ProjectMaintain: React.FC = () => {
   const [projectData] = Form.useForm();
   const projectName = useRef(null);
   const inputRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(()=> {
+    onSearch(searchForm.getFieldsValue());
+  }, [])
+
   /**
    * 检索
    *
    * @param value
    */
   const onSearch = (value: any) => {
-
+    console.log('检索');
   }
 
   /**
@@ -37,6 +44,14 @@ const ProjectMaintain: React.FC = () => {
    */
   const addProject = () => {
     setProjectType(true);
+  }
+
+  /**
+   * 保存数据
+   * @param value
+   */
+  const handleOk = (value: Project) => {
+    navigate('/project/projectMaintain/designer');
   }
 
   /**
@@ -178,9 +193,11 @@ const ProjectMaintain: React.FC = () => {
       render: function (text, record, index) {
         return <Space size={8}>
           <a onClick={() => editProject(record)}>编辑</a>
-          <a type="link">复制</a>
-          <a type="link">设计</a>
-          <a type="link">转换</a>
+          <a type="link" onClick={()=> {alert('复制')}}>复制</a>
+          <a type="link" onClick={() => {
+            navigate('/project/projectMaintain/designer', {state: record});
+          }}>设计</a>
+          <a type="link" onClick={()=> {alert('转换')}}>转换</a>
         </Space>;
       }
     },
@@ -307,6 +324,12 @@ const ProjectMaintain: React.FC = () => {
              cancelText="取消"
              style={{top: '20px'}}
              width={800}
+             onOk={() => {
+               projectData.validateFields().then((values) => {
+                 projectData.resetFields();
+                 handleOk(values);
+               });
+             }}
              onCancel={onCancel}
              afterOpenChange={handleAfterOpen}
              bodyStyle={{padding: '10px 40px'}}

@@ -583,7 +583,7 @@ export default {
           {
             "id": "112735529",
             "name": "sys-emr",
-            "path": "/emr/designer",
+            "path": "/emr/index",
             "component": "emr/Designer",
             "route": "1",
             "meta": {
