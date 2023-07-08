@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {Button, Checkbox, Col, Form, Input, Row} from "antd";
 import {useNavigate} from "umi";
 import logo from "@/assets/images/logo.png";
@@ -8,10 +8,11 @@ import {loginApi} from "@/services/system/user/login";
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
+  const inputRef = useRef(null);
   const navigate = useNavigate();
   // 加载状态
   const [loading, setLoading] = useState<boolean>(false);
-  const [code, setCode] = useState(Math.floor(Math.random()*10000).toString());
+  const [code, setCode] = useState(Math.floor(Math.random() * 10000).toString());
   const submit = async (loginForm: any) => {
     try {
       setLoading(true);
@@ -19,6 +20,12 @@ const Login: React.FC = () => {
       // 这里需要修改为将获取到的信息设置到全局状态中，供后续用户是否登录做验证
       // 暂时用返回值处理
       navigate("/home");
+    } catch (error) {
+      if (inputRef && inputRef.current) {
+        // @ts-ignore
+        inputRef.current.focus();
+      }
+      return;
     } finally {
       setLoading(false);
     }
@@ -27,8 +34,8 @@ const Login: React.FC = () => {
   /**
    * 获取验证码
    */
-  const getCode = ()=> {
-    setCode(Math.floor(Math.random()*10000).toString());
+  const getCode = () => {
+    setCode(Math.floor(Math.random() * 10000).toString());
   }
 
   return (
@@ -68,7 +75,8 @@ const Login: React.FC = () => {
               onFinish={submit}
             >
               <Form.Item name="username" rules={[{required: true, message: "请输入用户名"}]}>
-                <Input size="large" autoFocus allowClear placeholder="用户名：admin" prefix={<UserOutlined/>}/>
+                <Input size="large" ref={inputRef} autoFocus allowClear placeholder="用户名：admin"
+                       prefix={<UserOutlined/>}/>
               </Form.Item>
               <Form.Item name="password" rules={[{required: true, message: "请输入密码"}]}>
                 <Input.Password size="large" allowClear autoComplete="new-password" placeholder="密码：123123"
@@ -82,11 +90,12 @@ const Login: React.FC = () => {
                       noStyle
                       rules={[{required: true, message: '请输入验证码'}]}
                     >
-                      <Input size="large" allowClear placeholder="输入右侧验证码" prefix={<SecurityScanOutlined />}/>
+                      <Input size="large" allowClear placeholder="输入右侧验证码" prefix={<SecurityScanOutlined/>}/>
                     </Form.Item>
                   </Col>
                   <Col span={6}>
-                    <Button size="large" onClick={getCode} style={{width: "100%", backgroundColor: "#f0f0f0"}}>{code}</Button>
+                    <Button size="large" onClick={getCode}
+                            style={{width: "100%", backgroundColor: "#f0f0f0"}}>{code}</Button>
                   </Col>
                 </Row>
               </Form.Item>
