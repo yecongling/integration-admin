@@ -35,7 +35,7 @@ export const getAllPermission = (params: any) => {
  * @param param
  */
 export function validateFields(param: permission) {
-  let result: Result = {success: true, code: 200, result: '', msg: '', fieldName: ''};
+  let result: Result = {success: true, code: 200, result: '', message: '', fieldName: ''};
   return result;
 }
 

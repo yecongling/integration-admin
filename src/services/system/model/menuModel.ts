@@ -20,28 +20,28 @@ export interface RouteItem {
  */
 export interface permission {
   id: string;
-  parent_id: string;
+  parentId: string;
   name: string;
   url: string;
   component: string;
-  component_name: string;
+  componentName: string;
   redirect: string
-  menu_type: number;
+  menuType: number;
   perms: string;
-  perms_type: string;
-  sort_no: number;
-  always_show: boolean;
+  permsType: string;
+  sortNo: number;
+  alwaysShow: boolean;
   icon: string;
-  is_route: boolean;
-  is_leaf: boolean;
-  keep_alive: boolean;
+  route: boolean;
+  leaf: boolean;
+  keepAlive: boolean;
   hidden: boolean;
-  hide_tab: boolean;
+  hideTab: boolean;
   description: string;
-  del_flag: boolean;
-  rule_flag: number;
+  delFlag: boolean;
+  ruleFlag: number;
   status: string;
-  internal_or_external: boolean;
+  internalOrExternal: boolean;
   children?: permission[]
 }
 

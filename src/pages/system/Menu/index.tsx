@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
   Button,
   Card,
@@ -6,14 +6,17 @@ import {
   Form,
   Input,
   InputNumber,
+  message,
   Modal,
+  Popconfirm,
   Radio,
   RadioChangeEvent,
   Row,
   Select,
   Space,
   Switch,
-  Table, TreeSelect
+  Table,
+  TreeSelect
 } from "antd";
 import {ColumnsType} from "antd/es/table";
 import * as Icons from "@ant-design/icons";
@@ -48,9 +51,9 @@ const Menu: React.FC = () => {
   }, [])
 
   const menuType = [
-    {label: '一级菜单', value: 1},
-    {label: '子菜单', value: 2},
-    {label: '按钮/权限', value: 3},
+    {label: '一级菜单', value: 0},
+    {label: '子菜单', value: 1},
+    {label: '按钮/权限', value: 2},
   ];
 
   /**
@@ -85,16 +88,26 @@ const Menu: React.FC = () => {
       const res = await validateFields(values);
       if (res.success) {
         // 提交表单
+        const result = await addPermission(values);
+        // @ts-ignore
+        debugger
+        // @ts-ignore
+        if (result > 0) {
+          message.success("保存成功");
+          // 刷新
+          getAllMenus();
+          setOpen(false);
+        }
       } else {
         form.setFields([
           {
             name: res.fieldName,
-            errors: [res.msg],
+            errors: [res.message],
           },
         ]);
       }
     } catch (err) {
-      console.error(err);
+      return;
     }
   };
 
@@ -116,21 +129,22 @@ const Menu: React.FC = () => {
    * @param value
    */
   const edit = (value: any) => {
+    menuData.setFieldsValue(value);
     setOpen(true);
   }
 
   /**
-   * 删除
-   * @param value
+   * 确定删除的回调
    */
-  const del = (value: any) => {
-    alert('删除')
+  const confirm = (value: any) => {
+
   }
 
   /**
    * 新增
    */
   const add = () => {
+    menuData.resetFields();
     setOpen(true);
   }
 
@@ -139,16 +153,6 @@ const Menu: React.FC = () => {
    */
   const onCancel = () => {
     setOpen(false);
-  }
-
-  /**
-   * 确认框
-   * @param values
-   */
-  const handleOk = async (values: permission) => {
-    const result = await addPermission(values);
-
-    debugger
   }
 
   interface menuType {
@@ -223,7 +227,15 @@ const Menu: React.FC = () => {
       render: (text, record) => (
         <Space size="small">
           <Button type="primary" size="small" onClick={() => edit(record)}>编辑</Button>
-          <Button type="primary" size="small" danger onClick={() => del(record)}>删除</Button>
+          <Popconfirm
+            title="删除菜单"
+            description="确定删除这条菜单数据吗?"
+            onConfirm={() => confirm(record)}
+            okText="确认"
+            cancelText="取消"
+          >
+            <Button type="primary" size="small" danger>删除</Button>
+          </Popconfirm>
         </Space>
       )
     },
@@ -235,7 +247,7 @@ const Menu: React.FC = () => {
     // @ts-ignore
     if (result) {
       // @ts-ignore
-      let tableData:[] = [...result.data];
+      let tableData: [] = [...result.data];
       // 处理数据，当children没有时不要这个节点
       handlePermission(tableData);
       setTableData(tableData);
@@ -326,7 +338,7 @@ const Menu: React.FC = () => {
              onOk={() => {
                menuData.validateFields().then((values) => {
                  menuData.resetFields();
-                 handleOk(values);
+                 validate(values);
                });
              }}
              onCancel={onCancel}
@@ -340,24 +352,24 @@ const Menu: React.FC = () => {
           size="middle"
           labelCol={{span: 5}}
           initialValues={{
-            menu_type: 1,
-            is_route: true,
-            internal_or_external: true,
-            sort: 1
+            menuType: 1,
+            route: true,
+            internalOrExternal: true,
+            sortNo: 1
           }}
         >
-          <Form.Item name="menu_type" label="菜单类型">
+          <Form.Item name="menuType" label="菜单类型">
             <Radio.Group onChange={changeMenuType}>
-              <Radio value={1}>一级菜单</Radio>
-              <Radio value={2}>子菜单</Radio>
-              <Radio value={3}>按钮</Radio>
+              <Radio value={0}>一级菜单</Radio>
+              <Radio value={1}>子菜单</Radio>
+              <Radio value={2}>按钮</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item name="name" label="菜单名称" rules={[{required: true, message: '请输入菜单名称！'}]}>
             <Input ref={inputRef} allowClear placeholder="菜单名称"/>
           </Form.Item>
           {showParent &&
-              <Form.Item name="parent_id" label="上级菜单" rules={[{required: true, message: '请选择上级菜单！'}]}>
+              <Form.Item name="parentId" label="上级菜单" rules={[{required: true, message: '请选择上级菜单！'}]}>
                   <TreeSelect
                       style={{width: '100%'}}
                       value={value}
@@ -371,22 +383,22 @@ const Menu: React.FC = () => {
           <Form.Item name="url" label="菜单路径" rules={[{required: true, message: '请输入菜单路径！'}]}>
             <Input allowClear placeholder="菜单路径"/>
           </Form.Item>
-          <Form.Item name="component" label="前端组件" rules={[{required: true, message: '请输入前端组件！'}]}>
+          <Form.Item name="component" label="前端组件">
             <Input allowClear placeholder="请输入前端组件"/>
           </Form.Item>
           <Form.Item name="icon" label="菜单图标">
             <Input allowClear addonAfter={<SettingOutlined/>}/>
           </Form.Item>
-          <Form.Item name="sort" label="序号">
+          <Form.Item name="sortNo" label="序号">
             <InputNumber/>
           </Form.Item>
-          <Form.Item name="is_route" valuePropName="checked" label="是否路由菜单">
+          <Form.Item name="route" valuePropName="checked" label="是否路由菜单">
             <Switch checkedChildren="是" unCheckedChildren="否"/>
           </Form.Item>
           <Form.Item name="hidden" valuePropName="checked" label="隐藏路由">
             <Switch checkedChildren="是" unCheckedChildren="否"/>
           </Form.Item>
-          <Form.Item name="internal_or_external" valuePropName="checked" label="打开方式">
+          <Form.Item name="internalOrExternal" valuePropName="checked" label="打开方式">
             <Switch checkedChildren="内部" unCheckedChildren="外部"/>
           </Form.Item>
         </Form>
