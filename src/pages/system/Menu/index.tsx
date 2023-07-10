@@ -26,7 +26,7 @@ import {permission} from "@/services/system/model/menuModel";
 import {
   addPermission,
   deletePermission,
-  getAllPermission,
+  getAllPermission, getDirectoryPermission,
   validateFields
 } from "@/services/system/permission/permission";
 import {handlePermission} from "@/utils/util";
@@ -37,15 +37,17 @@ import {handlePermission} from "@/utils/util";
  */
 const Menu: React.FC = () => {
   const [form] = Form.useForm();
-  const [open, setOpen] = useState(false);
-  const [showParent, setShow] = useState(false);
   const [menuData] = Form.useForm();
   const inputRef = useRef(null);
   const menuName = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [showParent, setShow] = useState(false);
   // 上级菜单
   const [value, setValue] = useState<string>();
   // 表格数据
   const [tableData, setTableData] = useState([]);
+  // 目录数据
+  const [treeData, setTreeData] = useState([]);
   const onChange = (newValue: string) => {
     setValue(newValue);
   };
@@ -53,13 +55,13 @@ const Menu: React.FC = () => {
     // @ts-ignore
     menuName.current && menuName.current.focus();
     getAllMenus();
-  }, [])
+  }, []);
 
-  const menuType = [
-    {label: '一级菜单', value: 0},
-    {label: '子菜单', value: 1},
-    {label: '按钮/权限', value: 2},
-  ];
+  useEffect(() => {
+    if (open) {
+      getDirectory();
+    }
+  }, [open]);
 
   /**
    * 检索菜单
@@ -135,6 +137,11 @@ const Menu: React.FC = () => {
    */
   const edit = (value: any) => {
     menuData.setFieldsValue(value);
+    if (value['menuType'] !== 0) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
     setOpen(true);
   }
 
@@ -162,6 +169,18 @@ const Menu: React.FC = () => {
    */
   const onCancel = () => {
     setOpen(false);
+  }
+
+  /**
+   * 获取目录
+   */
+  const getDirectory = async () => {
+    let result = await getDirectoryPermission();
+    if (result) {
+      // @ts-ignore
+      const treeData: [] = [...result.directory];
+      setTreeData(treeData);
+    }
   }
 
   interface menuType {
@@ -262,27 +281,6 @@ const Menu: React.FC = () => {
       setTableData(tableData);
     }
   }
-
-  const treeData = [
-    {
-      title: '系统管理',
-      value: '0-0',
-      children: [
-        {
-          title: '模块管理',
-          value: '0-0-1',
-        },
-        {
-          title: '项目管理',
-          value: '0-0-2',
-        },
-      ],
-    },
-    {
-      title: '监控中心',
-      value: '0-1',
-    },
-  ];
 
   return (
     <>
@@ -413,7 +411,6 @@ const Menu: React.FC = () => {
         </Form>
       </Modal>
     </>
-
   )
 }
 

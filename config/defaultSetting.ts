@@ -1,9 +1,9 @@
 const Settings: any = {
-  navTheme: 'dark',
+  navTheme: 'light',
   // 拂晓蓝
   // colorPrimary: '#00b96b',
   colorPrimary: '#1890ff',
-  isCollapse: false,
+  isCollapse: true,
   layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,

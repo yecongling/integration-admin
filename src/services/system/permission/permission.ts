@@ -1,6 +1,6 @@
 import {defHttp} from "@/utils/http";
 import {Api} from "@/services/system/permission/menuApi";
-import {getMenuListResultModel, permission, permissionResult} from "@/services/system/model/menuModel";
+import {directoryResult, getMenuListResultModel, permission, permissionResult} from "@/services/system/model/menuModel";
 import {Result} from "@/types/axios";
 
 /**
@@ -35,7 +35,7 @@ export const getAllPermission = (params: any) => {
  */
 export const getDirectoryPermission = () => {
   return new Promise((resolve, reject) => {
-    defHttp.post<permissionResult>({url: Api.getDirectoryPermission}).then((res) => {
+    defHttp.post<directoryResult>({url: Api.getDirectoryPermission}).then((res) => {
       resolve(res);
     })
   })

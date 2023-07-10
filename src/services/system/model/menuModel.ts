@@ -51,6 +51,20 @@ export type permissionResult = {
 }
 
 /**
+ * 目录
+ */
+export interface directory{
+  title: string;
+  value: string;
+  children?: directory[];
+}
+
+export type directoryResult = {
+  code: number;
+  data: directory[]
+}
+
+/**
  * 请求菜单的返回值类型
  */
 export type getMenuListResultModel = RouteItem[];
