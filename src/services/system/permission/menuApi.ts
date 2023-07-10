@@ -3,6 +3,8 @@ export enum Api {
     getMenuList = '/api/sys/permission/getUserPermissionByToken',
     // 获取所有菜单
     getAllPermission = '/api/sys/permission/getAllPermission',
+    // 获取所有上级菜单
+    getDirectoryPermission = '/api/sys/permission/getDirectoryPermission',
     // 添加菜单
     addPermission = '/api/sys/permission/addPermission',
     // 编辑菜单

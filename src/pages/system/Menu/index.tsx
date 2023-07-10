@@ -23,7 +23,12 @@ import * as Icons from "@ant-design/icons";
 import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined} from "@ant-design/icons";
 import './menu.less';
 import {permission} from "@/services/system/model/menuModel";
-import {addPermission, getAllPermission, validateFields} from "@/services/system/permission/permission";
+import {
+  addPermission,
+  deletePermission,
+  getAllPermission,
+  validateFields
+} from "@/services/system/permission/permission";
 import {handlePermission} from "@/utils/util";
 
 /**
@@ -117,7 +122,7 @@ const Menu: React.FC = () => {
    * @param e
    */
   const changeMenuType = (e: RadioChangeEvent) => {
-    if (e.target.value === 1) {
+    if (e.target.value === 0) {
       setShow(false);
       return;
     }
@@ -136,8 +141,12 @@ const Menu: React.FC = () => {
   /**
    * 确定删除的回调
    */
-  const confirm = (value: any) => {
-
+  const confirm = async (value: any) => {
+    const result = await deletePermission(value.id);
+    if (result === 1) {
+      message.success("删除成功");
+      getAllMenus();
+    }
   }
 
   /**

@@ -31,6 +31,17 @@ export const getAllPermission = (params: any) => {
 }
 
 /**
+ * 获取上级菜单
+ */
+export const getDirectoryPermission = () => {
+  return new Promise((resolve, reject) => {
+    defHttp.post<permissionResult>({url: Api.getDirectoryPermission}).then((res) => {
+      resolve(res);
+    })
+  })
+}
+
+/**
  * 字段校验
  * @param param
  */
@@ -69,7 +80,7 @@ export const editPermission = (param: permission) => {
  */
 export const deletePermission = (id: string) => {
   return new Promise((resolve, reject) => {
-    defHttp.get<permissionResult>({url: Api.deletePermission, data: {id}}).then((res) => {
+    defHttp.post<permissionResult>({url: Api.deletePermission, data: id}).then((res) => {
       resolve(res);
     })
   });
