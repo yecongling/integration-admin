@@ -41,7 +41,7 @@ const Menu: React.FC = () => {
   const inputRef = useRef(null);
   const menuName = useRef(null);
   const [open, setOpen] = useState(false);
-  const [showParent, setShow] = useState(false);
+  const [showParent, setShow] = useState(true);
   // 上级菜单
   const [value, setValue] = useState<string>();
   // 表格数据
@@ -71,6 +71,11 @@ const Menu: React.FC = () => {
     getAllMenus();
   }
 
+  /**
+   * 窗口打开关闭操作
+   *
+   * @param open
+   */
   const handleAfterOpen = (open: boolean) => {
     if (open) {
       if (inputRef.current) {
@@ -161,6 +166,8 @@ const Menu: React.FC = () => {
    */
   const add = () => {
     menuData.resetFields();
+    // 默认上级菜单显示（选中字菜单）
+    setShow(true);
     setOpen(true);
   }
 
