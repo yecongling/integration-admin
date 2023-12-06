@@ -43,32 +43,32 @@ const routes = [
         component: lazyLoad('system/Personal').type
       },
       {
-        path: "engine/project/projectMaintain",
+        path: "project/projectMaintain",
         auth: false,
         component: lazyLoad('engine/project/ProjectMaintain').type
       },
       {
-        path: "engine/project/terminal",
+        path: "project/terminal",
         auth: false,
         component: lazyLoad('engine/project/TerminalManager').type
       },
       {
-        path: "/engine/project/projectMaintain/designer",
+        path: "project/projectMaintain/designer",
         auth: false,
         component: lazyLoad('engine/project/ProjectMaintain/Designer').type
       },
       {
-        path: "/engine/connection/database",
+        path: "connection/database",
         auth: false,
         component: lazyLoad('engine/connection/Database').type
       },
       {
-        path: "/engine/resource/database",
+        path: "resource/database",
         auth: false,
         component: lazyLoad('engine/resource/Database').type
       },
       {
-        path: 'engine/dataHandle/dataTransfer',
+        path: 'dataHandle/dataTransfer',
         auth: false,
         title: '数据转换',
         component: lazyLoad('engine/dataHandle/DataTransfer').type
@@ -83,6 +83,11 @@ const routes = [
         path: '*',
         auth: false,
         component: lazyLoad('404.tsx').type
+      },
+      {
+        path: '500',
+        auth: false,
+        component: lazyLoad('500.tsx').type
       }
     ]
   },

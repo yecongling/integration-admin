@@ -35,7 +35,7 @@ const permission: Array<MockMethod> = [
             "route": "1",
             "meta": {
               "keepAlive": false,
-              "icon": "HomeOutlined",
+              "icon": "LineChartOutlined",
               "title": "数据统计",
               "internal": false
             },
@@ -48,7 +48,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "FileSearchOutlined",
                   "title": "消息检索",
                   "internal": false
                 }
@@ -61,7 +61,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "CloseCircleOutlined",
                   "title": "错误统计",
                   "internal": false
                 }
@@ -74,7 +74,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "MonitorOutlined",
                   "title": "终端监控",
                   "internal": false
                 }
@@ -87,7 +87,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "MessageOutlined",
                   "title": "测试消息",
                   "internal": false
                 }
@@ -102,7 +102,7 @@ const permission: Array<MockMethod> = [
             "route": "1",
             "meta": {
               "keepAlive": false,
-              "icon": "HomeOutlined",
+              "icon": "ClusterOutlined",
               "title": "项目设计",
               "internal": false
             },
@@ -115,7 +115,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "ContainerOutlined",
                   "title": "项目维护",
                   "internal": false
                 }
@@ -143,7 +143,7 @@ const permission: Array<MockMethod> = [
             "route": "1",
             "meta": {
               "keepAlive": false,
-              "icon": "HomeOutlined",
+              "icon": "DeploymentUnitOutlined",
               "title": "资源管理",
               "internal": false
             },
@@ -156,7 +156,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "DatabaseOutlined",
                   "title": "数据库资源",
                   "internal": false
                 }
@@ -169,7 +169,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "FundOutlined",
                   "title": "数据模式",
                   "internal": false
                 }
@@ -182,7 +182,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "SwapOutlined",
                   "title": "数据转换",
                   "internal": false
                 }
@@ -236,7 +236,7 @@ const permission: Array<MockMethod> = [
             "route": "1",
             "meta": {
               "keepAlive": false,
-              "icon": "HomeOutlined",
+              "icon": "ApartmentOutlined",
               "title": "连接管理",
               "internal": false
             },
@@ -277,7 +277,7 @@ const permission: Array<MockMethod> = [
             "route": "1",
             "meta": {
               "keepAlive": false,
-              "icon": "HomeOutlined",
+              "icon": "HeatMapOutlined",
               "title": "数据处理",
               "internal": false
             },
@@ -450,7 +450,7 @@ const permission: Array<MockMethod> = [
             "route": "1",
             "meta": {
               "keepAlive": false,
-              "icon": "HomeOutlined",
+              "icon": "MonitorOutlined",
               "title": "系统监控",
               "internal": false
             },
@@ -463,7 +463,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "FieldTimeOutlined",
                   "title": "定时器",
                   "internal": false
                 }
@@ -502,7 +502,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "ConsoleSqlOutlined",
                   "title": "SQL监控",
                   "internal": false
                 }
@@ -528,7 +528,7 @@ const permission: Array<MockMethod> = [
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
-                  "icon": "HomeOutlined",
+                  "icon": "GatewayOutlined",
                   "title": "网关路由",
                   "internal": false
                 }
@@ -543,7 +543,7 @@ const permission: Array<MockMethod> = [
             "route": "1",
             "meta": {
               "keepAlive": false,
-              "icon": "HomeOutlined",
+              "icon": "CommentOutlined",
               "title": "消息中心",
               "internal": false
             },
@@ -603,7 +603,33 @@ const permission: Array<MockMethod> = [
                 }
               }
             ]
-          }
+          }, {
+            "id": "1123223",
+            "name": "404",
+            "path": "/404",
+            "component": "",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "icon": "MehOutlined",
+              "title": "404",
+              "internal": false
+            }
+          },
+          {
+            "id": "234ew",
+            "name": "sys-500",
+            "path": "/500",
+            "component": "",
+            "route": "1",
+            "meta": {
+              "keepAlive": false,
+              "icon": "FrownOutlined",
+              "title": "500",
+              "internal": false
+            },
+            "children": []
+          },
         ]
       }
     }
