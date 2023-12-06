@@ -112,7 +112,7 @@ const LeftMenu: React.FC = () => {
       style={{
         overflowX: 'hidden',
         zIndex: 1000,
-        boxShadow: '2px 2px 8px 0 rgba(29,35,41,.1)'
+        borderRight: '1px solid #e9edf0'
       }}
       theme={theme}
       collapsed={isCollapse}
