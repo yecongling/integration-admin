@@ -14,7 +14,7 @@ export const getAllProject = (params: Project) => {
 }
 
 export const addProject = (params: Project) => {
-  return defHttp.post<Result<any>>(
+  return defHttp.post<Result<never>>(
     {
       url: ProjectApi.addProject,
       data: params
@@ -31,7 +31,7 @@ export const addProject = (params: Project) => {
  * @param params
  */
 export const updateProject = (params: Project) => {
-  return defHttp.post<Result<any>>(
+  return defHttp.post<Result<never>>(
     {
       url: ProjectApi.updateProject,
       data: params
@@ -43,7 +43,7 @@ export const updateProject = (params: Project) => {
 }
 
 export const deleteProject = (projectId: string) => {
-  return defHttp.delete<Result<any>>(
+  return defHttp.delete<Result<never>>(
     {
       url: ProjectApi.deleteProject,
       params: {projectId}
