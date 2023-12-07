@@ -1,8 +1,10 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Col, Row} from "antd";
 
 const Editor: React.FC<EditorProps> = (props) => {
   const {width, height} = props;
+  const [canvasWith, setCanvasWidth] = useState(width);
+  const [canvasHeight, setCanvasHeight] = useState(height);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     if (canvasRef != null && canvasRef.current != null) {
@@ -10,20 +12,23 @@ const Editor: React.FC<EditorProps> = (props) => {
       if (ctx == null) {
         return;
       }
-      const width = canvasRef.current.width
-      const height = canvasRef.current.height
+      const ratio = window.devicePixelRatio || 1;
+      setCanvasWidth(width * ratio);
+      setCanvasHeight(height * ratio);
+
       const margins = [100, 120, 100, 120];
       // 清空面板
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, canvasWith, canvasHeight);
+      ctx.scale(ratio, ratio);
       const marginIndicatorSize = 35;
       ctx.save()
       ctx.translate(0.5, 0.5)
       ctx.strokeStyle = "#BABABA";
       ctx.beginPath()
       const leftTopPoint: [number, number] = [margins[3], margins[0]]
-      const rightTopPoint: [number, number] = [width - margins[1], margins[0]]
-      const leftBottomPoint: [number, number] = [margins[3], height - margins[2]]
-      const rightBottomPoint: [number, number] = [width - margins[1], height - margins[2]]
+      const rightTopPoint: [number, number] = [canvasWith - margins[1], margins[0]]
+      const leftBottomPoint: [number, number] = [margins[3], canvasHeight - margins[2]]
+      const rightBottomPoint: [number, number] = [canvasWith - margins[1], canvasHeight - margins[2]]
       // 上左
       ctx.moveTo(leftTopPoint[0] - marginIndicatorSize, leftTopPoint[1])
       ctx.lineTo(...leftTopPoint)
@@ -44,7 +49,7 @@ const Editor: React.FC<EditorProps> = (props) => {
       ctx.restore()
 
       ctx.font = "20px 宋体";
-      ctx.fillText("老子要打造一个类似Google文档的东西", 120, 120);
+      ctx.fillText("老子要打造一个类似Google文档的东西", 20 * ratio, 20 * ratio);
     }
   }, [])
 
@@ -74,11 +79,13 @@ const Editor: React.FC<EditorProps> = (props) => {
                 height: height + 'px',
                 boxShadow: '#9ea1a566 0 2px 12px'
               }}>
-                <canvas ref={canvasRef} className="kix-canvas-tile-content" width={width} height={height}
+                <canvas ref={canvasRef} className="kix-canvas-tile-content" width={canvasWith} height={canvasHeight}
                         style={{
                           zIndex: 0,
                           backgroundColor: 'rgb(249, 251, 253)',
-                          cursor: 'text'
+                          cursor: 'text',
+                          width: width + 'px',
+                          height: height + 'px'
                         }} dir="ltr"></canvas>
               </div>
             </Col>
