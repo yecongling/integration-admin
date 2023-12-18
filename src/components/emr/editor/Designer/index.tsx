@@ -18,7 +18,7 @@ const Designer: React.FC<DesignerProps> = (props) => {
           {/* 分三部分  上面的文本的操作，中间（左边的文件操作和插件，和编辑区） 下面的foot */}
           <Toolbar/>
           {/* 中间 */}
-          <Editor/>
+          <Editor width={794} height={1123}/>
           <Footer/>
         </section>
       </Col>
