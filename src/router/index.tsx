@@ -75,9 +75,9 @@ const routes = [
       },
 
       {
-        path: "emr/designCenter",
+        path: "/editor/docEditor",
         auth: false,
-        component: lazyLoad('emr/DesignCenter').type
+        component: lazyLoad('DocEditor').type
       },
       {
         path: '*',

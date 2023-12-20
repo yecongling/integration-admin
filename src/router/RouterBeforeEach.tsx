@@ -11,7 +11,7 @@ const RouterBeforeEach: React.FC = () => {
     if (blLogin == 'false' || !blLogin) {
       navigate('/login', {replace: true})
     } else {
-      navigate("/emr/designCenter");
+      navigate("/editor/docEditor");
     }
   }, [])
   return <Outlet/>
