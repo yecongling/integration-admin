@@ -22,8 +22,6 @@ const DocEditor: React.FC = () => {
       </div>
       <div className="docs-editor-container" style={{height: 'calc(100% - 90px)'}}>
         中间编辑器区域（封装组件）
-        <iframe src="https://docs.google.com/document/d/1y2vYbHtb-BPYB_W-Slc8sT1yOu58Vs9MEeBTxZ4ysV4/edit#"
-                frameBorder={0} width="100%" height="100%"></iframe>
       </div>
     </>
   )
