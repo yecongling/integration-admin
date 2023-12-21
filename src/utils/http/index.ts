@@ -8,11 +8,11 @@ import {deepMerge, setObjToUrlParams} from "@/utils";
 import {AxiosResponse} from "axios";
 import {RequestOptions, Result} from "@/types/axios";
 import {ContentTypeEnum, RequestEnum, ResultEnum} from "@/enums/httpEnum";
-import {message as messageApi, Modal} from "antd";
 // import {setToken} from "@/stores/modules/global/action";
 import {isString} from "@/utils/is";
 import {joinTimestamp} from "@/utils/http/helper";
 import {Recordable} from "@/types/global";
+import {antdUtils} from "@/utils/antd.ts";
 
 /**
  * 数据处理，拦截器。hooks实现
@@ -44,7 +44,7 @@ const transform: AxiosTransform = {
     if (hasSuccess) {
       if (success && message && options.successMessageMode === 'success') {
         // 信息成功提示
-        messageApi.success(message);
+        antdUtils.message?.success(message);
       }
       return result;
     }
@@ -61,9 +61,9 @@ const transform: AxiosTransform = {
         }
     }
     if (options.errorMessageMode === 'modal') {
-      Modal.error({title: "错误提示", content: timeoutMsg});
+      antdUtils.modal?.error({title: "错误提示", content: timeoutMsg});
     } else if (options.errorMessageMode === 'message') {
-      messageApi.error(timeoutMsg);
+      antdUtils.message?.error(timeoutMsg);
     }
     throw new Error(timeoutMsg || "接口请求失败");
   },
@@ -141,7 +141,7 @@ const transform: AxiosTransform = {
       errMessage = "网络异常"
     }
     if (errMessage) {
-      messageApi.error(errMessage);
+      antdUtils.message?.error(errMessage);
       return Promise.reject(error);
     }
 

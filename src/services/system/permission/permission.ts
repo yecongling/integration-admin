@@ -13,7 +13,7 @@ import {Result} from "@/types/axios";
  */
 export const getMenuList = () => {
   return new Promise((resolve) => {
-    defHttp.get<getMenuListResultModel>({url: Api.getMenuList}).then((res) => {
+    defHttp.get<getMenuListResultModel>({url: Api.getMenuList}, {successMessageMode: 'none'}).then((res) => {
       if (Array.isArray(res)) {
         resolve(res);
       } else {

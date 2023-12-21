@@ -1,6 +1,7 @@
 import {useRoutes} from "react-router-dom";
-import React, {Suspense} from 'react'
-import {Skeleton} from "antd";
+import React, {Suspense, useEffect} from 'react'
+import {App, Skeleton} from "antd";
+import {antdUtils} from "@/utils/antd.ts";
 
 const lazyLoad = (moduleName: string) => {
   const viteModule = import.meta.glob('../**/*.tsx');
@@ -125,7 +126,16 @@ const generateRouter = (routers: any) => {
   })
 }
 
-const Router = () => useRoutes(generateRouter(routes))
+const Router = () => {
+  const route = generateRouter(routes);
+  const {notification, message, modal} = App.useApp();
+  useEffect(() => {
+    antdUtils.setMessageInstance(message);
+    antdUtils.setNotificationInstance(notification);
+    antdUtils.setModalInstance(modal);
+  }, [notification, message, modal]);
+  return useRoutes(route);
+}
 const checkRouterAuth = (path: string) => {
   let auth = null
   auth = checkAuth(routes, path)
