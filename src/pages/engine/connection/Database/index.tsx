@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Button, Col, Form, Input, InputRef, Layout, Modal, Popconfirm, Row, Select, Space, Table} from "antd";
 import {
   CheckCircleOutlined,
-  CloseCircleOutlined,
+  CloseCircleOutlined, EyeInvisibleOutlined, EyeTwoTone,
   LoginOutlined,
   LogoutOutlined,
   PlusOutlined,
@@ -324,8 +324,9 @@ const Database: React.FC = () => {
               marginBottom: '0',
               marginRight: '6px'
             }}
-                       rules={[{required: true, message: '请输入用户名'}]}>
-              <Input/>
+                       rules={[{required: true, message: '请输入密码'}]}>
+              <Input.Password placeholder="请输入密码"
+                              iconRender={(visible) => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}/>
             </Form.Item>
             <Form.Item style={{width: '90px', display: 'inline-block', marginBottom: '0'}}>
               <Button type="primary" onClick={() => data.validateFields().then((values) => {
