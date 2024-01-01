@@ -177,7 +177,7 @@ const ProjectMaintain: React.FC = () => {
         return (
           <>
             <a type="link" onClick={() => {
-              navigate('/engine/project/projectMaintain/designer', {state: record});
+              navigate('/project/projectMaintain/designer', {state: record});
             }}>{text}</a>
           </>
         )
@@ -232,7 +232,7 @@ const ProjectMaintain: React.FC = () => {
           </Tooltip>
           <Tooltip placement="top" title="设计">
             <BranchesOutlined style={{fontSize: '18px'}} onClick={() => {
-              navigate('/engine/project/projectMaintain/designer', {state: record});
+              navigate('/project/projectMaintain/designer', {state: record});
             }}/>
           </Tooltip>
           <Popconfirm
