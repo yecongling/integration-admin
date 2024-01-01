@@ -30,7 +30,15 @@ const project: Array<MockMethod> = [
   {
     url: '/api/engine/project/addProject',
     method: 'post',
-
+    response: ({body}) => {
+      console.log("body>>>>>", body);
+      return {
+        code: 200,
+        message: '',
+        success: true,
+        result: []
+      }
+    }
   }
 ]
 
