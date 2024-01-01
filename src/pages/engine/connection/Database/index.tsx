@@ -31,7 +31,9 @@ const Database: React.FC = () => {
   }
 
   useEffect(() => {
-    getDbSource({});
+    getDbSource({}).then((res) => {
+      setDbSource(res);
+    });
   }, [])
 
   /**
@@ -39,7 +41,9 @@ const Database: React.FC = () => {
    * @param value
    */
   const onFinish = (value: any) => {
-    getDbSource(value);
+    getDbSource(value).then((res) => {
+      setDbSource(res);
+    });
   }
 
   /**
@@ -109,7 +113,9 @@ const Database: React.FC = () => {
     // 更新表格数据
     setOpen(false);
     const param = form.getFieldsValue();
-    getDbSource(param);
+    getDbSource(param).then((res) => {
+      setDbSource(res);
+    });
   }
 
   /**
@@ -134,8 +140,7 @@ const Database: React.FC = () => {
    * @param param
    */
   const getDbSource = async (param: any) => {
-    const resource = await getDatasource(param);
-    setDbSource(resource);
+    return await getDatasource(param);
   }
 
   // 定义列

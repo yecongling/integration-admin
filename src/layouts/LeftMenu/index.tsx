@@ -74,9 +74,9 @@ const LeftMenu: React.FC = () => {
 
   // 刷新页面菜单保持高亮
   useEffect(() => {
-    setSelectedKeys([pathname]);
     const openKey = getOpenKeys(pathname);
     !isCollapse && setOpenKeys(openKey);
+    setSelectedKeys(openKey.concat([pathname]));
   }, [pathname, isCollapse]);
 
   // 设置当前展开的 subMenu
