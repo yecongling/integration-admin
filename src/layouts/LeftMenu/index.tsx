@@ -87,21 +87,25 @@ const LeftMenu: React.FC = () => {
     setOpenKeys([latestOpenKey]);
   };
 
+  /**
+   * 获取菜单数据
+   */
   const getMenuData = async () => {
-    setLoading(true);
-    try {
-      const data = (await getMenuList()) as RouteItem[];
-      if (!data) return;
-      setMenuList(deepLoopFloat(data, []));
-      // 把路由菜单处理成一维数组，存储到 redux 中，做菜单权限判断
-      handleRouter(data);
-    } finally {
-      setLoading(false);
-    }
+    return (await getMenuList()) as RouteItem[];
   };
 
   useEffect(() => {
-    getMenuData();
+    setLoading(true);
+    try {
+      getMenuData().then(data => {
+        if (!data) return;
+        setMenuList(deepLoopFloat(data, []));
+        // 把路由菜单处理成一维数组，存储到 redux 中，做菜单权限判断
+        handleRouter(data);
+      });
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   return (

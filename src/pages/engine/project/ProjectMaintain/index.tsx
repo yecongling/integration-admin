@@ -50,16 +50,17 @@ const ProjectMaintain: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onSearch(searchForm.getFieldsValue());
-  }, [])
+    onSearch(searchForm.getFieldsValue()).then((result) => {
+      setProjectSource(result);
+    });
+  }, [searchForm]);
 
   /**
    * 检索
    *
    */
   const onSearch = async (value: any) => {
-    const resource = await getAllProject(value);
-    setProjectSource(resource);
+    return await getAllProject(value);
   }
 
   /**
