@@ -31,7 +31,7 @@ const Header: React.FC = () => {
    * 跳转到github
    */
   const routeGitHub = () => {
-    window.open('https://github.com/yecongling/react-integration', '_blank');
+    window.open('https://github.com/yecongling/integration-admin', '_blank');
     // window.open('https://www.baidu.com', '_blank');
   }
 
