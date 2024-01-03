@@ -35,10 +35,10 @@ import {Project} from "./Project.ts";
 import "./index.less";
 import {useNavigate} from "react-router-dom";
 import {deleteProject, getAllProject} from "@/services/engine/project/projectMaintain/projectMaintain.ts";
-import ProjectTypeModal from "@/pages/engine/project/ProjectMaintain/components/ProjectTypeModal.tsx";
-import ProjectInfoModal from "@/pages/engine/project/ProjectMaintain/components/ProjectInfoModal.tsx";
+import ProjectTypeModal from "@/pages/engine/project/Design/components/ProjectTypeModal.tsx";
+import ProjectInfoModal from "@/pages/engine/project/Design/components/ProjectInfoModal.tsx";
 
-const ProjectMaintain: React.FC = () => {
+const Design: React.FC = () => {
   const [searchForm] = Form.useForm();
   const [open, setOpen] = useState(false);
   const [projectType, setProjectType] = useState(false);
@@ -306,4 +306,4 @@ const ProjectMaintain: React.FC = () => {
     </>
   );
 }
-export default ProjectMaintain;
+export default Design;

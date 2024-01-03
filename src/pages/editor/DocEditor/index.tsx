@@ -1,7 +1,7 @@
 import React from "react";
-import DocsBars from "@/pages/DocEditor/DocsBars";
-import DocsHeader from "@/pages/DocEditor/DocsHeader";
-import DocsEditor from "@/pages/DocEditor/DocsEditor";
+import DocsBars from "@/pages/editor/DocEditor/DocsBars";
+import DocsHeader from "@/pages/editor/DocEditor/DocsHeader";
+import DocsEditor from "@/pages/editor/DocEditor/DocsEditor";
 
 const DocEditor: React.FC = () => {
   return (

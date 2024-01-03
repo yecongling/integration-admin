@@ -1,5 +1,5 @@
 import {MockMethod} from "vite-plugin-mock";
-import {Project} from "../src/pages/engine/project/ProjectMaintain/Project";
+import {Project} from "../src/pages/engine/project/Design/Project";
 
 const projectData: Project[] = [
   {

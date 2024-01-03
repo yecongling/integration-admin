@@ -1,6 +1,6 @@
 import React from "react";
-import DocsMenuBars from "@/pages/DocEditor/DocsBars/DocsMenuBars";
-import DocsToolBar from "@/pages/DocEditor/DocsBars/DocsToolBar";
+import DocsMenuBars from "@/pages/editor/DocEditor/DocsBars/DocsMenuBars";
+import DocsToolBar from "@/pages/editor/DocEditor/DocsBars/DocsToolBar";
 
 const DocsBars: React.FC = () => {
   return (

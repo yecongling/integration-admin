@@ -1,7 +1,7 @@
 import React from "react";
 import {Col, Modal, Row} from "antd";
 import {CompressOutlined, FullscreenOutlined} from "@ant-design/icons";
-import {ProjectTypeProps} from "@/pages/engine/project/ProjectMaintain/components/ProjectState.ts";
+import {ProjectTypeProps} from "@/pages/engine/project/Design/components/ProjectState.ts";
 
 /**
  * 项目类型

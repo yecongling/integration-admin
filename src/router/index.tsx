@@ -44,19 +44,19 @@ const routes = [
         component: lazyLoad('system/Personal').type
       },
       {
-        path: "project/projectMaintain",
+        path: "project/design",
         auth: false,
-        component: lazyLoad('engine/project/ProjectMaintain').type
+        component: lazyLoad('engine/project/Design').type
       },
       {
         path: "project/terminal",
         auth: false,
-        component: lazyLoad('engine/project/TerminalManager').type
+        component: lazyLoad('engine/project/Terminal').type
       },
       {
-        path: "project/projectMaintain/designer",
+        path: "project/design/designer",
         auth: false,
-        component: lazyLoad('engine/project/ProjectMaintain/Designer').type
+        component: lazyLoad('engine/project/Design/Designer').type
       },
       {
         path: "connection/database",
@@ -78,7 +78,7 @@ const routes = [
       {
         path: "/editor/docEditor",
         auth: false,
-        component: lazyLoad('DocEditor').type
+        component: lazyLoad('editor/DocEditor').type
       },
       {
         path: '*',

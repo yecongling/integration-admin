@@ -18,8 +18,8 @@ import {
   TableOutlined,
   UndoOutlined
 } from "@ant-design/icons";
-import Setting from "@/pages/engine/project/ProjectMaintain/Designer/Setting";
-import Endpoint from "@/pages/engine/project/ProjectMaintain/Designer/components/server/Endpoint";
+import Setting from "@/pages/engine/project/Design/Designer/Setting";
+import Endpoint from "@/pages/engine/project/Design/Designer/components/server/Endpoint";
 
 const Designer: React.FC = () => {
   const navigate = useNavigate();

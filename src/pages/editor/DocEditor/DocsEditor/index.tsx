@@ -1,7 +1,7 @@
 import React from "react";
-import HorizontalRuler from "@/pages/DocEditor/DocsEditor/ruler/HorizontalRuler";
-import VerticalRuler from "@/pages/DocEditor/DocsEditor/ruler/VerticalRuler";
-import AppView from "@/pages/DocEditor/DocsEditor/AppView";
+import HorizontalRuler from "@/pages/editor/DocEditor/DocsEditor/ruler/HorizontalRuler.tsx";
+import VerticalRuler from "@/pages/editor/DocEditor/DocsEditor/ruler/VerticalRuler.tsx";
+import AppView from "@/pages/editor/DocEditor/DocsEditor/AppView";
 
 const DocsEditor: React.FC = () => {
   return (

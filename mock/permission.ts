@@ -87,7 +87,7 @@ const permission: Array<MockMethod> = [
                                 "route": "1",
                                 "meta": {
                                     "keepAlive": false,
-                                    "icon": "MessageOutlined",
+                                                            "icon": "MessageOutlined",
                                     "title": "测试消息",
                                     "internal": false
                                 }
@@ -110,13 +110,13 @@ const permission: Array<MockMethod> = [
                             {
                                 "id": "11335",
                                 "name": "sys-project",
-                                "path": "/project/projectMaintain",
-                                "component": "engine/project/ProjectMaintain",
+                                "path": "/project/design",
+                                "component": "engine/project/Design",
                                 "route": "1",
                                 "meta": {
                                     "keepAlive": false,
                                     "icon": "ContainerOutlined",
-                                    "title": "项目维护",
+                                    "title": "项目设计",
                                     "internal": false
                                 }
                             },
@@ -124,7 +124,7 @@ const permission: Array<MockMethod> = [
                                 "id": "11236",
                                 "name": "sys-project",
                                 "path": "/project/terminal",
-                                "component": "project/TerminalManager",
+                                "component": "project/Terminal",
                                 "route": "1",
                                 "meta": {
                                     "keepAlive": false,
@@ -169,7 +169,7 @@ const permission: Array<MockMethod> = [
                                 "route": "1",
                                 "meta": {
                                     "keepAlive": false,
-                                    "icon": "FundOutlined",
+                                        "icon": "FundOutlined",
                                     "title": "数据模式",
                                     "internal": false
                                 }
@@ -593,7 +593,7 @@ const permission: Array<MockMethod> = [
                                 "id": "112735529",
                                 "name": "sys-emr",
                                 "path": "/editor/docEditor",
-                                "component": "DocEditor",
+                                "component": "editor/DocEditor",
                                 "route": "1",
                                 "meta": {
                                     "keepAlive": false,

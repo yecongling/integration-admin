@@ -1,5 +1,5 @@
 import React from "react";
-import {AppViewProps} from "@/pages/DocEditor/DocsEditor/AppView/AppViewProps.ts";
+import {AppViewProps} from "@/pages/editor/DocEditor/DocsEditor/AppView/AppViewProps.ts";
 
 const AppView: React.FC<AppViewProps> = (props: AppViewProps) => {
   const {id} = props;
