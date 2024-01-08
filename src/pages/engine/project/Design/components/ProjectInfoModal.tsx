@@ -49,7 +49,7 @@ const ProjectInfoModal: React.FC<ProjectInfoProps> = (props) => {
         setOpen(false);
         messageApi.success("新增成功");
         // 如果是新增，则新增完成就跳转到设计界面
-        navigate('/project/projectMaintain/designer', {state: values});
+        navigate('/project/design/designer', {state: values});
       } else {
         messageApi.error(result.message);
       }
