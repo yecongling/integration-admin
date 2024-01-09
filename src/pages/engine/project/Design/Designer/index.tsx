@@ -114,7 +114,7 @@ const Designer: React.FC = () => {
             }}>
               <Col span={10}>
                 <Space.Compact>
-                  <Button type="default" icon={<UndoOutlined/>} disabled>撤销</Button>
+                  <Button type="default" icon={<UndoOutlined/>} disabled>撤销2</Button>
                   <Button type="default" icon={<RedoOutlined/>} disabled>恢复</Button>
                   <Button type="default" icon={<DeleteOutlined/>}>清空</Button>
                   <Button type="default" icon={<FlagOutlined/>}>标尺</Button>
