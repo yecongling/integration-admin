@@ -1,5 +1,5 @@
 import {defHttp} from "@/utils/http";
-import {DataType} from "@/pages/engine/connection/Database/DataType";
+import {DataType} from "@/pages/engine/connection/Database/DataType.ts";
 import {datasourceApi} from "@/services/engine/project/connection/database/datasourceApi";
 
 /**
