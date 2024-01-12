@@ -21,10 +21,10 @@ import {
   BranchesOutlined,
   CompressOutlined,
   CopyOutlined,
-  DeleteOutlined,
+  DeleteOutlined, DownOutlined,
   EditOutlined,
   EllipsisOutlined,
-  FullscreenOutlined,
+  FullscreenOutlined, LogoutOutlined,
   QuestionCircleOutlined,
   SearchOutlined,
   SwapOutlined,
@@ -153,7 +153,7 @@ const Design: React.FC = () => {
     {
       title: "运行状态",
       dataIndex: 'status',
-      width: '40px',
+      width: 40,
       align: 'center',
       render: function (text) {
         return text === '1' ? <Switch defaultChecked/> : <Switch/>;
@@ -162,7 +162,7 @@ const Design: React.FC = () => {
     {
       title: "警告",
       dataIndex: 'warning',
-      width: '40px',
+      width: 40,
       align: 'center',
       render: function (text) {
         return <QuestionCircleOutlined style={{color: text ? 'orange' : 'gray'}}/>;
@@ -171,7 +171,7 @@ const Design: React.FC = () => {
     {
       title: "项目名称",
       dataIndex: 'projectName',
-      width: '160px',
+      width: 160,
       align: 'left',
       ellipsis: true,
       render: function (text, record) {
@@ -187,7 +187,7 @@ const Design: React.FC = () => {
     {
       title: "优先级",
       dataIndex: 'projectPriority',
-      width: '40px',
+      width: 40,
       align: 'left',
       defaultSortOrder: 'descend',
       sorter: (a, b) => a.projectPriority - b.projectPriority,
@@ -195,14 +195,14 @@ const Design: React.FC = () => {
     {
       title: "描述",
       dataIndex: 'description',
-      width: '220px',
+      width: 220,
       align: 'left',
       ellipsis: true
     },
     {
       title: "类型",
       dataIndex: 'projectType',
-      width: '40px',
+      width: 40,
       align: 'center',
       render: function (text) {
         if (text === 1) {
@@ -214,7 +214,7 @@ const Design: React.FC = () => {
     {
       title: "视图",
       dataIndex: 'chart',
-      width: '40px',
+      width: 40,
       align: 'center',
       render: function () {
         return <FullscreenOutlined/>;
@@ -223,7 +223,7 @@ const Design: React.FC = () => {
     {
       title: "操作",
       dataIndex: 'opr',
-      width: '120px',
+      width: 120,
       align: 'center',
       fixed: 'right',
       render: function (_text, record) {
@@ -236,15 +236,17 @@ const Design: React.FC = () => {
               navigate('/project/design/designer', {state: record});
             }}/>
           </Tooltip>
-          <Popconfirm
-            title="删除菜单"
-            description="确定删除这条菜单数据吗?"
-            onConfirm={() => delProject(record.id)}
-            okText="确认"
-            cancelText="取消"
-          >
-            <DeleteOutlined style={{fontSize: '18px', color: '#ff4d4f'}}/>
-          </Popconfirm>
+          <Tooltip placement="top" title="删除">
+            <Popconfirm
+              title="删除菜单"
+              description="确定删除这条菜单数据吗?"
+              onConfirm={() => delProject(record.id)}
+              okText="确认"
+              cancelText="取消"
+            >
+              <DeleteOutlined style={{fontSize: '18px', color: '#ff4d4f'}}/>
+            </Popconfirm>
+          </Tooltip>
           <Dropdown menu={{items}}>
             <EllipsisOutlined style={{fontSize: '18px', cursor: 'pointer'}}/>
           </Dropdown>
@@ -252,6 +254,20 @@ const Design: React.FC = () => {
       }
     },
   ];
+
+  const oprBtn = {
+    items: [
+      {
+        key: '1',
+        label: '批量导入',
+        icon: <LogoutOutlined/>,
+        disabled: false,
+        onClick: function () {
+          alert("批量导入项目")
+        }
+      }
+    ]
+  }
 
   return (
     <>
@@ -282,15 +298,17 @@ const Design: React.FC = () => {
       </Layout.Header>
       <Layout.Content style={{marginTop: '6px'}}>
         <section className="layout-operation-bar">
-          <Space>
-            <Button type="primary" onClick={addProject}>新增项目</Button>
+          <Space wrap>
+            <Dropdown.Button type="primary" icon={<DownOutlined/>} menu={oprBtn}
+                             onClick={addProject}>新建</Dropdown.Button>
           </Space>
         </section>
         <section className="integration-layout-content">
           <Table
             rowSelection={{type: 'checkbox'}}
+            scroll={{x: true}}
             style={{marginTop: '6px'}}
-            size="middle"
+            size="small"
             columns={columns}
             dataSource={projectSource}
           /></section>
