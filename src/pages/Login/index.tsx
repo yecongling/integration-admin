@@ -62,7 +62,7 @@ const Login: React.FC = () => {
                 form={form}
                 name="login"
                 labelCol={{span: 5}}
-                initialValues={{captcha: '', remember: true}}
+                initialValues={{username: 'admin', password: '123123', captcha: code, remember: true}}
                 size="large"
                 autoComplete="off"
                 onFinish={submit}
