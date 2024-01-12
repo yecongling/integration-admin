@@ -139,7 +139,7 @@ const Designer: React.FC = () => {
                   <Button type="primary" title="导出流程" icon={<ExportOutlined/>}
                           onClick={() => alert("导出")}>导出</Button>
                   <Button type="primary" icon={<RollbackOutlined/>} onClick={() => {
-                    navigate('/project/projectMaintain')
+                    navigate('/project/design')
                   }}>返回</Button>
                   <Button type="default" icon={<MenuOutlined/>} title="面板" onClick={clickPanel}/>
                 </Space>
