@@ -1,10 +1,13 @@
 import {RouteObject} from "@/interface";
+import * as Icons from "@ant-design/icons";
 import {permission, RouteItem} from "@/services/system/permission/menuModel";
+import React from "react";
+import SvgIcon from "@/components/SvgIcon";
 
 /**
  * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断
  * @param {Array} routerList 所有菜单列表
- * @param menuList 构建的路由信息
+ * @param newArr
  * @return array
  */
 export function handleRouter(routerList: RouteItem[], newArr: string[] = []) {
@@ -52,3 +55,12 @@ export const handlePermission = (permissions: permission[]) => {
     }
   })
 }
+
+// 动态渲染 Icon 图标
+const customIcons: { [key: string]: any } = Icons;
+export const addIcon = (name: string) => {
+  if (name.startsWith('icon')) {
+    return <SvgIcon type={name}/>;
+  }
+  return React.createElement(customIcons[name]);
+};

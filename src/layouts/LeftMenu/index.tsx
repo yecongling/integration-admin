@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from "react";
 import Sider from "antd/es/layout/Sider";
 import "./index.less";
-import * as Icons from "@ant-design/icons";
 import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
 import {Menu, MenuProps, Spin, Tooltip} from "antd";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import SvgIcon from "@/components/SvgIcon";
 import {RouteItem} from "@/services/system/permission/menuModel";
-import {getOpenKeys, handleRouter} from "@/utils/util.ts";
+import {addIcon, getOpenKeys, handleRouter} from "@/utils/util.tsx";
 import {getMenuList} from "@/services/system/permission/permission.ts";
 import {setCollapse} from "@/store/modules/global.ts";
 
@@ -42,15 +40,6 @@ const LeftMenu: React.FC = () => {
       label,
       type
     } as MenuItem;
-  };
-
-  // 动态渲染 Icon 图标
-  const customIcons: { [key: string]: any } = Icons;
-  const addIcon = (name: string) => {
-    if (name.startsWith('icon')) {
-      return <SvgIcon type={name}/>;
-    }
-    return React.createElement(customIcons[name]);
   };
 
   // 处理后台返回菜单 key 值为 antd 菜单需要的 key 值

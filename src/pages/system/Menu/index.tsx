@@ -21,7 +21,6 @@ import {
   TreeSelect
 } from "antd";
 import {ColumnsType} from "antd/es/table";
-import * as Icons from "@ant-design/icons";
 import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined} from "@ant-design/icons";
 import './menu.less';
 import {
@@ -32,7 +31,7 @@ import {
   updatePermission,
   validateFields
 } from "@/services/system/permission/permission";
-import {handlePermission} from "@/utils/util";
+import {addIcon, handlePermission} from "@/utils/util.tsx";
 import {Directory, permission, permissionResult} from "@/services/system/permission/menuModel";
 import IconPicker from "@/components/menu/icon/IconPicker.tsx";
 
@@ -192,24 +191,21 @@ const Menu: React.FC = () => {
     }
   }
 
-  // 动态渲染 Icon 图标
-  const customIcons: { [key: string]: any } = Icons;
-  const addIcon = (name: string) => {
-    return React.createElement(customIcons[name]);
-  };
   // 定义列
   const columns: ColumnsType<permission> = [
     {
       title: '菜单名称',
       dataIndex: 'name',
       key: 'name',
-      width: '140px'
+      width: 140,
+      ellipsis: true
     },
     {
       title: '菜单类型',
       dataIndex: 'menuType',
       key: 'menuType',
-      width: '80px',
+      width: 80,
+      ellipsis: true,
       align: 'center',
       render: (text) => {
         return text === 0 ? "一级菜单" : (text === 1 ? "子菜单" : "按钮");
@@ -218,8 +214,9 @@ const Menu: React.FC = () => {
     {
       title: '图标',
       dataIndex: 'icon',
-      width: '80px',
+      width: 80,
       key: 'icon',
+      ellipsis: true,
       align: 'center',
       render: (text) => {
         return addIcon(text);
@@ -229,26 +226,30 @@ const Menu: React.FC = () => {
       title: '组件',
       dataIndex: 'component',
       key: 'component',
-      width: '120px',
+      ellipsis: true,
+      width: 120,
     },
     {
       title: '路径',
       dataIndex: 'url',
+      ellipsis: true,
       key: 'url',
-      width: '180px',
+      width: 180,
     },
     {
       title: '排序',
       dataIndex: 'sortNo',
+      ellipsis: true,
       key: 'sortNo',
-      width: '80px',
+      width: 80,
       align: 'center'
     },
     {
       title: '操作',
       dataIndex: 'sort_no',
       key: 'operation',
-      width: '180px',
+      width: 180,
+      fixed: 'right',
       align: 'center',
       render: (_text, record) => (
         <Space size="small">
@@ -326,6 +327,7 @@ const Menu: React.FC = () => {
             style={{marginTop: '6px'}}
             className="table"
             size="middle"
+            scroll={{x: '100%', y: 'calc(100vh - 270px)'}}
             columns={columns}
             dataSource={tableData}
           />
