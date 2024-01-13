@@ -15,13 +15,18 @@ import {
   RadioChangeEvent,
   Row,
   Select,
-  Space,
-  Switch,
+  Space, Switch,
   Table,
   TreeSelect
 } from "antd";
 import {ColumnsType} from "antd/es/table";
-import {CheckCircleOutlined, CloseCircleOutlined, PlusOutlined, SettingOutlined} from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  LoadingOutlined,
+  PlusOutlined,
+  SettingOutlined
+} from "@ant-design/icons";
 import './menu.less';
 import {
   addPermission,
@@ -52,6 +57,8 @@ const Menu: React.FC = () => {
   const [tableData, setTableData] = useState<permission[]>([]);
   // 目录数据
   const [treeData, setTreeData] = useState<Directory[]>([]);
+  // 表格加载中
+  const [loading, setLoading] = useState(false);
   const onChange = (newValue: string) => {
     setValue(newValue);
   };
@@ -269,6 +276,7 @@ const Menu: React.FC = () => {
   ];
 
   const getAllMenus = async () => {
+    setLoading(true);
     const formData = form.getFieldsValue();
     const result = await getAllPermission(formData);
     if (result) {
@@ -277,6 +285,7 @@ const Menu: React.FC = () => {
       handlePermission(tableData);
       setTableData(tableData);
     }
+    setLoading(false);
   }
 
   return (
@@ -301,11 +310,11 @@ const Menu: React.FC = () => {
               </Form.Item>
             </Col>
             <Col span={5}>
-              <Form.Item label="显示" name="show" initialValue="-1" style={{marginBottom: 0}}>
+              <Form.Item label="显示" name="hidden" initialValue="-1" style={{marginBottom: 0}}>
                 <Select options={[
                   {value: '-1', label: '所有'},
-                  {value: '1', label: '显示'},
-                  {value: '0', label: '隐藏'}
+                  {value: '0', label: '显示'},
+                  {value: '1', label: '隐藏'}
                 ]}/>
               </Form.Item>
             </Col>
@@ -324,6 +333,7 @@ const Menu: React.FC = () => {
         </section>
         <section className="integration-layout-content">
           <Table
+            loading={{indicator: <LoadingOutlined style={{fontSize: 24}}/>, spinning: loading}}
             style={{marginTop: '6px'}}
             className="table"
             size="middle"
