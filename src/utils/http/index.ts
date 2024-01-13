@@ -63,7 +63,17 @@ const transform: AxiosTransform = {
     if (options.errorMessageMode === 'modal') {
       antdUtils.modal?.error({title: "错误提示", content: timeoutMsg});
     } else if (options.errorMessageMode === 'message') {
-      antdUtils.message?.error(timeoutMsg);
+      if (code === 403) {
+        antdUtils.modal?.confirm({
+          title: "登录失败",
+          content: '当前会话失效',
+          onOk() {
+            window.location.href = '/login';
+          }
+        })
+      } else {
+        antdUtils.message?.error(timeoutMsg);
+      }
     }
     throw new Error(timeoutMsg || "接口请求失败");
   },
@@ -155,7 +165,8 @@ function createAxios(opts?: Partial<CreateAxiosOptions>) {
       {
         authenticationScheme: '',
         timeout: 10 * 1000,
-        headers: {'Content-Type': ContentTypeEnum.JSON},
+        /* 这里需要添加登录的token */
+        headers: {'Content-Type': ContentTypeEnum.JSON, 'satoken': 'integration 12312312awferwebdrgt'},
         // 数据处理方式
         transform,
         // 配置项，下面的选项都可以在独立的接口请求中覆盖
