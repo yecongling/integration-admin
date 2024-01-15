@@ -5,6 +5,7 @@ import {LockOutlined, SecurityScanOutlined, UserOutlined} from "@ant-design/icon
 import "./login.less";
 import filing from '@/assets/images/filing.png';
 import {useNavigate} from "react-router-dom";
+import {login} from "@/services/login/loginApi.ts";
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
@@ -13,9 +14,16 @@ const Login: React.FC = () => {
   // 加载状态
   // const [loading, setLoading] = useState<boolean>(false);
   const [code, setCode] = useState(Math.floor(Math.random() * 10000).toString());
-  const submit = async () => {
-    sessionStorage.setItem('login', 'true');
-    navigate("/home");
+  const submit = async (values: any) => {
+    const result = await login(values);
+    if (result.code === 200) {
+      const tokenVal = result.data['tokenValue'];
+      const isLogin = result.data['isLogin'];
+      sessionStorage.setItem("satoken", "integration " + tokenVal);
+      sessionStorage.setItem('isLogin', isLogin);
+      navigate('/home');
+
+    }
   }
 
   /**

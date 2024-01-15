@@ -75,7 +75,8 @@ const Header: React.FC = () => {
           onOk: function () {
             // 清空token
             // setToken("");
-            sessionStorage.removeItem('login');
+            sessionStorage.removeItem('satoken');
+            sessionStorage.removeItem('isLogin');
             // 退出到登录页面
             navigate("/login");
           },

@@ -166,7 +166,7 @@ function createAxios(opts?: Partial<CreateAxiosOptions>) {
         authenticationScheme: '',
         timeout: 10 * 1000,
         /* 这里需要添加登录的token */
-        headers: {'Content-Type': ContentTypeEnum.JSON, 'satoken': 'integration 12312312awferwebdrgt'},
+        headers: {'Content-Type': ContentTypeEnum.JSON, 'satoken': sessionStorage.getItem('satoken')},
         // 数据处理方式
         transform,
         // 配置项，下面的选项都可以在独立的接口请求中覆盖
