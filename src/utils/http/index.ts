@@ -38,11 +38,11 @@ const transform: AxiosTransform = {
     if (!data) {
       throw new Error("api接口请求失败，没有返回数据");
     }
-    const {code, result, message, success} = data;
+    const {code, result, message} = data;
     // 系统默认200状态码为正常成功请求，可在枚举中配置自己的
     const hasSuccess = data && Reflect.has(data, "code") && (code === ResultEnum.SUCCESS || code === 200);
     if (hasSuccess) {
-      if (success && message && options.successMessageMode === 'success') {
+      if (message && options.successMessageMode === 'success') {
         // 信息成功提示
         antdUtils.message?.success(message);
       }
