@@ -21,10 +21,12 @@ import {
   BranchesOutlined,
   CompressOutlined,
   CopyOutlined,
-  DeleteOutlined, DownOutlined,
+  DeleteOutlined,
   EditOutlined,
   EllipsisOutlined,
-  FullscreenOutlined, LogoutOutlined,
+  FullscreenOutlined,
+  ImportOutlined,
+  PlusOutlined,
   QuestionCircleOutlined,
   SearchOutlined,
   SwapOutlined,
@@ -265,20 +267,6 @@ const Design: React.FC = () => {
     },
   ];
 
-  const oprBtn = {
-    items: [
-      {
-        key: '1',
-        label: '批量导入',
-        icon: <LogoutOutlined/>,
-        disabled: false,
-        onClick: function () {
-          alert("批量导入项目")
-        }
-      }
-    ]
-  }
-
   return (
     <>
       {/* 查询区域 */}
@@ -309,8 +297,8 @@ const Design: React.FC = () => {
       <Layout.Content style={{marginTop: '6px'}}>
         <section className="layout-operation-bar">
           <Space wrap>
-            <Dropdown.Button type="primary" icon={<DownOutlined/>} menu={oprBtn}
-                             onClick={addProject}>新建</Dropdown.Button>
+            <Button type="primary" onClick={addProject} icon={<PlusOutlined/>}>新建</Button>
+            <Button type="primary" onClick={() => alert('导入')} icon={<ImportOutlined/>}>导入</Button>
           </Space>
         </section>
         <section className="integration-layout-content">
