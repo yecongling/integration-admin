@@ -56,6 +56,16 @@ const Design: React.FC = () => {
   }, [searchForm]);
 
   /**
+   * 完成检索
+   * @param values
+   */
+  const finishSearch = (values: any) => {
+    onSearch(values).then((result) => {
+      setProjectSource(result);
+    })
+  }
+
+  /**
    * 检索
    *
    */
@@ -273,7 +283,7 @@ const Design: React.FC = () => {
     <>
       {/* 查询区域 */}
       <Layout.Header className="layout-header-row">
-        <Form form={searchForm} onFinish={onSearch} initialValues={{projectType: '-1'}}>
+        <Form form={searchForm} onFinish={finishSearch} initialValues={{projectType: '-1'}}>
           <Row gutter={24}>
             <Col span={6}>
               <Form.Item label="项目名称" name="name" style={{marginBottom: 0}}>
@@ -320,7 +330,7 @@ const Design: React.FC = () => {
       {/* 编辑弹窗 */}
       <ProjectInfoModal open={open} setOpen={setOpen} isEdit={isEdit} changeModal={changeModal}
                         projectName={projectName}
-                        editInfo={editInfo} projectData={projectData} onSearch={onSearch} searchForm={searchForm}/>
+                        editInfo={editInfo} projectData={projectData} onSearch={finishSearch} searchForm={searchForm}/>
     </>
   );
 }
