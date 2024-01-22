@@ -1,7 +1,7 @@
 import {defHttp} from "@/utils/http";
 import {Api} from "@/services/system/permission/menuApi";
 import {
-  directoryResult,
+  Directory,
   getMenuListResultModel,
   permission,
   permissionResult
@@ -35,7 +35,7 @@ export const getAllPermission = (params: any) => {
  * 获取上级菜单
  */
 export const getDirectoryPermission = () => {
-  return defHttp.get<directoryResult>({url: Api.getDirectoryPermission}, {successMessageMode: "none"});
+  return defHttp.get<Directory[]>({url: Api.getDirectoryPermission}, {successMessageMode: "none"});
 }
 
 /**

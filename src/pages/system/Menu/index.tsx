@@ -194,7 +194,7 @@ const Menu: React.FC = () => {
   const getDirectory = async () => {
     const result = await getDirectoryPermission();
     if (result) {
-      const treeData: Directory[] = [...result.directory];
+      const treeData: Directory[] = [...result];
       setTreeData(treeData);
     }
   }
