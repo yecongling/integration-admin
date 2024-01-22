@@ -15,7 +15,8 @@ import {
   RadioChangeEvent,
   Row,
   Select,
-  Space, Switch,
+  Space,
+  Switch,
   Table,
   TreeSelect
 } from "antd";
@@ -280,7 +281,7 @@ const Menu: React.FC = () => {
     const formData = form.getFieldsValue();
     const result = await getAllPermission(formData);
     if (result) {
-      const tableData: permission[] = [...result.data];
+      const tableData: permission[] = [...result];
       // 处理数据，当children没有时不要这个节点
       handlePermission(tableData);
       setTableData(tableData);

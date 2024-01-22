@@ -28,7 +28,7 @@ export const getMenuList = () => {
  * @param params
  */
 export const getAllPermission = (params: any) => {
-  return defHttp.post<permissionResult>({url: Api.getAllPermission, data: params});
+  return defHttp.post<permission[]>({url: Api.getAllPermission, data: params});
 }
 
 /**
