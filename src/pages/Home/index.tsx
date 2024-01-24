@@ -11,7 +11,7 @@ const Index: React.FC = () => {
   return (
     <>
       <div style={{margin: '10px'}}>
-        <Row gutter={16} style={{height: '160px'}}>
+        <Row gutter={16} style={{height: '160px', marginBottom: '16px'}}>
           <Col className="gutter-row" span={6}>
             <Card>
               <Row gutter={16}>
@@ -74,7 +74,7 @@ const Index: React.FC = () => {
           </Col>
         </Row>
 
-        <Row gutter={16} style={{marginTop: '6px', height: '300px'}}>
+        <Row gutter={16} style={{height: '300px', marginBottom: '16px'}}>
           <Col className="gutter-row" span={6}>
             <Card bodyStyle={{height: '100%'}}>
               <PieChart/>
@@ -87,7 +87,7 @@ const Index: React.FC = () => {
           </Col>
         </Row>
 
-        <Row gutter={16} style={{marginTop: '6px', height: '400px'}}>
+        <Row gutter={16} style={{height: '400px'}}>
           <Col className="gutter-row" span={6}>
             <Card bodyStyle={{height: '100%'}}>
               <div className="eventTitle">
