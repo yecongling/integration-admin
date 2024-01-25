@@ -4,7 +4,8 @@ import RouterBeforeEach from "@/router/RouterBeforeEach.tsx";
 /* 内容区域 */
 const Index: React.FC = () => {
   return (
-    <Layout.Content className="dis-fl fd-c" style={{overflowY: 'auto', overflowX: 'hidden'}}>
+    <Layout.Content className="dis-fl fd-c"
+                    style={{overflowY: 'auto', overflowX: 'hidden', padding: '16px'}}>
       <Suspense fallback={
         <div className="dis-fl jc-ct ai-ct" style={{height: '100vh'}}>
           <Spin size="large"/>
