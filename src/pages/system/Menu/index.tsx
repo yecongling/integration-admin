@@ -338,6 +338,7 @@ const Menu: React.FC = () => {
             style={{marginTop: '6px'}}
             className="table"
             size="middle"
+            pagination={false}
             scroll={{x: '100%', y: 'calc(100vh - 270px)'}}
             columns={columns}
             dataSource={tableData}

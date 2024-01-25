@@ -27,49 +27,49 @@ const routes = [
     component: React.lazy(() => import("@/layouts")),
     children: [
       {
-        path: "home",
+        path: "/home",
         auth: false,
         title: '首页',
         component: lazyLoad('Home').type
       },
       {
-        path: "system/menu",
+        path: "/system/menu",
         auth: false,
         component: lazyLoad('system/Menu').type
       },
       {
-        path: 'system/personal',
+        path: '/system/personal',
         title: '个人中心',
         auth: false,
         component: lazyLoad('system/Personal').type
       },
       {
-        path: "project/design",
+        path: "/project/design",
         auth: false,
         component: lazyLoad('engine/project/Design').type
       },
       {
-        path: "project/terminal",
+        path: "/project/terminal",
         auth: false,
         component: lazyLoad('engine/project/Terminal').type
       },
       {
-        path: "project/design/designer",
+        path: "/project/design/designer",
         auth: false,
         component: lazyLoad('engine/project/Design/Designer').type
       },
       {
-        path: "connection/database",
+        path: "/connection/database",
         auth: false,
         component: lazyLoad('engine/connection/Database').type
       },
       {
-        path: "resource/database",
+        path: "/resource/database",
         auth: false,
         component: lazyLoad('engine/resource/Database').type
       },
       {
-        path: 'dataHandle/dataTransfer',
+        path: '/dataHandle/dataTransfer',
         auth: false,
         title: '数据转换',
         component: lazyLoad('engine/dataHandle/DataTransfer').type
@@ -86,7 +86,7 @@ const routes = [
         component: lazyLoad('404.tsx').type
       },
       {
-        path: '500',
+        path: '/500',
         auth: false,
         component: lazyLoad('500.tsx').type
       }
@@ -141,4 +141,13 @@ const checkRouterAuth = (path: string) => {
   auth = checkAuth(routes, path)
   return auth
 }
+
+/**
+ * 更新路由
+ * @param routesData
+ */
+const updateRoutes = (routesData) => {
+
+}
+
 export {Router, checkRouterAuth}
