@@ -1,12 +1,15 @@
 import './App.css'
 import React from "react";
 import {Router} from "@/router";
-import {App as AntdApp} from "antd"
-import ZhCN from "antd/es/locale/zh_CN";
+import {App as AntdApp, ConfigProvider} from "antd"
+import ZhCN from "antd/locale/zh_CN";
 import {useSelector} from "react-redux";
-import {ConfigProvider} from "antd";
+import dayjs from 'dayjs';
+
+import 'dayjs/locale/zh-cn';
 
 const App: React.FC = () => {
+  dayjs.locale('zh-cn');
   const {colorPrimary} = useSelector((store: any) => store.global);
   return (
     <ConfigProvider theme={{

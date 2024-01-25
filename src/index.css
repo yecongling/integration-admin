@@ -565,3 +565,16 @@ code {
     padding: 16px 32px 0;
 }
 
+/* 修改卡片 */
+.ant-card-bordered {
+    border-color: #e9edf0;
+}
+
+.ant-card {
+    transition: box-shadow 0.3s;
+}
+
+.ant-card:hover {
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.06);
+}
+

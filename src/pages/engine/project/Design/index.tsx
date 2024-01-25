@@ -1,12 +1,13 @@
 import React, {useEffect, useRef, useState} from "react";
 import {
   Button,
+  Card,
   Col,
+  DatePicker,
   Dropdown,
   Form,
   Input,
   InputRef,
-  Layout,
   MenuProps,
   message,
   Popconfirm,
@@ -270,7 +271,7 @@ const Design: React.FC = () => {
   return (
     <>
       {/* 查询区域 */}
-      <Layout.Header className="layout-header-row">
+      <Card bodyStyle={{height: '100%'}} style={{marginBottom: '16px'}}>
         <Form form={searchForm} onFinish={finishSearch} initialValues={{projectType: '-1'}}>
           <Row gutter={24}>
             <Col span={6}>
@@ -287,30 +288,42 @@ const Design: React.FC = () => {
                 ]}/>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={6}>
+              <Form.Item label="创建时间" name="createTime" style={{marginBottom: 0}}>
+                <DatePicker style={{width: '100%'}}/>
+              </Form.Item>
+            </Col>
+            <Col span={4} offset={2}>
               <Button type="primary" htmlType="submit"><SearchOutlined/>查询</Button>
               <Button htmlType="reset" style={{margin: '0 8px'}}><SyncOutlined/>重置</Button>
             </Col>
           </Row>
         </Form>
-      </Layout.Header>
-      <Layout.Content style={{marginTop: '6px'}}>
-        <section className="layout-operation-bar">
+      </Card>
+      <Card>
+        <section style={{marginBottom: '16px'}}>
           <Space wrap>
             <Button type="primary" onClick={addProject} icon={<PlusOutlined/>}>新建</Button>
             <Button type="primary" onClick={() => alert('导入')} icon={<ImportOutlined/>}>导入</Button>
           </Space>
         </section>
-        <section className="integration-layout-content">
+        <section>
           <Table
-            rowSelection={{type: 'checkbox'}}
-            scroll={{x: true}}
+            // rowSelection={{type: 'checkbox'}}
+            scroll={{x: '100', y: 'calc(100vh - 270px)'}}
             style={{marginTop: '6px'}}
-            size="small"
+            size="middle"
+            pagination={{
+              showQuickJumper: true,
+              showSizeChanger: true,
+              defaultPageSize: 25,
+              total: 1,
+              showTotal: (total) => `共 ${total} 条`
+            }}
             columns={columns}
             dataSource={projectSource}
           /></section>
-      </Layout.Content>
+      </Card>
 
       {/* 选择项目类型 */}
       <ProjectTypeModal projectType={projectType} setProjectType={setProjectType}
