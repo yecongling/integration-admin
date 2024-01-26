@@ -14,6 +14,7 @@ export default defineConfig({
       prodEnabled: false // 设置打包是否启用mock功能
     })
   ],
+  base: './',
   build: {
     sourcemap: true,
     outDir: 'integration'
