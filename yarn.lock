@@ -4295,7 +4295,7 @@ mock-property@~1.0.0:
     hasown "^2.0.0"
     isarray "^2.0.5"
 
-mockjs@^1.1.0:
+mockjs@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/mockjs/-/mockjs-1.1.0.tgz#e6a0c378e91906dbaff20911cc0273b3c7d75b06"
   integrity sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ==
@@ -4554,7 +4554,7 @@ polyline-normals@^2.0.2:
   dependencies:
     polyline-miter-util "^1.0.1"
 
-postcss@^8.4.32:
+postcss@^8.4.33:
   version "8.4.33"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.33.tgz#1378e859c9f69bf6f638b990a0212f43e2aaa742"
   integrity sha512-Kkpbhhdjw2qQs2O2DGX+8m5OVqEcbB9HRBvuYM9pgrjEFUg30A9LmXNlTAUj4S9kgtGyrMbTzVjH7E+s5Re2yg==
@@ -6057,13 +6057,13 @@ vite-plugin-mock@^2.9.6:
     fast-glob "^3.2.7"
     path-to-regexp "^6.2.0"
 
-vite@^5.0.10:
-  version "5.0.11"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-5.0.11.tgz#31562e41e004cb68e1d51f5d2c641ab313b289e4"
-  integrity sha512-XBMnDjZcNAw/G1gEiskiM1v6yzM4GE5aMGvhWTlHAYYhxb7S3/V1s3m2LDHa8Vh6yIWYYB0iJwsEaS523c4oYA==
+vite@5.1.0-beta.0:
+  version "5.1.0-beta.0"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-5.1.0-beta.0.tgz#adcb851ec7002d8b7d56469c127d628b5beed9a4"
+  integrity sha512-CcJta/BGL1XerknRfCJmymjx/VGNr2p0HVyttQPxSIKjliXe711aOtZC/Y0ZzWY0yxgBk17x99h66LJfDtqrWw==
   dependencies:
     esbuild "^0.19.3"
-    postcss "^8.4.32"
+    postcss "^8.4.33"
     rollup "^4.2.0"
   optionalDependencies:
     fsevents "~2.3.3"
