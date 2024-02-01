@@ -146,8 +146,8 @@ const checkRouterAuth = (path: string) => {
  * 更新路由
  * @param routesData
  */
-const updateRoutes = (routesData) => {
-
-}
+// const updateRoutes = (routesData) => {
+//
+// }
 
 export {Router, checkRouterAuth}

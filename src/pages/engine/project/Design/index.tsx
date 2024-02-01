@@ -143,6 +143,10 @@ const Design: React.FC = () => {
     }
   }
 
+  const changeStatus = (checked: boolean) => {
+    console.log('当前状态', checked);
+  }
+
   const items: MenuProps['items'] = [
     {
       key: "copy",
@@ -169,7 +173,7 @@ const Design: React.FC = () => {
       width: 40,
       align: 'center',
       render: function (text) {
-        return text === '1' ? <Switch defaultChecked/> : <Switch/>;
+        return <Switch defaultChecked={text === '1'} onChange={changeStatus}/>;
       }
     },
     {

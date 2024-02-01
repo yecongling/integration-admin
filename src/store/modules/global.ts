@@ -9,7 +9,7 @@ export interface globalState {
 const initialState: globalState = {
   theme: "light",
   colorPrimary: "#1890ff",
-  collapse: false
+  collapse: true
 }
 
 // 创建一个Slice

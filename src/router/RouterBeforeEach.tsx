@@ -14,6 +14,7 @@ const RouterBeforeEach: React.FC = () => {
       navigate('/login', {replace: true})
     } else {
       if (obj != null) {
+        // 需要判定菜单列表里面是否有这个路径（二级路由不能刷新直接进）
         navigate(obj.path);
       } else {
         navigate("/home");
