@@ -76,12 +76,12 @@ const Index: React.FC = () => {
 
         <Row gutter={16} style={{height: '300px', marginBottom: '16px'}}>
           <Col className="gutter-row" span={6}>
-            <Card bodyStyle={{height: '100%'}}>
+            <Card styles={{body: {height: '100%'}}}>
               <PieChart/>
             </Card>
           </Col>
           <Col className="gutter-row" span={18} style={{height: '100%'}}>
-            <Card bodyStyle={{height: '100%'}}>
+            <Card styles={{body: {height: '100%'}}}>
               <BrokenLine/>
             </Card>
           </Col>
@@ -89,7 +89,7 @@ const Index: React.FC = () => {
 
         <Row gutter={16} style={{height: '400px'}}>
           <Col className="gutter-row" span={6}>
-            <Card bodyStyle={{height: '100%'}}>
+            <Card styles={{body: {height: '100%'}}}>
               <div className="eventTitle">
                 <h3>事件排名Top5</h3>
               </div>
@@ -136,7 +136,7 @@ const Index: React.FC = () => {
             </Card>
           </Col>
           <Col className="gutter-row" span={12}>
-            <Card bodyStyle={{height: '100%'}}>
+            <Card styles={{body: {height: '100%'}}}>
               <div className="resource" style={{width: '50%'}}>
                 <RoseChart/>
               </div>

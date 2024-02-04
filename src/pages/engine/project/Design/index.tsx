@@ -275,7 +275,7 @@ const Design: React.FC = () => {
   return (
     <>
       {/* 查询区域 */}
-      <Card bodyStyle={{height: '100%'}} style={{marginBottom: '16px'}}>
+      <Card styles={{body: {height: '100%'}}} style={{marginBottom: '16px'}}>
         <Form form={searchForm} onFinish={finishSearch} initialValues={{projectType: '-1'}}>
           <Row gutter={24}>
             <Col span={6}>
