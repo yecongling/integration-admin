@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, Form, Input, Layout, Popconfirm, Row, Select, Space, Table} from "antd";
+import {Button, Card, Col, Form, Input, Popconfirm, Row, Select, Space, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {ColumnsType} from "antd/es/table";
 import {permission} from "@/services/system/permission/menuModel.ts";
@@ -90,7 +90,7 @@ const Database: React.FC = () => {
   return (
     <>
       {/* 查询区域 */}
-      <Layout.Header className="layout-header-row">
+      <Card bodyStyle={{height: '100%'}} style={{marginBottom: '16px'}}>
         <Form form={form} onFinish={onFinish}>
           <Row gutter={24}>
             <Col span={5}>
@@ -123,8 +123,8 @@ const Database: React.FC = () => {
             </Col>
           </Row>
         </Form>
-      </Layout.Header>
-      <Layout.Content style={{marginTop: '6px'}}>
+      </Card>
+      <Card>
         <section className="layout-operation-bar">
           <Space>
             <Button type="primary"><PlusOutlined/>新增</Button>
@@ -134,11 +134,19 @@ const Database: React.FC = () => {
           <Table
             style={{marginTop: '6px'}}
             className="table"
+            scroll={{x: '100', y: 'calc(100vh - 270px)'}}
             size="middle"
+            pagination={{
+              showQuickJumper: true,
+              showSizeChanger: true,
+              defaultPageSize: 25,
+              total: 1,
+              showTotal: (total) => `共 ${total} 条`
+            }}
             columns={columns}
           />
         </section>
-      </Layout.Content>
+      </Card>
     </>
   );
 }
