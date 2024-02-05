@@ -297,7 +297,7 @@ const Design: React.FC = () => {
                 <DatePicker style={{width: '100%'}}/>
               </Form.Item>
             </Col>
-            <Col span={4} offset={2}>
+            <Col span={6}>
               <Button type="primary" htmlType="submit"><SearchOutlined/>查询</Button>
               <Button htmlType="reset" style={{margin: '0 8px'}}><SyncOutlined/>重置</Button>
             </Col>
