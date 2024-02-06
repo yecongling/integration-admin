@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import {
   Button,
+  Card,
   Col,
   Form,
   Input,
   InputNumber,
   InputRef,
-  Layout,
   message,
   Modal,
   Popconfirm,
@@ -292,7 +292,7 @@ const Menu: React.FC = () => {
   return (
     <>
       {/* 查询区域 */}
-      <Layout.Header className="layout-header-row">
+      <Card styles={{body: {height: '100%'}}} style={{marginBottom: '16px'}}>
         <Form form={form} onFinish={onFinish}>
           <Row gutter={24}>
             <Col span={5}>
@@ -325,14 +325,14 @@ const Menu: React.FC = () => {
             </Col>
           </Row>
         </Form>
-      </Layout.Header>
-      <Layout.Content style={{marginTop: '6px'}}>
-        <section className="layout-operation-bar">
+      </Card>
+      <Card>
+        <section style={{marginBottom: '16px'}}>
           <Space>
             <Button type="primary" onClick={add}><PlusOutlined/>新增</Button>
           </Space>
         </section>
-        <section className="integration-layout-content">
+        <section>
           <Table
             loading={{indicator: <LoadingOutlined style={{fontSize: 24}}/>, spinning: loading}}
             style={{marginTop: '6px'}}
@@ -344,7 +344,7 @@ const Menu: React.FC = () => {
             dataSource={tableData}
           />
         </section>
-      </Layout.Content>
+      </Card>
       {/* 编辑弹窗 */}
       <Modal open={open}
              centered
