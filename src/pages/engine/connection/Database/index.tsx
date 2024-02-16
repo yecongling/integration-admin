@@ -1,8 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Button, Col, Form, Input, InputRef, Layout, Modal, Popconfirm, Row, Select, Space, Table} from "antd";
+import {Button, Card, Col, Form, Input, InputRef, Modal, Popconfirm, Row, Select, Space, Table} from "antd";
 import {
   CheckCircleOutlined,
-  CloseCircleOutlined, EyeInvisibleOutlined, EyeTwoTone,
+  CloseCircleOutlined,
+  EyeInvisibleOutlined,
+  EyeTwoTone,
   LoginOutlined,
   LogoutOutlined,
   PlusOutlined,
@@ -208,7 +210,7 @@ const Database: React.FC = () => {
   return (
     <>
       {/* 查询区域 */}
-      <Layout.Header className="layout-header-row">
+      <Card styles={{body: {height: '100%'}}} style={{marginBottom: '16px'}}>
         <Form form={form} onFinish={onFinish}>
           <Row gutter={24}>
             <Col span={6}>
@@ -234,8 +236,8 @@ const Database: React.FC = () => {
             </Col>
           </Row>
         </Form>
-      </Layout.Header>
-      <Layout.Content style={{marginTop: '6px'}}>
+      </Card>
+      <Card>
         <section className="layout-operation-bar">
           <Space>
             <Button type="primary" onClick={add}><PlusOutlined/>新增</Button>
@@ -246,13 +248,22 @@ const Database: React.FC = () => {
         <section className="integration-layout-content">
           <Table
             style={{marginTop: '6px'}}
+            scroll={{x: '100', y: 'calc(100vh - 270px)'}}
+            size="middle"
+            pagination={{
+              showQuickJumper: true,
+              showSizeChanger: true,
+              defaultPageSize: 25,
+              total: 1,
+              showTotal: (total) => `共 ${total} 条`
+            }}
             columns={columns}
             dataSource={dbSource}
             rowSelection={rowSelection}
             rowKey={record => record.id}
           />
         </section>
-      </Layout.Content>
+      </Card>
       {/* 编辑弹窗 */}
       <Modal open={open}
              centered
