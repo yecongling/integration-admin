@@ -125,12 +125,12 @@ const Database: React.FC = () => {
         </Form>
       </Card>
       <Card>
-        <section className="layout-operation-bar">
+        <section style={{marginBottom: '16px'}}>
           <Space>
             <Button type="primary"><PlusOutlined/>新增</Button>
           </Space>
         </section>
-        <section className="integration-layout-content">
+        <section>
           <Table
             style={{marginTop: '6px'}}
             className="table"
