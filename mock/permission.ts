@@ -3,7 +3,7 @@ import {MockMethod} from "vite-plugin-mock"
 const permission: Array<MockMethod> = [
   {
     // 接口路径
-    url: '/api/sys/permission/getUserPermissionByToken',
+    url: '/api/sys/permission/getUserPermissionByRole',
     // 接口方法
     method: 'get',
     // 返回数据

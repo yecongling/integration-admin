@@ -1,6 +1,6 @@
 export enum Api {
   // 根据token获取菜单（多用于框架上根据角色获取菜单那种）
-  getMenuList = '/api/sys/permission/getUserPermissionByToken',
+  getMenuList = '/api/sys/permission/getUserPermissionByRole',
   // 获取所有菜单
   getAllPermission = '/api/sys/permission/getAllPermission',
   // 获取所有上级菜单
