@@ -9,15 +9,20 @@ const isDev = process.env.IS_DEV === 'true'
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600
-  })
+    show: false,
+    icon: ''
+  });
+  // 设置图标
+  app.dock.setIcon('');
+  // 最大化
+  mainWindow.maximize();
   if (isDev) {
     mainWindow.loadURL('http://localhost:3000')
     mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadFile(path.join(__dirname, '../integration', 'index.html'))
   }
+  mainWindow.show();
 }
 
 app.whenReady().then(() => {
