@@ -26,8 +26,10 @@ const Console: React.FC = () => {
       <Modal
         open={open}
         mask={false}
+        maskClosable={false}
         title={<span>console监控台</span>}
-        style={{top: 20, right: 20, position: "absolute"}}
+        width={420}
+        style={{top: 50, right: 26, position: "absolute"}}
         styles={{
           body: {
             height: "calc(100vh - 160px)",
