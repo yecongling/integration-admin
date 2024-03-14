@@ -39,7 +39,7 @@ const Setting: React.FC<SettingProps> = (props) => {
               侧边栏
             </Col>
             <Col span={17} offset={1}>
-              <Switch checkedChildren="明亮" unCheckedChildren="黑暗" defaultChecked
+              <Switch unCheckedChildren="明亮" checkedChildren="黑暗" defaultChecked
                       onChange={(checked) => changeTheme(checked)}/>
             </Col>
           </Row>

@@ -132,8 +132,8 @@ const LeftMenu: React.FC = () => {
           className="btnbor"
         >
           <div style={{padding: '10px 20px 10px 10px', display: 'flex', justifyContent: 'end'}}>
-            {collapse ? <Tooltip title="展开"><MenuUnfoldOutlined/></Tooltip> :
-              <Tooltip title="收起"><MenuFoldOutlined/></Tooltip>}
+            {collapse ? <Tooltip title="展开"><MenuUnfoldOutlined style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip> :
+              <Tooltip title="收起"><MenuFoldOutlined style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip>}
           </div>
       </span>
       </div>
