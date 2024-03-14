@@ -20,7 +20,7 @@ const Setting: React.FC<SettingProps> = (props) => {
    * @param checked
    */
   const changeTheme = (checked: boolean) => {
-    dispatch(setTheme({theme: checked ? 'light' : 'dark'}));
+    dispatch(setTheme({theme: checked ? 'dark' : 'light'}));
   }
 
   return (
@@ -39,7 +39,7 @@ const Setting: React.FC<SettingProps> = (props) => {
               侧边栏
             </Col>
             <Col span={17} offset={1}>
-              <Switch unCheckedChildren="明亮" checkedChildren="黑暗" defaultChecked
+              <Switch unCheckedChildren="明亮" checkedChildren="黑暗" defaultChecked disabled
                       onChange={(checked) => changeTheme(checked)}/>
             </Col>
           </Row>

@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import Sider from "antd/es/layout/Sider";
 import "./index.less";
 import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
-import {Menu, MenuProps, Spin, Tooltip} from "antd";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Image, Menu, MenuProps, Spin, Tooltip} from "antd";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RouteItem} from "@/services/system/permission/menuModel";
 import {addIcon, getOpenKeys, handleRouter} from "@/utils/util.tsx";
 import {getMenuList} from "@/services/system/permission/permission.ts";
 import {setCollapse} from "@/store/modules/global.ts";
+import favicon from "@/assets/images/favicon.png";
 
 const LeftMenu: React.FC = () => {
   const navigate = useNavigate();
@@ -111,6 +112,22 @@ const LeftMenu: React.FC = () => {
       collapsed={isCollapse}
       collapsible
     >
+      <div className="dis-fl js-sb ai-ct toolbox">
+        <Link to="/home" style={{width: '100%'}}>
+          <div className="hd-64 mgr-01 dis-fl ai-ct jc-ct" style={{justifyContent: 'space-around'}}>
+            <Image width={25} src={favicon} preview={false}/>
+            {
+              isCollapse ? '' : <p style={{
+                fontWeight: 'bold',
+                margin: '0 12px',
+                fontSize: '20px',
+                color: '#1890ff'
+              }}>integration</p>
+            }
+
+          </div>
+        </Link>
+      </div>
       <Spin wrapperClassName="side-menu" spinning={loading} tip="Loading...">
         <Menu
           mode="inline"
@@ -132,7 +149,8 @@ const LeftMenu: React.FC = () => {
           className="btnbor"
         >
           <div style={{padding: '10px 20px 10px 10px', display: 'flex', justifyContent: 'end'}}>
-            {collapse ? <Tooltip title="展开"><MenuUnfoldOutlined style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip> :
+            {collapse ? <Tooltip title="展开"><MenuUnfoldOutlined
+                style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip> :
               <Tooltip title="收起"><MenuFoldOutlined style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip>}
           </div>
       </span>

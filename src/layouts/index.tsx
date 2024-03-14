@@ -11,9 +11,9 @@ const Layouts: React.FC = () => {
       {/* 监控台 */}
       <Console/>
       <Layout style={{height: "100%"}}>
-        <Header/>
+        <LeftMenu/>
         <Layout style={{backgroundColor: '#fff'}}>
-          <LeftMenu/>
+          <Header/>
           <Content/>
         </Layout>
       </Layout>
