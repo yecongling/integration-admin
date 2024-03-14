@@ -45,5 +45,6 @@
     "eslint-plugin-react-refresh": "^0.4.4",
     "typescript": "^5.2.2",
     "vite": "5.1.3"
-  }
+  },
+  "description": "# 支持丰富的交互协议，http、soap、RPC、hl7(后续支持)、file等等，其包含的功能大部分由apache camel中的组件所支持，也可自行扩充其中的组件"
 }
