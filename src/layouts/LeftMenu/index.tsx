@@ -9,7 +9,7 @@ import {RouteItem} from "@/services/system/permission/menuModel";
 import {addIcon, getOpenKeys, handleRouter} from "@/utils/util.tsx";
 import {getMenuList} from "@/services/system/permission/permission.ts";
 import {setCollapse} from "@/store/modules/global.ts";
-import favicon from "@/assets/images/favicon.png";
+import favicon from "@/assets/svg/vite.svg";
 
 const LeftMenu: React.FC = () => {
   const navigate = useNavigate();
@@ -121,7 +121,8 @@ const LeftMenu: React.FC = () => {
                 fontWeight: 'bold',
                 margin: '0 12px',
                 fontSize: '20px',
-                color: '#1890ff'
+                // color: '#1890ff'
+                color: '#fff'
               }}>integration</p>
             }
 
