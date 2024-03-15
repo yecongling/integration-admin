@@ -81,7 +81,7 @@ const LeftMenu: React.FC = () => {
    * 获取菜单数据
    */
   const getMenuData = async () => {
-    return (await getMenuList()) as RouteItem[];
+    return (await getMenuList({roleId: 'admin'})) as RouteItem[];
   };
 
   useEffect(() => {

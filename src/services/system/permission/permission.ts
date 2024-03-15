@@ -11,9 +11,9 @@ import {Result} from "@/types/axios";
 /**
  * 获取菜单列表
  */
-export const getMenuList = () => {
+export const getMenuList = (params: any) => {
   return new Promise((resolve) => {
-    defHttp.get<getMenuListResultModel>({url: Api.getMenuList}, {successMessageMode: 'none'}).then((res) => {
+    defHttp.get<getMenuListResultModel>({url: Api.getMenuList, params: params}, {successMessageMode: 'none'}).then((res) => {
       if (Array.isArray(res)) {
         resolve(res);
       } else {

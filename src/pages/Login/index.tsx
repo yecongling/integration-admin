@@ -6,6 +6,7 @@ import "./login.less";
 import filing from '@/assets/images/filing.png';
 import {useNavigate} from "react-router-dom";
 import {login} from "@/services/login/loginApi.ts";
+import {antdUtils} from "@/utils/antd.ts";
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
@@ -22,7 +23,9 @@ const Login: React.FC = () => {
       sessionStorage.setItem("satoken", "integration " + tokenVal);
       sessionStorage.setItem('isLogin', isLogin);
       navigate('/home');
-
+    } else {
+      const mes = result.message;
+      antdUtils.message?.error(mes);
     }
   }
 
@@ -70,7 +73,7 @@ const Login: React.FC = () => {
                 form={form}
                 name="login"
                 labelCol={{span: 5}}
-                initialValues={{username: 'admin', password: 'ycl499475142!', captcha: code, remember: true}}
+                initialValues={{username: 'admin', password: '123123', captcha: code, remember: true}}
                 size="large"
                 autoComplete="off"
                 onFinish={submit}
@@ -80,7 +83,7 @@ const Login: React.FC = () => {
                          prefix={<UserOutlined/>}/>
                 </Form.Item>
                 <Form.Item name="password" rules={[{required: true, message: "请输入密码"}]}>
-                  <Input.Password size="large" allowClear autoComplete="new-password" placeholder="密码：ycl499475142!"
+                  <Input.Password size="large" allowClear autoComplete="new-password" placeholder="密码：123123"
                                   prefix={<LockOutlined/>}/>
                 </Form.Item>
                 <Form.Item>
