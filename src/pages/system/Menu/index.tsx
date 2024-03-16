@@ -59,14 +59,14 @@ const Menu: React.FC = () => {
   // 目录数据
   const [treeData, setTreeData] = useState<Directory[]>([]);
   // 表格加载中
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const onChange = (newValue: string) => {
     setValue(newValue);
   };
   useEffect(() => {
     menuName.current && menuName.current.focus();
     getAllMenus();
-  }, []);
+  }, [form]);
 
   useEffect(() => {
     if (open) {
@@ -277,7 +277,6 @@ const Menu: React.FC = () => {
   ];
 
   const getAllMenus = async () => {
-    setLoading(true);
     const formData = form.getFieldsValue();
     const result = await getAllPermission(formData);
     if (result) {

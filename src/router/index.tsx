@@ -34,8 +34,15 @@ const routes = [
       },
       {
         path: "/system/menu",
+        title: "菜单管理",
         auth: false,
         component: lazyLoad('system/Menu').type
+      },
+      {
+        path: "/system/user",
+        title: "用户管理",
+        auth: false,
+        component: lazyLoad('system/User').type
       },
       {
         path: '/system/personal',
