@@ -6,4 +6,4 @@
 ![login.png](login.png)
 
 # 内部框架界面显示如下
-![](/home/ycl/IdeaProjects/integration-admin/integration.png)
+![integration.png](integration.png)
