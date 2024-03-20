@@ -4,6 +4,7 @@ import {UserModel} from "@/services/system/user/userModel.ts";
 import {getAllUser} from "@/services/system/user/user.ts";
 import {ColumnsType} from "antd/es/table";
 import {PlusOutlined, SearchOutlined, SyncOutlined} from "@ant-design/icons";
+import UserModal from "./userModal";
 
 /**
  * 用户管理模块
@@ -109,6 +110,7 @@ const User: React.FC = () => {
           />
         </section>
       </Card>
+      <UserModal />
     </>
   )
 }
