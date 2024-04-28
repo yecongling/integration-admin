@@ -1,7 +1,7 @@
 import {defHttp} from "@/utils/http";
 
 export enum LoginApi {
-  login = '/api/sys/login'
+  login = '/api/system/login'
 }
 
 /**
