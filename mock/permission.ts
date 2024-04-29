@@ -3,7 +3,7 @@ import {MockMethod} from "vite-plugin-mock"
 const permission: Array<MockMethod> = [
   {
     // 接口路径
-    url: '/api/sys/permission/getUserPermissionByRole',
+    url: '/api/menu/getMenusByRole',
     // 接口方法
     method: 'get',
     // 返回数据
@@ -11,7 +11,7 @@ const permission: Array<MockMethod> = [
       return {
         code: 200,
         message: 'success',
-        result: [
+        data: [
           {
             "id": "11231",
             "name": "sys-home",

@@ -129,9 +129,9 @@ const Router = () => {
 
   // 从store中获取后台获取到的路由
   const {menus} = useSelector((store: any) => store.menu);
-  useEffect(() => {
-    routes[0].children = menus;
-  }, [menus])
+  // useEffect(() => {
+  //   routes[0].children = menus;
+  // }, [menus])
   return useRoutes(route);
 }
 const checkRouterAuth = (path: string) => {
