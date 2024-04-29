@@ -1,12 +1,12 @@
 import './App.css'
 import React from "react";
-import {Router} from "@/router";
 import {App as AntdApp, ConfigProvider} from "antd"
 import ZhCN from "antd/locale/zh_CN";
 import {useSelector} from "react-redux";
 import dayjs from 'dayjs';
 
 import 'dayjs/locale/zh-cn';
+import RouterBeforeEach from "@/router/RouterBeforeEach.tsx";
 
 const App: React.FC = () => {
   dayjs.locale('zh-cn');
@@ -24,7 +24,7 @@ const App: React.FC = () => {
       }
     }} locale={ZhCN}>
       <AntdApp style={{height: '100%'}}>
-        <Router/>
+        <RouterBeforeEach/>
       </AntdApp>
     </ConfigProvider>
   )

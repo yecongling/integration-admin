@@ -9,6 +9,7 @@ import {RouteItem} from "@/services/system/permission/menuModel";
 import {addIcon, getOpenKeys, handleRouter} from "@/utils/util.tsx";
 import {getMenuList} from "@/services/system/permission/permission.ts";
 import {setCollapse} from "@/store/modules/global.ts";
+import {setMenu} from "@/store/modules/menu.ts";
 import favicon from "@/assets/svg/vite.svg";
 
 const LeftMenu: React.FC = () => {
@@ -28,11 +29,11 @@ const LeftMenu: React.FC = () => {
   // 定义 menu 类型
   type MenuItem = Required<MenuProps>["items"][number];
   const getItem = (
-    label: React.ReactNode,
-    key?: React.Key | null,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    type?: "group"
+      label: React.ReactNode,
+      key?: React.Key | null,
+      icon?: React.ReactNode,
+      children?: MenuItem[],
+      type?: "group"
   ): MenuItem => {
     return {
       key,
@@ -91,7 +92,8 @@ const LeftMenu: React.FC = () => {
         if (!data) return;
         setMenuList(deepLoopFloat(data, []));
         // 把路由菜单处理成一维数组，存储到 redux 中，做菜单权限判断
-        handleRouter(data);
+        const routes = handleRouter(data);
+        dispatch(setMenu({menus: routes}))
       });
     } finally {
       setLoading(false);
@@ -99,64 +101,65 @@ const LeftMenu: React.FC = () => {
   }, []);
 
   return (
-    <Sider
-      trigger={null}
-      collapsedWidth={64}
-      className="scroll ant-menu"
-      style={{
-        overflowX: 'hidden',
-        zIndex: 1000,
-        borderRight: '1px solid #e9edf0'
-      }}
-      theme={theme}
-      collapsed={isCollapse}
-      collapsible
-    >
-      <div className="dis-fl js-sb ai-ct toolbox">
-        <Link to="/home" style={{width: '100%'}}>
-          <div className="hd-64 mgr-01 dis-fl ai-ct jc-ct" style={{justifyContent: 'space-around'}}>
-            <Image width={25} src={favicon} preview={false}/>
-            {
-              isCollapse ? '' : <p style={{
-                fontWeight: 'bold',
-                margin: '0 12px',
-                fontSize: '20px',
-                // color: '#1890ff'
-                color: '#fff'
-              }}>integration</p>
-            }
-
-          </div>
-        </Link>
-      </div>
-      <Spin wrapperClassName="side-menu" spinning={loading} tip="Loading...">
-        <Menu
-          mode="inline"
-          theme={theme}
-          selectedKeys={selectedKeys}
-          openKeys={openKeys}
-          items={menuList}
-          onClick={clickMenu}
-          onOpenChange={onOpenChange}
-        />
-      </Spin>
-      <div className="collapse">
-        <span
+      <Sider
+          trigger={null}
+          collapsedWidth={64}
+          className="scroll ant-menu"
           style={{
-            cursor: 'pointer',
-            fontSize: '16px'
+            overflowX: 'hidden',
+            zIndex: 1000,
+            borderRight: '1px solid #e9edf0'
           }}
-          onClick={() => dispatch(setCollapse({collapse: !collapse}))}
-          className="btnbor"
+          theme={theme}
+          collapsed={isCollapse}
+          collapsible
+      >
+        <div className="dis-fl js-sb ai-ct toolbox">
+          <Link to="/home" style={{width: '100%'}}>
+            <div className="hd-64 mgr-01 dis-fl ai-ct jc-ct" style={{justifyContent: 'space-around'}}>
+              <Image width={25} src={favicon} preview={false}/>
+              {
+                isCollapse ? '' : <p style={{
+                  fontWeight: 'bold',
+                  margin: '0 12px',
+                  fontSize: '20px',
+                  // color: '#1890ff'
+                  color: '#fff'
+                }}>integration</p>
+              }
+
+            </div>
+          </Link>
+        </div>
+        <Spin wrapperClassName="side-menu" spinning={loading} tip="Loading...">
+          <Menu
+              mode="inline"
+              theme={theme}
+              selectedKeys={selectedKeys}
+              openKeys={openKeys}
+              items={menuList}
+              onClick={clickMenu}
+              onOpenChange={onOpenChange}
+          />
+        </Spin>
+        <div className="collapse">
+        <span
+            style={{
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}
+            onClick={() => dispatch(setCollapse({collapse: !collapse}))}
+            className="btnbor"
         >
           <div style={{padding: '10px 20px 10px 10px', display: 'flex', justifyContent: 'end'}}>
             {collapse ? <Tooltip title="展开"><MenuUnfoldOutlined
-                style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip> :
-              <Tooltip title="收起"><MenuFoldOutlined style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip>}
+                    style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip> :
+                <Tooltip title="收起"><MenuFoldOutlined
+                    style={{color: theme === 'dark' ? 'white' : 'black'}}/></Tooltip>}
           </div>
       </span>
-      </div>
-    </Sider>
+        </div>
+      </Sider>
   )
 }
 export default LeftMenu;

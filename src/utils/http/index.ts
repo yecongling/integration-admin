@@ -38,13 +38,13 @@ const transform: AxiosTransform = {
     if (!data) {
       throw new Error("api接口请求失败，没有返回数据");
     }
-    const {code, result, message} = data;
+    const {code, result, msg} = data;
     // 系统默认200状态码为正常成功请求，可在枚举中配置自己的
     const hasSuccess = data && Reflect.has(data, "code") && (code === ResultEnum.SUCCESS || code === 200);
     if (hasSuccess) {
-      if (message && options.successMessageMode === 'success') {
+      if (msg && options.successMessageMode === 'success') {
         // 信息成功提示
-        antdUtils.message?.success(message);
+        antdUtils.message?.success(msg);
       }
       return result;
     }
@@ -56,8 +56,8 @@ const transform: AxiosTransform = {
         window.location.href = "/login";
         break;
       default:
-        if (message) {
-          timeoutMsg = message;
+        if (msg) {
+          timeoutMsg = msg;
         }
     }
     if (options.errorMessageMode === 'modal') {
@@ -66,7 +66,7 @@ const transform: AxiosTransform = {
       if (code === 403) {
         antdUtils.modal?.confirm({
           title: "登录失败",
-          content: '当前会话失效',
+          content: '当前会话失效，请重新登录！',
           onOk() {
             window.location.href = '/login';
           }
@@ -125,6 +125,11 @@ const transform: AxiosTransform = {
    * @param config
    */
   requestInterceptors: (config: Recordable) => {
+    // 请求之前处理token
+    const token = localStorage.getItem('token');
+    if (token && config?.requestOptions?.withToken !== false) {
+      config.headers['token'] = token;
+    }
     return config;
   },
 
@@ -165,8 +170,7 @@ function createAxios(opts?: Partial<CreateAxiosOptions>) {
       {
         authenticationScheme: '',
         timeout: 10 * 1000,
-        /* 这里需要添加登录的token */
-        headers: {'Content-Type': ContentTypeEnum.JSON, 'satoken': sessionStorage.getItem('satoken')},
+        headers: {'Content-Type': ContentTypeEnum.JSON},
         // 数据处理方式
         transform,
         // 配置项，下面的选项都可以在独立的接口请求中覆盖

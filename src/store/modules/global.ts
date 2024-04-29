@@ -36,7 +36,7 @@ export const global = createSlice({
   }
 });
 
-// 到处reducer方法
+// 导出reducer方法
 export const {setCollapse, setTheme, setColorPrimary} = global.actions;
 
 // 默认导出

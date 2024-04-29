@@ -2,23 +2,8 @@ import {useRoutes} from "react-router-dom";
 import React, {Suspense, useEffect} from 'react'
 import {App, Skeleton} from "antd";
 import {antdUtils} from "@/utils/antd.ts";
-
-const lazyLoad = (moduleName: string) => {
-  const viteModule = import.meta.glob('../**/*.tsx');
-  //组件地址
-  let URL = "";
-  if (moduleName === "layouts") {
-    URL = `../layouts/index.tsx`;
-  } else if (moduleName.endsWith(".tsx")) {
-    URL = `../pages/${moduleName}`;
-  } else {
-    URL = `../pages/${moduleName}/index.tsx`;
-  }
-  const Module = React.lazy(viteModule[`${URL}`] as any);
-  return (
-    <Module/>
-  );
-}
+import {useSelector} from "react-redux";
+import {lazyLoad} from "@/router/lazyLoad.tsx";
 
 const routes = [
   {
@@ -141,6 +126,12 @@ const Router = () => {
     antdUtils.setNotificationInstance(notification);
     antdUtils.setModalInstance(modal);
   }, [notification, message, modal]);
+
+  // 从store中获取后台获取到的路由
+  const {menus} = useSelector((store: any) => store.menu);
+  useEffect(() => {
+    routes[0].children = menus;
+  }, [menus])
   return useRoutes(route);
 }
 const checkRouterAuth = (path: string) => {

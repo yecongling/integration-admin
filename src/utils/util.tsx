@@ -3,6 +3,7 @@ import * as Icons from "@ant-design/icons";
 import {permission, RouteItem} from "@/services/system/permission/menuModel";
 import React from "react";
 import SvgIcon from "@/components/SvgIcon";
+import {lazyLoad} from "@/router/lazyLoad.tsx";
 
 /**
  * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断
@@ -10,12 +11,13 @@ import SvgIcon from "@/components/SvgIcon";
  * @param newArr
  * @return array
  */
-export function handleRouter(routerList: RouteItem[], newArr: string[] = []) {
+export function handleRouter(routerList: RouteItem[], newArr: RouteObject[] = []) {
   routerList.forEach((item: RouteItem) => {
     const menu: RouteObject = {};
     if (typeof item === "object" && item.path) {
-      newArr.push(item.path);
       menu['path'] = item.path
+      menu['component'] = lazyLoad(item.component).type;
+      newArr.push(menu);
     }
     if (item.children && item.children.length) {
       menu.children = [];

@@ -1,7 +1,7 @@
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 // import {checkRouterAuth} from './index'
 import React, {useEffect} from 'react'
-import {checkRouterAuth} from "@/router/index.tsx";
+import {checkRouterAuth, Router} from "@/router/index.tsx";
 
 const RouterBeforeEach: React.FC = () => {
   const navigate = useNavigate();
@@ -21,6 +21,6 @@ const RouterBeforeEach: React.FC = () => {
       }
     }
   }, [])
-  return <Outlet/>
+  return <Router/>
 }
 export default RouterBeforeEach

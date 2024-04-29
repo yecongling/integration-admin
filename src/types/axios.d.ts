@@ -29,7 +29,7 @@ export interface RequestOptions {
 export interface Result<T = any> {
   code: number;
   success: boolean;
-  message: string;
+  msg: string;
   result: T;
   fieldName: string;
 
