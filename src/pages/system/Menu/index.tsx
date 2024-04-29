@@ -36,7 +36,7 @@ import {
   getDirectoryPermission,
   updatePermission,
   validateFields
-} from "@/services/system/permission/permission";
+} from "@/services/system/permission/menu.ts";
 import {addIcon, handlePermission} from "@/utils/util.tsx";
 import {Directory, permission, permissionResult} from "@/services/system/permission/menuModel";
 import IconPicker from "@/components/menu/icon/IconPicker.tsx";

@@ -7,7 +7,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RouteItem} from "@/services/system/permission/menuModel";
 import {addIcon, getOpenKeys, handleRouter} from "@/utils/util.tsx";
-import {getMenuList} from "@/services/system/permission/permission.ts";
+import {getMenuList} from "@/services/system/permission/menu.ts";
 import {setCollapse} from "@/store/modules/global.ts";
 import {setMenu} from "@/store/modules/menu.ts";
 import favicon from "@/assets/svg/vite.svg";
@@ -82,6 +82,7 @@ const LeftMenu: React.FC = () => {
    * 获取菜单数据
    */
   const getMenuData = async () => {
+    // 这里角色暂时写死，后续修改
     return (await getMenuList({roleId: 'admin'})) as RouteItem[];
   };
 

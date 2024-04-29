@@ -13,7 +13,7 @@ import {Result} from "@/types/axios";
  */
 export const getMenuList = (params: any) => {
   return new Promise((resolve) => {
-    defHttp.get<getMenuListResultModel>({url: Api.getMenuList, params: params}, {successMessageMode: 'none'}).then((res) => {
+    defHttp.get<getMenuListResultModel>({url: Api.getMenuList, params}, {successMessageMode: 'none'}).then((res) => {
       if (Array.isArray(res)) {
         resolve(res);
       } else {
@@ -27,8 +27,8 @@ export const getMenuList = (params: any) => {
  * 获取所有菜单
  * @param params
  */
-export const getAllPermission = (params: any) => {
-  return defHttp.post<permission[]>({url: Api.getAllPermission, data: params});
+export const getAllMenus = (params: any) => {
+  return defHttp.post<permission[]>({url: Api.getAllMenus, data: params});
 }
 
 /**
@@ -42,7 +42,7 @@ export const getDirectoryPermission = () => {
  * 字段校验
  */
 export function validateFields() {
-  const result: Result = {success: true, code: 200, result: '', message: '', fieldName: ''};
+  const result: Result = {success: true, code: 200, result: '', msg: '', fieldName: ''};
   return result;
 }
 

@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import {Layout, Spin} from "antd";
 import {useSelector} from "react-redux";
-import {Outlet} from "react-router-dom";
+import RouterBeforeEach from "@/router/RouterBeforeEach.tsx";
 /* 内容区域 */
 const Index: React.FC = () => {
   const {theme} = useSelector((store: any) => store.global);
@@ -19,7 +19,7 @@ const Index: React.FC = () => {
           <Spin size="large"/>
         </div>
       }>
-        <Outlet/>
+        <RouterBeforeEach/>
       </Suspense>
     </Layout.Content>
   )

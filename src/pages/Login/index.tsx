@@ -6,7 +6,6 @@ import "./login.less";
 import filing from '@/assets/images/filing.png';
 import {useNavigate} from "react-router-dom";
 import {login} from "@/services/login/loginApi.ts";
-import {antdUtils} from "@/utils/antd.ts";
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
@@ -17,16 +16,9 @@ const Login: React.FC = () => {
   const [code, setCode] = useState(Math.floor(Math.random() * 10000).toString());
   const submit = async (values: any) => {
     const result = await login(values);
-    if (result.code === 200) {
-      const tokenVal = result.data['tokenValue'];
-      const isLogin = result.data['isLogin'];
-      sessionStorage.setItem("satoken", "integration " + tokenVal);
-      sessionStorage.setItem('isLogin', isLogin);
-      navigate('/home');
-    } else {
-      const mes = result.message;
-      antdUtils.message?.error(mes);
-    }
+    sessionStorage.setItem("token", result);
+    sessionStorage.setItem('isLogin', "true")
+    navigate('/home');
   }
 
   /**

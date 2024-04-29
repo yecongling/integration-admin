@@ -30,7 +30,6 @@ export interface Result<T = any> {
   code: number;
   success: boolean;
   msg: string;
-  result: T;
-  fieldName: string;
+  data: T;
 
 }
