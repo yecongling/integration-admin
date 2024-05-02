@@ -6,7 +6,6 @@ import {
   permission,
   permissionResult
 } from "@/services/system/permission/menuModel";
-import {Result} from "@/types/axios";
 
 /**
  * 获取菜单列表
@@ -27,7 +26,7 @@ export const getMenuList = (params: any) => {
  * 获取所有菜单
  * @param params
  */
-export const getAllMenus = (params: any) => {
+export const getMenus = (params: any) => {
   return defHttp.post<permission[]>({url: Api.getAllMenus, data: params});
 }
 
@@ -42,7 +41,7 @@ export const getDirectoryPermission = () => {
  * 字段校验
  */
 export function validateFields() {
-  const result: Result = {success: true, code: 200, result: '', msg: '', fieldName: ''};
+  const result: any = {success: true, code: 200, data: '', msg: ''};
   return result;
 }
 
