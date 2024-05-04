@@ -9,5 +9,5 @@ export enum LoginApi {
  * @param params
  */
 export const login = (params: any) => {
-  return defHttp.post<any>({url: LoginApi.login, data: params});
+  return defHttp.post<any>({url: LoginApi.login, data: params}, {successMessageMode: 'none'});
 }

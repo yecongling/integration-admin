@@ -14,7 +14,7 @@ import {lazyLoad} from "@/router/lazyLoad.tsx";
 export function handleRouter(routerList: RouteItem[], newArr: RouteObject[] = []) {
   routerList.forEach((item: RouteItem) => {
     const menu: RouteObject = {};
-    if (typeof item === "object" && item.path) {
+    if (typeof item === "object" && item.path && item.route == '1') {
       menu['path'] = item.path
       menu['component'] = lazyLoad(item.component).type;
       newArr.push(menu);

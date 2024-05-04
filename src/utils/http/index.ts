@@ -66,7 +66,7 @@ const transform: AxiosTransform = {
       if (code === 403) {
         antdUtils.modal?.confirm({
           title: "登录失败",
-          content: '当前会话失效，请重新登录！',
+          content: '当前会话已失效，请重新登录！',
           onOk() {
             window.location.href = '/login';
           }
