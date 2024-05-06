@@ -1,5 +1,5 @@
 /* 数据处理 */
-import {AxiosRequestConfig, AxiosResponse} from "axios";
+import {AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig} from "axios";
 import {RequestOptions, Result} from "@/types/axios";
 
 export interface CreateAxiosOptions extends AxiosRequestConfig {
@@ -30,7 +30,7 @@ export abstract class AxiosTransform {
     /**
      * @description: 请求之前的拦截器
      */
-    requestInterceptors?: (config: AxiosRequestConfig, options: CreateAxiosOptions) => AxiosRequestConfig;
+    requestInterceptors?: (config: InternalAxiosRequestConfig, options: CreateAxiosOptions) => InternalAxiosRequestConfig;
 
     /**
      * @description: 请求之后的拦截器
