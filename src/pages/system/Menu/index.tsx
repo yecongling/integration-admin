@@ -39,6 +39,7 @@ import {
 import {addIcon, handlePermission} from "@/utils/util.tsx";
 import {Directory, permission, permissionResult} from "@/services/system/permission/menuModel";
 import IconPicker from "@/components/menu/icon/IconPicker.tsx";
+import {TableRowSelection} from "antd/es/table/interface";
 
 /**
  * 菜单维护界面
@@ -59,6 +60,9 @@ const Menu: React.FC = () => {
     const [treeData, setTreeData] = useState<Directory[]>([]);
     // 表格加载中
     const [loading, setLoading] = useState(true);
+
+    const [checkStrictly, setCheckStrictly] = useState<boolean>(false);
+
     const onChange = (newValue: string) => {
         setValue(newValue);
     };
@@ -287,6 +291,16 @@ const Menu: React.FC = () => {
         setLoading(false);
     }
 
+    // 定义可多选
+    const rowSelection: TableRowSelection<permission> = {
+        onChange: (_selectedRowKeys, selectedRows) => {
+            console.log('selectedRows', selectedRows);
+        },
+        onSelect: (_record, _selected, selectedRows) => {
+            console.log('selectedRows', selectedRows);
+        }
+    }
+
     return (
         <>
             {/* 查询区域 */}
@@ -333,6 +347,7 @@ const Menu: React.FC = () => {
                 <section>
                     <Table
                         loading={{indicator: <LoadingOutlined style={{fontSize: 24}}/>, spinning: loading}}
+                        rowSelection={{...rowSelection, checkStrictly}}
                         style={{marginTop: '6px'}}
                         className="table"
                         size="middle"
