@@ -33,8 +33,8 @@ export const getMenus = (params: any) => {
 /**
  * 获取上级菜单
  */
-export const getDirectoryPermission = () => {
-  return defHttp.get<Directory[]>({url: Api.getDirectoryPermission}, {successMessageMode: "none"});
+export const getDirectoryMenu = () => {
+  return defHttp.get<Directory[]>({url: Api.getDirectoryMenu}, {successMessageMode: "none"});
 }
 
 /**

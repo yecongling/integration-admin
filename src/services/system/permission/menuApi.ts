@@ -4,7 +4,7 @@ export enum Api {
   // 获取所有菜单
   getAllMenus = '/api/menu/getAllMenus',
   // 获取所有上级菜单
-  getDirectoryPermission = '/api/menu/getDirectoryPermission',
+  getDirectoryMenu = '/api/menu/getDirectoryMenu',
   // 添加菜单
   addPermission = '/api/menu/addPermission',
   // 编辑菜单

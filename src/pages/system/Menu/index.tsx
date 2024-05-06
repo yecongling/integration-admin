@@ -32,7 +32,7 @@ import './menu.less';
 import {
     addPermission,
     deletePermission,
-    getDirectoryPermission, getMenus,
+    getDirectoryMenu, getMenus,
     updatePermission,
     validateFields
 } from "@/services/system/permission/menu.ts";
@@ -61,7 +61,7 @@ const Menu: React.FC = () => {
     // 表格加载中
     const [loading, setLoading] = useState(true);
 
-    const [checkStrictly, setCheckStrictly] = useState<boolean>(false);
+    // const [checkStrictly, setCheckStrictly] = useState<boolean>(false);
 
     const onChange = (newValue: string) => {
         setValue(newValue);
@@ -195,7 +195,7 @@ const Menu: React.FC = () => {
      * 获取目录
      */
     const getDirectory = async () => {
-        const result = await getDirectoryPermission();
+        const result = await getDirectoryMenu();
         if (result) {
             const treeData: Directory[] = [...result];
             setTreeData(treeData);
@@ -347,12 +347,12 @@ const Menu: React.FC = () => {
                 <section>
                     <Table
                         loading={{indicator: <LoadingOutlined style={{fontSize: 24}}/>, spinning: loading}}
-                        rowSelection={{...rowSelection, checkStrictly}}
+                        rowSelection={{...rowSelection, checkStrictly: false}}
                         style={{marginTop: '6px'}}
                         className="table"
                         size="middle"
                         pagination={false}
-                        scroll={{x: '100%', y: 'calc(100vh - 270px)'}}
+                        scroll={{x: '100%', y: 'calc(100vh - 310px)'}}
                         columns={columns}
                         dataSource={tableData}
                     />
