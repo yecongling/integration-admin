@@ -1,6 +1,6 @@
 /* 封装axios */
 
-import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig} from "axios";
 import {CreateAxiosOptions} from "./axiosTransform";
 import {cloneDeep} from "lodash-es";
 import {RequestOptions, Result} from "@/types/axios";
@@ -38,15 +38,14 @@ export class RAxios {
       responseInterceptorsCatch
     } = transform;
     // 请求侦听器配置处理
-    // @ts-ignore
-    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+    this.axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config, this.options);
       }
       return config;
     }, undefined);
     // 请求拦截器错误捕获
-    requestInterceptorsCatch && isFunction(requestInterceptorsCatch) && this.axiosInstance.interceptors.request.use(undefined, responseInterceptorsCatch);
+    requestInterceptorsCatch && isFunction(requestInterceptorsCatch) && this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
     // 响应结果拦截器处理
     this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
       if (responseInterceptors && isFunction(responseInterceptors)) {
