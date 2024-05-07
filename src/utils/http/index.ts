@@ -11,7 +11,6 @@ import {ContentTypeEnum, RequestEnum, ResultEnum} from "@/enums/httpEnum";
 // import {setToken} from "@/stores/modules/global/action";
 import {isString} from "@/utils/is";
 import {joinTimestamp} from "@/utils/http/helper";
-import {Recordable} from "@/types/global";
 import {antdUtils} from "@/utils/antd.ts";
 
 /**
@@ -123,11 +122,12 @@ const transform: AxiosTransform = {
   /**
    * 请求拦截器处理（主要用于处理如token的传入，授权信息等，或请求头里的一些特殊参数）
    * @param config
+   * @param options
    */
-  requestInterceptors: (config: Recordable) => {
+  requestInterceptors: (config, options) => {
     // 请求之前处理token
     const token = sessionStorage.getItem('token');
-    if (token && config?.requestOptions?.withToken !== false) {
+    if (token && options?.requestOptions?.withToken !== false) {
       config.headers['token'] = token;
     }
     return config;
