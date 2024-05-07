@@ -23,7 +23,7 @@ import {
 import {ColumnsType} from "antd/es/table";
 import {
     CheckCircleOutlined,
-    CloseCircleOutlined,
+    CloseCircleOutlined, DeleteOutlined,
     LoadingOutlined,
     PlusOutlined,
     SettingOutlined
@@ -342,6 +342,7 @@ const Menu: React.FC = () => {
                 <section style={{marginBottom: '16px'}}>
                     <Space>
                         <Button type="primary" onClick={add}><PlusOutlined/>新增</Button>
+                        <Button type="primary" disabled danger onClick={()=>{}}><DeleteOutlined />批量操作</Button>
                     </Space>
                 </section>
                 <section>
