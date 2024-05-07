@@ -635,7 +635,7 @@ const permission: Array<MockMethod> = [
   },
   {
     // 接口路径
-    url: '/api/sys/permission/getDirectoryPermission',
+    url: '/api/menu/getDirectoryMenu',
     // 接口方法
     method: 'get',
     // 返回数据
@@ -649,7 +649,7 @@ const permission: Array<MockMethod> = [
     }
   },
   {
-    url: "/api/sys/permission/getAllPermission",
+    url: "/api/menu/getAllMenus",
     method: "post",
     response: () => {
       return {

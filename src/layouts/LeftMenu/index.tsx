@@ -85,6 +85,8 @@ const LeftMenu: React.FC = () => {
         setLoading(false)
     }, []);
 
+    const titleColor = theme === 'dark' ? '#fff' : '#1890ff';
+
     return (
         <Sider
             trigger={null}
@@ -108,8 +110,7 @@ const LeftMenu: React.FC = () => {
                                 fontWeight: 'bold',
                                 margin: '0 12px',
                                 fontSize: '20px',
-                                // color: '#1890ff'
-                                color: '#fff'
+                                color: titleColor
                             }}>integration</p>
                         }
 

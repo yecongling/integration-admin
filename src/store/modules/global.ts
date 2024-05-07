@@ -1,13 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 export interface globalState {
-  theme: string;
+  theme: 'dark' | 'light';
   colorPrimary: string;
   collapse: boolean;
 }
 
 const initialState: globalState = {
-  theme: "dark",
+  theme: "light",
   colorPrimary: "#1890ff",
   collapse: false
 }
