@@ -60,6 +60,8 @@ const Menu: React.FC = () => {
   const [treeData, setTreeData] = useState<Directory[]>([]);
   // 表格加载中
   const [loading, setLoading] = useState(true);
+  // 表格中选中的行
+  const [selectRow, setSelectRow] = useState<permission[]>([]);
 
   // const [checkStrictly, setCheckStrictly] = useState<boolean>(false);
 
@@ -195,7 +197,7 @@ const Menu: React.FC = () => {
    * 获取目录
    */
   const getDirectory = async () => {
-    const result = await getDirectoryMenu();
+    const result = await getDirectoryMenu({roleId: 'admin'});
     if (result) {
       const treeData: Directory[] = [...result];
       setTreeData(treeData);
@@ -294,7 +296,7 @@ const Menu: React.FC = () => {
   // 定义可多选
   const rowSelection: TableRowSelection<permission> = {
     onChange: (_selectedRowKeys, selectedRows) => {
-      console.log('selectedRows', selectedRows);
+      setSelectRow(selectedRows);
     }
   }
 
@@ -339,7 +341,7 @@ const Menu: React.FC = () => {
           <section style={{marginBottom: '16px'}}>
             <Space>
               <Button type="primary" onClick={add}><PlusOutlined/>新增</Button>
-              <Button type="primary" disabled danger onClick={() => {
+              <Button type="primary" disabled={selectRow.length == 0} danger onClick={() => {
               }}><DeleteOutlined/>批量操作</Button>
             </Space>
           </section>
