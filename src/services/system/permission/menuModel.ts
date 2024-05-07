@@ -38,7 +38,7 @@ export interface permission {
   hidden: boolean;
   hideTab: boolean;
   description: string;
-  delFlag: boolean;
+  delFlag: number;
   ruleFlag: number;
   status: string;
   internalOrExternal: boolean;
