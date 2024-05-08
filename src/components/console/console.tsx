@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Modal} from "antd";
 import Draggable, {DraggableData, DraggableEvent} from 'react-draggable';
 import './console.less';
-import {io} from "socket.io-client";
+import {io, Socket} from "socket.io-client";
 
 /**
  * 前端使用的SQL、错误监控台
@@ -18,26 +18,31 @@ const Console: React.FC = () => {
   useEffect(() => {
     // 监听键盘事件
     document.addEventListener("keyup", keyupEvent, false);
-    // 并初始化websocket
-    const socket = io("http://localhost:8080");
-
-    // 建立链接
-    socket.on('connect', () => {
-      console.log('socket已建立')
-    })
-
-    // 收到消息
-    socket.on('message', (data) => {
-      console.log('收到socket消息', data);
-    })
-
-    // 其它事件处理
-
-    return () => {
-      socket.disconnect();
-    }
   }, []);
 
+  // 监控窗口打开的时候才开启websocket
+  useEffect(() => {
+    if (open) {
+      // 并初始化websocket
+      const socket = io("http://localhost:8080");
+
+      // 建立链接
+      socket.on('connect', () => {
+        console.log('socket已建立')
+      })
+
+      // 收到消息
+      socket.on('message', (data) => {
+        console.log('收到socket消息', data);
+      })
+
+      // 其它事件处理
+
+      return () => {
+        socket.disconnect();
+      }
+    }
+  }, [open])
   /**
    * 监听键盘事件
    * @param e
@@ -66,63 +71,63 @@ const Console: React.FC = () => {
   };
 
   return (
-    <>
-      <Modal
-        open={open}
-        mask={false}
-        maskClosable={false}
-        title={<div
-          style={{
-            width: '100%',
-            cursor: 'move',
-          }}
-          onMouseOver={() => {
-            if (disabled) {
-              setDisabled(false);
-            }
-          }}
-          onMouseOut={() => {
-            setDisabled(true);
-          }}
-          // fix eslintjsx-a11y/mouse-events-have-key-events
-          // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
-          onFocus={() => {
-          }}
-          onBlur={() => {
-          }}
+      <>
+        <Modal
+            open={open}
+            mask={false}
+            maskClosable={false}
+            title={<div
+                style={{
+                  width: '100%',
+                  cursor: 'move',
+                }}
+                onMouseOver={() => {
+                  if (disabled) {
+                    setDisabled(false);
+                  }
+                }}
+                onMouseOut={() => {
+                  setDisabled(true);
+                }}
+                // fix eslintjsx-a11y/mouse-events-have-key-events
+                // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
+                onFocus={() => {
+                }}
+                onBlur={() => {
+                }}
+            >
+              监控台（ESC退出）
+            </div>}
+            wrapClassName="ant-modal-wrap-console"
+            width={380}
+            style={{top: 60, right: 26, position: "absolute", zIndex: 1000}}
+            styles={{
+              body: {
+                height: "calc(100vh - 160px)",
+                border: "1px solid #ccc",
+                padding: "10px",
+                borderRadius: "6px",
+                backgroundColor: "aliceblue"
+              }
+            }}
+            footer={null}
+            onCancel={() => setOpen(false)}
+            modalRender={(modal) => (
+                <Draggable
+                    disabled={disabled}
+                    bounds={bounds}
+                    nodeRef={draggleRef}
+                    onStart={(event, uiData) => onStart(event, uiData)}
+                >
+                  <div ref={draggleRef}>{modal}</div>
+                </Draggable>
+            )}
         >
-          监控台（ESC退出）
-        </div>}
-        wrapClassName="ant-modal-wrap-console"
-        width={380}
-        style={{top: 60, right: 26, position: "absolute", zIndex: 1000}}
-        styles={{
-          body: {
-            height: "calc(100vh - 160px)",
-            border: "1px solid #ccc",
-            padding: "10px",
-            borderRadius: "6px",
-            backgroundColor: "aliceblue"
-          }
-        }}
-        footer={null}
-        onCancel={() => setOpen(false)}
-        modalRender={(modal) => (
-          <Draggable
-            disabled={disabled}
-            bounds={bounds}
-            nodeRef={draggleRef}
-            onStart={(event, uiData) => onStart(event, uiData)}
-          >
-            <div ref={draggleRef}>{modal}</div>
-          </Draggable>
-        )}
-      >
-        console监控台，这里填写监控到的执行的SQL
-        console监控台，这里填写监控到的执行的SQL
-        console监控台，这里填写监控到的执行的SQL
-      </Modal>
-    </>
+          console监控台，这里填写监控到的执行的SQL
+          console监控台，这里填写监控到的执行的SQL
+          console监控台，这里填写监控到的执行的SQL
+        </Modal>
+      </>
   )
 }
 export default Console;
