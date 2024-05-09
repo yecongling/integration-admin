@@ -195,7 +195,7 @@ const Design: React.FC = () => {
         return (
           <>
             <a type="link" onClick={() => {
-              navigate('/project/design/designer', {state: record});
+              navigate('/project/designer', {state: record});
             }}>{text}</a>
           </>
         )
@@ -250,7 +250,7 @@ const Design: React.FC = () => {
           </Tooltip>
           <Tooltip placement="top" title="设计">
             <BranchesOutlined style={{fontSize: '18px'}} onClick={() => {
-              navigate('/project/design/designer', {state: record});
+              navigate('/project/designer', {state: record});
             }}/>
           </Tooltip>
           <Tooltip placement="top" title="删除">

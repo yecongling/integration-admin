@@ -23,6 +23,10 @@ export function handleRouter(routerList: RouteItem[], newArr: RouteObject[] = []
       menu.children = [];
       handleRouter(item.children, newArr);
     }
+    if (item.childrenRoute && item.childrenRoute.length) {
+      menu.children = [];
+      handleRouter(item.childrenRoute, newArr);
+    }
   });
   return newArr;
 }

@@ -118,22 +118,22 @@ const permission: Array<MockMethod> = [
                   "title": "项目设计",
                   "internal": false
                 },
-                // "children": [
-                //   {
-                //     "id": "16335",
-                //     "name": "sys-project-design",
-                //     "path": "/project/designer",
-                //     "component": "engine/project/Design/Designer",
-                //     "route": "1",
-                //     "meta": {
-                //       "keepAlive": false,
-                //       "icon": "ContainerOutlined",
-                //       "title": "流程设计",
-                //       "internal": false,
-                //       "menuType": 0,
-                //     }
-                //   }
-                // ]
+                "childrenRoute": [
+                  {
+                    "id": "16335",
+                    "name": "sys-project-design",
+                    "path": "/project/designer",
+                    "component": "engine/project/Design/Designer",
+                    "route": "1",
+                    "meta": {
+                      "keepAlive": false,
+                      "icon": "ContainerOutlined",
+                      "title": "流程设计",
+                      "internal": false,
+                      "menuType": 0,
+                    }
+                  }
+                ]
               },
               {
                 "id": "11236",

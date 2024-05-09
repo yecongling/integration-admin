@@ -144,7 +144,7 @@ const Menu: React.FC = () => {
    * @param e
    */
   const changeMenuType = (e: RadioChangeEvent) => {
-    if (e.target.value === 0) {
+    if (e.target.value === 0 || e.target.value === 2) {
       setShow(false);
       return;
     }
@@ -408,7 +408,8 @@ const Menu: React.FC = () => {
               <Radio.Group onChange={changeMenuType}>
                 <Radio value={0}>一级菜单</Radio>
                 <Radio value={1}>子菜单</Radio>
-                <Radio value={2}>按钮</Radio>
+                <Radio value={2}>子路由</Radio>
+                <Radio value={3}>按钮</Radio>
               </Radio.Group>
             </Form.Item>
             <Form.Item name="name" label="菜单名称" rules={[{required: true, message: '请输入菜单名称！'}]}>

@@ -13,6 +13,7 @@ export interface RouteItem {
   redirect?: string;
   caseSensitive?: boolean;
   children?: RouteItem[];
+  childrenRoute?: RouteItem[];
 }
 
 /**

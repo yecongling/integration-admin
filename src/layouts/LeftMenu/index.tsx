@@ -47,7 +47,7 @@ const LeftMenu: React.FC = () => {
     const deepLoopFloat = (menuList: RouteItem[], newArr: MenuItem[] = []) => {
         menuList.forEach((item: RouteItem) => {
             // 如果不能显示的菜单不显示
-            if (item?.meta?.menuType === 0) {
+            if (item?.meta?.menuType === 2) {
                 return true;
             }
             // 下面判断代码解释 *** !item?.children?.length   ==>   (!item.children || item.children.length === 0)
