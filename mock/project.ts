@@ -1,5 +1,6 @@
 import {MockMethod} from "vite-plugin-mock";
 import {Project} from "../src/pages/engine/project/Design/Project";
+import {Result} from "../src/types/axios";
 
 const projectData: Project[] = [
   {
@@ -18,12 +19,12 @@ const project: Array<MockMethod> = [
   {
     url: '/api/engine/project/queryProjects',
     method: 'post',
-    response: () => {
+    response: (): Result => {
       return {
         code: 200,
-        message: '',
+        msg: '',
         success: true,
-        result: projectData
+        data: projectData
       }
     }
   },
@@ -32,11 +33,12 @@ const project: Array<MockMethod> = [
     method: 'post',
     response: ({body}) => {
       console.log("body>>>>>", body);
+      projectData.push(body as Project);
       return {
         code: 200,
-        message: '',
+        msg: '',
         success: true,
-        result: []
+        data: []
       }
     }
   }
