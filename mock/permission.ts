@@ -3,7 +3,7 @@ import {MockMethod} from "vite-plugin-mock"
 const permission: Array<MockMethod> = [
   {
     // 接口路径
-    url: '/api/menu/getMenusByRole',
+    url: '/api/system/menu/getMenusByRole',
     // 接口方法
     method: 'get',
     // 返回数据
@@ -635,7 +635,7 @@ const permission: Array<MockMethod> = [
   },
   {
     // 接口路径
-    url: '/api/menu/getDirectoryMenu',
+    url: '/api/system/menu/getDirectoryMenu',
     // 接口方法
     method: 'get',
     // 返回数据
@@ -649,7 +649,7 @@ const permission: Array<MockMethod> = [
     }
   },
   {
-    url: "/api/menu/getAllMenus",
+    url: "/api/system/menu/getAllMenus",
     method: "post",
     response: () => {
       return {
