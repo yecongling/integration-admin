@@ -10,7 +10,7 @@ const permission: Array<MockMethod> = [
     response: () => {
       return {
         code: 200,
-        message: 'success',
+        msg: 'success',
         data: [
           {
             "id": "11231",
@@ -117,7 +117,23 @@ const permission: Array<MockMethod> = [
                   "icon": "ContainerOutlined",
                   "title": "项目设计",
                   "internal": false
-                }
+                },
+                // "children": [
+                //   {
+                //     "id": "16335",
+                //     "name": "sys-project-design",
+                //     "path": "/project/designer",
+                //     "component": "engine/project/Design/Designer",
+                //     "route": "1",
+                //     "meta": {
+                //       "keepAlive": false,
+                //       "icon": "ContainerOutlined",
+                //       "title": "流程设计",
+                //       "internal": false,
+                //       "menuType": 0,
+                //     }
+                //   }
+                // ]
               },
               {
                 "id": "11236",
@@ -655,7 +671,7 @@ const permission: Array<MockMethod> = [
       return {
         code: 200,
         message: 'success',
-        result: [
+        data: [
           {
             "id": "11231",
             "key": "11231",

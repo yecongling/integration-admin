@@ -14,7 +14,6 @@ declare namespace Menu {
   }
 }
 
-declare type Recordable<T = any> = Record<string, any>;
 
 declare module 'react-router' {
   interface RouteMeta extends Record<string | number | symbol, unknown> {
@@ -57,6 +56,7 @@ declare module 'react-router' {
     ignoreRoute?: boolean;
     // Hide path for children
     hidePathForChildren?: boolean;
+    menuType?: number;
   }
 }
 
