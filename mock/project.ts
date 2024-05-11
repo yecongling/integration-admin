@@ -10,6 +10,7 @@ const projectData: Project[] = [
     warning: true,
     projectType: 1,
     projectName: "测试使用的项目",
+    description: '这是一个用来测试的项目',
     chart: 2,
     projectPriority: 5
   }

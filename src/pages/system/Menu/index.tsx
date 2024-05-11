@@ -23,8 +23,7 @@ import {
 import {ColumnsType} from "antd/es/table";
 import {
   CheckCircleOutlined,
-  CloseCircleOutlined, DeleteOutlined, DownOutlined,
-  LoadingOutlined,
+  CloseCircleOutlined, DeleteOutlined, LoadingOutlined,
   PlusOutlined,
   SettingOutlined
 } from "@ant-design/icons";
@@ -40,6 +39,7 @@ import {addIcon, handlePermission} from "@/utils/util.tsx";
 import {Directory, permission, permissionResult} from "@/services/system/permission/menuModel";
 import IconPicker from "@/components/menu/icon/IconPicker.tsx";
 import {TableRowSelection} from "antd/es/table/interface";
+import {MenuInfo} from "rc-menu/lib/interface";
 
 /**
  * 菜单维护界面
@@ -205,8 +205,27 @@ const Menu: React.FC = () => {
   }
 
   const items: MenuProps['items'] = [
-
+    {
+      key: 'defaultPage',
+      label: '设为默认首页',
+      icon: <SettingOutlined/>,
+    },
+    {
+      key: 'delete',
+      label: '删除',
+      icon: <DeleteOutlined/>
+    }
   ]
+
+  /**
+   * 更多选项里的配置
+   * @param e
+   * @param param
+   */
+  const onClickMore = (e: MenuInfo, param: permission) => {
+    console.log(e)
+    console.log(param)
+  }
 
   // 定义列
   const columns: ColumnsType<permission> = [
@@ -225,7 +244,7 @@ const Menu: React.FC = () => {
       ellipsis: true,
       align: 'center',
       render: (text) => {
-        return text === 0 ? "一级菜单" : (text === 1 ? "子菜单" : "按钮");
+        return text === 0 ? "一级菜单" : (text === 1 ? "子菜单" : (text === 2 ? "子路由" : "按钮"));
       }
     },
     {
@@ -271,9 +290,6 @@ const Menu: React.FC = () => {
       render: (_text, record) => (
           <Space size="small">
             <Button type="primary" size="small" onClick={() => edit(record)}>编辑</Button>
-            <Dropdown.Button icon={<DownOutlined/>} menu={{items}}>
-              更多
-            </Dropdown.Button>
             <Popconfirm
                 title={record.delFlag === 1 ? "启用菜单" : "停用菜单"}
                 description="确定更改这条菜单数据吗?"
@@ -283,7 +299,9 @@ const Menu: React.FC = () => {
             >
               <Button type="primary" size="small" danger>{record.delFlag === 1 ? "启用" : "停用"}</Button>
             </Popconfirm>
-            <Button type="default" size="small">设为默认首页</Button>
+            <Dropdown menu={{items, onClick: (e) => onClickMore(e, record)}}>
+              <Button>更多</Button>
+            </Dropdown>
           </Space>
       )
     },

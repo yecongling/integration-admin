@@ -102,7 +102,7 @@ const permission: Array<MockMethod> = [
             "meta": {
               "keepAlive": false,
               "icon": "ClusterOutlined",
-              "title": "项目设计",
+              "title": "项目管理",
               "internal": false
             },
             "children": [
@@ -118,6 +118,7 @@ const permission: Array<MockMethod> = [
                   "title": "项目设计",
                   "internal": false
                 },
+                // 子路由（不在左侧菜单栏显示出来）
                 "childrenRoute": [
                   {
                     "id": "16335",
@@ -139,7 +140,7 @@ const permission: Array<MockMethod> = [
                 "id": "11236",
                 "name": "sys-project",
                 "path": "/project/terminal",
-                "component": "project/Terminal",
+                "component": "engine/project/Terminal",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
