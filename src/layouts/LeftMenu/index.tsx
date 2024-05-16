@@ -9,6 +9,7 @@ import {RouteItem} from "@/services/system/permission/menuModel";
 import {addIcon, getOpenKeys} from "@/utils/util.tsx";
 import {setCollapse} from "@/store/modules/global.ts";
 import favicon from "@/assets/svg/vite.svg";
+import {searchRoute} from "@/utils";
 
 const LeftMenu: React.FC = () => {
     const {menus} = useSelector((store: any) => store.menu);
@@ -60,10 +61,14 @@ const LeftMenu: React.FC = () => {
     };
 
     const clickMenu: MenuProps["onClick"] = ({key}: { key: string }) => {
-        // const route = searchRoute(key, props.menuList);
         // 配置外置跳转路由
         // if (route.meta.isLink) window.open(route.meta.isLink, "_blank");
         navigate(key);
+        const route = searchRoute(key, menus);
+        const title = route.meta?.title;
+        if (title) {
+            document.title = title;
+        }
     };
 
     // 刷新页面菜单保持高亮

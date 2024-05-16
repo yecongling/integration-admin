@@ -39,7 +39,7 @@ export function setObjToUrlParams(baseUrl: string, obj: any): string {
  */
 export const searchRoute = (path: string, routes: RouteItem[] = []): RouteItem => {
     let result: RouteItem = {};
-    for (let item of routes) {
+    for (const item of routes) {
         if (item.path === path) return item;
         if (item.children) {
             const res = searchRoute(path, item.children);
