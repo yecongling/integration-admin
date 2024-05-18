@@ -25,6 +25,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   EllipsisOutlined,
+  ExportOutlined,
   FullscreenOutlined,
   ImportOutlined,
   PlusOutlined,
@@ -51,7 +52,7 @@ const Design: React.FC = () => {
   const [projectData] = Form.useForm();
   const projectName = useRef<InputRef>(null);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     onSearch(searchForm.getFieldsValue()).then((result) => {
       setProjectSource(result);
@@ -308,7 +309,8 @@ const Design: React.FC = () => {
         <section style={{marginBottom: '16px'}}>
           <Space wrap>
             <Button type="primary" onClick={addProject} icon={<PlusOutlined/>}>新建</Button>
-            <Button type="primary" onClick={() => alert('导入')} icon={<ImportOutlined/>}>导入</Button>
+            <Button type="default" onClick={() => alert('导入')} icon={<ImportOutlined style={{color: 'orange'}}/>}>导入</Button>
+            <Button type="default" onClick={() => alert('导出')} icon={<ExportOutlined style={{color: 'red'}}/>}>导出</Button>
           </Space>
         </section>
         <section>

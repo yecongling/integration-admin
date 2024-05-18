@@ -114,7 +114,7 @@ const Designer: React.FC = () => {
             }}>
               <Col span={10}>
                 <Space.Compact>
-                  <Button type="default" icon={<UndoOutlined/>} disabled>撤销2</Button>
+                  <Button type="default" icon={<UndoOutlined/>} disabled>撤销</Button>
                   <Button type="default" icon={<RedoOutlined/>} disabled>恢复</Button>
                   <Button type="default" icon={<DeleteOutlined/>}>清空</Button>
                   <Button type="default" icon={<FlagOutlined/>}>标尺</Button>
@@ -152,7 +152,7 @@ const Designer: React.FC = () => {
                 <div className="landscape-canvas-ruler" style={{width: 'calc(100% - 20px)', height: '20px'}}>
                   <canvas id="landscape-canvas"></canvas>
                 </div>
-                <div className="vertical-canvas-ruler" style={{width: '20px', height: 'calc(100% - 20px)'}}>
+                <div className="vertical-canvas-ruler" style={{width: '20px', height: 'calc(100% - 40px)'}}>
                   <canvas id="vertical-canvas"></canvas>
                 </div>
                 <div className="editor-content">编辑器内容区</div>
