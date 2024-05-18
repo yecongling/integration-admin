@@ -16,7 +16,15 @@ export default defineConfig({
   ],
   build: {
     sourcemap: true,
-    outDir: 'integration'
+    outDir: 'integration',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom', 'zustand'],
+          antd: ['antd'],
+        },
+      },
+    },
   },
   resolve: {
     alias: {
