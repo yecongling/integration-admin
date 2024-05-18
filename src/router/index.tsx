@@ -2,10 +2,10 @@ import {useRoutes, Navigate} from "react-router-dom";
 import React, {Suspense, useState, useEffect} from 'react'
 import {App, Skeleton} from "antd";
 import {antdUtils} from "@/utils/antd.ts";
-import {useSelector} from "react-redux";
 import {lazyLoad} from "@/router/lazyLoad.tsx";
 import {RouteObject} from "@/interface";
 import {handleRouter} from "@/utils/util"
+import useMenuStore from "@/store/modules/menu.ts";
 
 const errorRoutes: RouteObject[] = [{
     path: '*',
@@ -140,7 +140,7 @@ const Router = () => {
 
     // 从store中获取后台获取到的路由
     const [route, setRoute] = useState([...routes])
-    const {menus} = useSelector((store: any) => store.menu);
+    const {menus} = useMenuStore();
     useEffect(() => {
         route[0].children = [...handleRouter(menus), ...errorRoutes];
         setRoute([...route]);

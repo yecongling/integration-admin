@@ -1,10 +1,10 @@
 import React, {Suspense} from "react";
 import {Layout, Spin} from "antd";
-import {useSelector} from "react-redux";
 import RouterBeforeEach from "@/router/RouterBeforeEach.tsx";
+import useGlobalStore from "@/store/modules/global.ts";
 /* 内容区域 */
 const Index: React.FC = () => {
-  const {theme} = useSelector((store: any) => store.global);
+  const {theme} = useGlobalStore();
 
   return (
     <Layout.Content className="dis-fl fd-c"

@@ -1,36 +1,23 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {RouteObject} from "@/interface";
+import {create} from "zustand";
 
 /**
  * 定义菜单
  */
 export interface Menu {
-  menus: RouteObject[];
+  menus: any[];
+  setMenus: (params: any[]) => void;
 }
 
-/**
- * 初始状态（从后台获取到的路由信息）
- */
-const initialState: Menu = {
-  menus: []
-}
+// /**
+//  * 初始状态（从后台获取到的路由信息）
+//  */
+// const initialState: Menu = {
+//   menus: []
+// }
 
-export const menu = createSlice({
-  // 命名空间
-  name: 'menu',
+const useMenuStore = create<Menu>((set) => ({
+  menus: [],
+  setMenus: (menus: any[]) => set({menus}),
+}));
 
-  // 初始状态
-  initialState,
-
-  // 定义reducer并生成关联的操作
-  reducers: {
-    setMenu(state, {payload}) {
-      state.menus = payload.menus
-    }
-  }
-})
-
-// 导出reducer方法
-export const {setMenu} = menu.actions;
-
-export default menu.reducer;
+export default useMenuStore;

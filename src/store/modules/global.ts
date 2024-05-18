@@ -1,43 +1,27 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {create} from "zustand";
 
 export interface globalState {
   theme: 'dark' | 'light';
   colorPrimary: string;
   collapse: boolean;
+  setTheme: (params: 'dark' | 'light') => void;
+  setCollapse: (params: boolean) => void;
+  setColorPrimary: (params: string) => void;
 }
 
-const initialState: globalState = {
+// const initialState: globalState = {
+//   theme: "light",
+//   colorPrimary: "#1890ff",
+//   collapse: false
+// }
+
+// 创建状态存储
+const useGlobalStore = create<globalState>((set) => ({
   theme: "light",
   colorPrimary: "#1890ff",
-  collapse: false
-}
-
-// 创建一个Slice
-export const global = createSlice({
-  // 命名空间
-  name: "global",
-
-  // 初始状态值
-  initialState,
-
-  // 定义reducer并生成关联的操作
-  reducers: {
-    setCollapse(state, {payload}) {
-      state.collapse = payload.collapse
-    },
-
-    setTheme(state, {payload}) {
-      state.theme = payload.theme
-    },
-
-    setColorPrimary(state, {payload}) {
-      state.colorPrimary = payload.colorPrimary
-    }
-  }
-});
-
-// 导出reducer方法
-export const {setCollapse, setTheme, setColorPrimary} = global.actions;
-
-// 默认导出
-export default global.reducer
+  collapse: false,
+  setCollapse: (collapse: boolean) => set({collapse}),
+  setTheme: (theme) => set({theme}),
+  setColorPrimary: (colorPrimary) => set({colorPrimary}),
+}))
+export default useGlobalStore

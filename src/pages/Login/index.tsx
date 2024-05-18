@@ -7,11 +7,10 @@ import filing from '@/assets/images/filing.png';
 import {useNavigate} from "react-router-dom";
 import {login} from "@/services/login/loginApi.ts";
 import {getMenuList} from "@/services/system/permission/menu.ts";
-import {setMenu} from "@/store/modules/menu.ts";
-import {useDispatch} from "react-redux";
+import useMenuStore from "@/store/modules/menu.ts";
 
 const Login: React.FC = () => {
-  const dispatch = useDispatch();
+  const {setMenus} = useMenuStore()
   const [form] = Form.useForm();
   const inputRef = useRef(null);
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const Login: React.FC = () => {
     sessionStorage.setItem('isLogin', "true")
     // 这里角色暂时写死，后续修改
     const menu = await getMenuList({roleId: 'admin'});
-    dispatch(setMenu({menus: menu}))
+    setMenus(menu as unknown as any[])
     navigate('/home');
   }
 
