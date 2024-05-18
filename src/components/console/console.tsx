@@ -89,8 +89,6 @@ const Console: React.FC = () => {
                 onMouseOut={() => {
                   setDisabled(true);
                 }}
-                // fix eslintjsx-a11y/mouse-events-have-key-events
-                // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
                 onFocus={() => {
                 }}
                 onBlur={() => {
@@ -123,6 +121,7 @@ const Console: React.FC = () => {
                 </Draggable>
             )}
         >
+          {messges}
           console监控台，这里填写监控到的执行的SQL
           console监控台，这里填写监控到的执行的SQL
           console监控台，这里填写监控到的执行的SQL
