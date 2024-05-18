@@ -30,7 +30,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
 
-    const blLogin = sessionStorage.getItem('isLogin');
+    const blLogin = localStorage.getItem('isLogin');
     console.log("useEffect ~ obj:", location)
     if (blLogin == 'false' || !blLogin || location.pathname.startsWith("/login")) {
       navigate('/login', {replace: true})

@@ -7,9 +7,8 @@ const project: Array<MockMethod> = [
     response: () => {
       return {
         code: 200,
-        message: '',
-        success: true,
-        result: [
+        msg: '',
+        data: [
           {
             id: "sdgerwrefgert",
             name: "HIS数据源",

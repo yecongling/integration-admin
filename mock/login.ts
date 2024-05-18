@@ -7,14 +7,11 @@ const project: Array<MockMethod> = [
     response: () => {
       return {
         code: 200,
-        message: '',
-        success: true,
-        result: {
-          'code': 200,
-          'isLogin': true,
-          'data': {
-            'tokenValue': 'wefewfwe'
-          }
+        msg: '',
+        data: {
+          token: 'wefewfwe',
+          roleId: 'admin',
+          homePath: '/home'
         }
       }
     }

@@ -19,13 +19,14 @@ const Login: React.FC = () => {
   // const [loading, setLoading] = useState<boolean>(false);
   const [code, setCode] = useState(Math.floor(Math.random() * 10000).toString());
   const submit = async (values: any) => {
-    const result = await login(values);
-    sessionStorage.setItem("token", result);
-    sessionStorage.setItem('isLogin', "true")
+    // 这里考虑返回的内容不仅包括token，还包括用户登录的角色（需要存储在本地，用于刷新页面时重新根据角色获取菜单）、配置的首页地址（供登录后进行跳转）
+    const {token, roleId, homePath} = await login(values);
+    localStorage.setItem("token", token);
+    localStorage.setItem('isLogin', "true")
     // 这里角色暂时写死，后续修改
-    const menu = await getMenuList({roleId: 'admin'});
+    const menu = await getMenuList({roleId});
     setMenus(menu as unknown as any[])
-    navigate('/home');
+    navigate(homePath);
   }
 
   /**

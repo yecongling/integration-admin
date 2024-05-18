@@ -24,7 +24,6 @@ const project: Array<MockMethod> = [
       return {
         code: 200,
         msg: '',
-        success: true,
         data: projectData
       }
     }
@@ -38,7 +37,6 @@ const project: Array<MockMethod> = [
       return {
         code: 200,
         msg: '',
-        success: true,
         data: []
       }
     }

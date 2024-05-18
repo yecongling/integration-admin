@@ -1,5 +1,5 @@
 import React from "react";
-import {FormInstance, InputRef} from "antd";
+import {FormInstance, InputRef, ModalProps} from "antd";
 
 export interface ProjectTypeProps {
   projectType: boolean;
@@ -8,8 +8,7 @@ export interface ProjectTypeProps {
   projectName:  React.RefObject<InputRef>;
 }
 
-export interface ProjectInfoProps {
-  open: boolean;
+export interface ProjectInfoProps extends ModalProps{
   setOpen:  React.Dispatch<React.SetStateAction<boolean>>;
   isEdit: boolean;
   changeModal: (type: string) => void;

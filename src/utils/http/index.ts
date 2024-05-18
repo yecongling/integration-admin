@@ -67,6 +67,8 @@ const transform: AxiosTransform = {
           title: "登录失败",
           content: '当前会话已失效，请重新登录！',
           onOk() {
+            // 登录失效后需要将本地token清除
+            localStorage.removeItem('token');
             window.location.href = '/login';
           }
         })
@@ -126,7 +128,7 @@ const transform: AxiosTransform = {
    */
   requestInterceptors: (config, options) => {
     // 请求之前处理token
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token && options?.requestOptions?.withToken !== false) {
       config.headers['token'] = token;
     }

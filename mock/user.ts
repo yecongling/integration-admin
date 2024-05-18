@@ -7,9 +7,7 @@ const user: Array<MockMethod> = [
     response: () => {
       return {
         code: 200,
-        message: '',
-        success: true,
-        result: [
+        msg: [
           {
             key: "12312",
             id: "werwe",
