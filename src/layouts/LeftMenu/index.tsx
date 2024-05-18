@@ -71,6 +71,7 @@ const LeftMenu: React.FC = memo(() => {
     // 配置外置跳转路由
     // if (route.meta.isLink) window.open(route.meta.isLink, "_blank");
     navigate(key);
+    // 可以通过这里去查询菜单路由，以此构建面包屑
     const route = searchRoute(key, menus);
     const title = route.meta?.title;
     if (title) {
