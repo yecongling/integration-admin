@@ -8,9 +8,10 @@ import {useNavigate} from "react-router-dom";
 import {login} from "@/services/login/loginApi.ts";
 import {getMenuList} from "@/services/system/permission/menu.ts";
 import useMenuStore from "@/store/modules/menu.ts";
+import {useShallow} from "zustand/react/shallow";
 
 const Login: React.FC = () => {
-  const {setMenus} = useMenuStore()
+  const {setMenus} = useMenuStore(useShallow((state) => ({setMenus: state.setMenus})));
   const [form] = Form.useForm();
   const inputRef = useRef(null);
   const navigate = useNavigate();

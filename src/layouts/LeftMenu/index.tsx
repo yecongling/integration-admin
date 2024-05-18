@@ -10,22 +10,29 @@ import useGlobalStore from "@/store/modules/global.ts";
 import favicon from "@/assets/svg/vite.svg";
 import {searchRoute} from "@/utils";
 import useMenuStore from "@/store/modules/menu.ts";
+import {useShallow} from "zustand/react/shallow";
 
 const LeftMenu: React.FC = memo(() => {
   console.log('菜单组件渲染')
-  const {menus} = useMenuStore();
+  const {menus} = useMenuStore(
+      useShallow((state) => ({
+        menus: state.menus
+      }))
+  );
+  // 通过useSelector直接拿到store中定义的value
+  const {collapse, theme, setCollapse} = useGlobalStore(
+      useShallow((state) => ({
+        collapse: state.collapse,
+        theme: state.theme,
+        setCollapse: state.setCollapse
+      }))
+  );
   const navigate = useNavigate();
   const {pathname} = useLocation();
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
-  // 通过useSelector直接拿到store中定义的value
-  const {collapse, theme, setCollapse} = useGlobalStore();
-  const [isCollapse, changeCollapse] = useState(collapse);
-  useEffect(() => {
-    changeCollapse(collapse);
-  }, [collapse]);
   // 定义 menu 类型
   type MenuItem = Required<MenuProps>["items"][number];
   const getItem = (
@@ -74,9 +81,9 @@ const LeftMenu: React.FC = memo(() => {
   // 刷新页面菜单保持高亮
   useEffect(() => {
     const openKey = getOpenKeys(pathname);
-    !isCollapse && setOpenKeys(openKey);
+    !collapse && setOpenKeys(openKey);
     setSelectedKeys(openKey.concat([pathname]));
-  }, [pathname, isCollapse]);
+  }, [collapse, pathname]);
 
   // 设置当前展开的 subMenu
   const onOpenChange = useCallback((openKeys: string[]) => {
@@ -107,7 +114,7 @@ const LeftMenu: React.FC = memo(() => {
             borderRight: '1px solid #e9edf0'
           }}
           theme={theme}
-          collapsed={isCollapse}
+          collapsed={collapse}
           collapsible
       >
         <div className="dis-fl js-sb ai-ct toolbox">
@@ -115,7 +122,7 @@ const LeftMenu: React.FC = memo(() => {
             <div className="hd-64 mgr-01 dis-fl ai-ct jc-ct" style={{justifyContent: 'space-around'}}>
               <Image width={25} src={favicon} preview={false}/>
               {
-                isCollapse ? '' : <p style={{
+                collapse ? '' : <p style={{
                   fontWeight: 'bold',
                   margin: '0 12px',
                   fontSize: '20px',

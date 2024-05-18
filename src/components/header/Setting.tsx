@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {memo, useCallback, useState} from "react";
 import {Col, ColorPicker, ColorPickerProps, Divider, Drawer, Row, Space, Switch} from "antd";
 import useGlobalStore from "@/store/modules/global.ts";
+import {useShallow} from "zustand/react/shallow";
 
 export type SettingProps = {
   open: boolean;
@@ -8,18 +9,23 @@ export type SettingProps = {
 }
 
 /* 系统配置界面 */
-const Setting: React.FC<SettingProps> = (props) => {
+const Setting: React.FC<SettingProps> = memo((props) => {
   const {open, setOpen} = props;
-  const {colorPrimary, setColorPrimary} = useGlobalStore();
+  const {colorPrimary, setColorPrimary} = useGlobalStore(
+      useShallow((state) => ({
+        colorPrimary: state.colorPrimary,
+        setColorPrimary: state.setColorPrimary
+      }))
+  );
   const [value, setValue] = useState<ColorPickerProps['value']>(colorPrimary);
 
   /**
    * 改变主题
    * @param checked
    */
-  const changeTheme = (checked: boolean) => {
+  const changeTheme = useCallback((checked: boolean) => {
     setColorPrimary(checked ? 'light' : 'dark');
-  }
+  }, [])
 
   return (
       <>
@@ -69,6 +75,6 @@ const Setting: React.FC<SettingProps> = (props) => {
         </Drawer>
       </>
   )
-}
+})
 
 export default Setting;
