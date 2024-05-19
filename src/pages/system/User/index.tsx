@@ -45,7 +45,15 @@ const User: React.FC = () => {
   /**
    * 定义表格列
    */
-  const columns: ColumnsType<UserModel> = []
+  const columns: ColumnsType<UserModel> = [
+    {
+      title: '用户名',
+      dataIndex: 'username',
+      key: 'username',
+      width: 140,
+      ellipsis: true
+    }
+  ]
 
   return (
     <>
