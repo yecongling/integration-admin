@@ -319,9 +319,9 @@ const Design: React.FC = () => {
         <section style={{marginBottom: '16px'}}>
           <Space wrap>
             <Button type="primary" onClick={addProject} icon={<PlusOutlined/>}>新建</Button>
-            <Button type="primary" onClick={()=>{alert('批量操作')}} icon={<DeleteOutlined/>} disabled={selectRow.length === 0}>批量操作</Button>
+            <Button type="primary" onClick={()=>{alert('批量操作')}} icon={<DeleteOutlined style={{color: 'red'}}/>} disabled={selectRow.length === 0}>批量操作</Button>
             <Button type="default" onClick={() => alert('导入')} icon={<ImportOutlined style={{color: 'orange'}}/>}>导入</Button>
-            <Button type="default" onClick={() => alert('导出')} icon={<ExportOutlined style={{color: 'red'}}/>}>导出</Button>
+            <Button type="default" onClick={() => alert('导出')} icon={<ExportOutlined style={{color: 'red'}}/>} disabled={selectRow.length === 0}>导出</Button>
           </Space>
         </section>
         <section>
