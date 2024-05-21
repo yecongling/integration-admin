@@ -41,6 +41,7 @@ import {useNavigate} from "react-router-dom";
 import {deleteProject, getAllProject} from "@/services/engine/project/projectMaintain/projectMaintain.ts";
 import ProjectTypeModal from "@/pages/engine/Project/components/ProjectTypeModal.tsx";
 import ProjectInfoModal from "@/pages/engine/Project/components/ProjectInfoModal.tsx";
+import { TableRowSelection } from "antd/es/table/interface";
 
 const Design: React.FC = () => {
   const [searchForm] = Form.useForm();
@@ -52,6 +53,8 @@ const Design: React.FC = () => {
   const [projectData] = Form.useForm();
   const projectName = useRef<InputRef>(null);
   const navigate = useNavigate();
+  // 表格中选中的行
+  const [selectRow, setSelectRow] = useState<Project[]>([]);
   
   useEffect(() => {
     onSearch(searchForm.getFieldsValue()).then((result) => {
@@ -273,6 +276,13 @@ const Design: React.FC = () => {
     },
   ];
 
+  // 定义可多选
+  const rowSelection: TableRowSelection<Project> = {
+    onChange: (_selectedRowKeys, selectedRows) => {
+      setSelectRow(selectedRows);
+    }
+  }
+
   return (
     <>
       {/* 查询区域 */}
@@ -309,13 +319,14 @@ const Design: React.FC = () => {
         <section style={{marginBottom: '16px'}}>
           <Space wrap>
             <Button type="primary" onClick={addProject} icon={<PlusOutlined/>}>新建</Button>
+            <Button type="primary" onClick={()=>{alert('批量操作')}} icon={<DeleteOutlined/>} disabled={selectRow.length === 0}>批量操作</Button>
             <Button type="default" onClick={() => alert('导入')} icon={<ImportOutlined style={{color: 'orange'}}/>}>导入</Button>
             <Button type="default" onClick={() => alert('导出')} icon={<ExportOutlined style={{color: 'red'}}/>}>导出</Button>
           </Space>
         </section>
         <section>
           <Table
-            // rowSelection={{type: 'checkbox'}}
+            rowSelection={{...rowSelection, checkStrictly: false}}
             scroll={{x: '100', y: 'calc(100vh - 270px)'}}
             style={{marginTop: '6px'}}
             size="middle"
