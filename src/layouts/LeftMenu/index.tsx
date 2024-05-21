@@ -13,7 +13,6 @@ import useMenuStore from "@/store/modules/menu.ts";
 import {useShallow} from "zustand/react/shallow";
 
 const LeftMenu: React.FC = memo(() => {
-  console.log('菜单组件渲染')
   const {menus} = useMenuStore(
       useShallow((state) => ({
         menus: state.menus
@@ -82,6 +81,11 @@ const LeftMenu: React.FC = memo(() => {
   // 刷新页面菜单保持高亮
   useEffect(() => {
     const openKey = getOpenKeys(pathname);
+    // 判断如果是二级路由，不在左边菜单那种的就不去更新
+    const route = searchRoute(pathname, menus);
+    if (!route || Object.keys(route).length === 0) {
+      return;
+    }
     !collapse && setOpenKeys(openKey);
     setSelectedKeys(openKey.concat([pathname]));
   }, [collapse, pathname]);

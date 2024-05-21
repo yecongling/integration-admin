@@ -18,8 +18,8 @@ import {
   TableOutlined,
   UndoOutlined
 } from "@ant-design/icons";
-import Setting from "@/pages/engine/project/Design/Designer/Setting";
-import Endpoint from "@/pages/engine/project/Design/Designer/components/server/Endpoint";
+import Setting from "@/pages/engine/Project/Designer/Setting";
+import Endpoint from "@/pages/engine/Project/Designer/components/server/Endpoint";
 
 const Designer: React.FC = () => {
   const navigate = useNavigate();
@@ -139,7 +139,7 @@ const Designer: React.FC = () => {
                   <Button type="primary" title="导出流程" icon={<ExportOutlined/>}
                           onClick={() => alert("导出")}>导出</Button>
                   <Button type="primary" icon={<RollbackOutlined/>} onClick={() => {
-                    navigate('/project/design')
+                    navigate('/engine/project')
                   }}>返回</Button>
                   <Button type="default" icon={<MenuOutlined/>} title="面板" onClick={clickPanel}/>
                 </Space>

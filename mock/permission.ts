@@ -96,7 +96,7 @@ const permission: Array<MockMethod> = [
           {
             "id": "11236",
             "name": "sys-project",
-            "path": "/project",
+            "path": "/engine",
             "component": "",
             "route": "1",
             "meta": {
@@ -109,8 +109,8 @@ const permission: Array<MockMethod> = [
               {
                 "id": "11335",
                 "name": "sys-project",
-                "path": "/project/design",
-                "component": "engine/project/Design",
+                "path": "/engine/project",
+                "component": "engine/Project",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
@@ -124,7 +124,7 @@ const permission: Array<MockMethod> = [
                     "id": "16335",
                     "name": "sys-project-design",
                     "path": "/project/designer",
-                    "component": "engine/project/Design/Designer",
+                    "component": "engine/Project/Designer",
                     "route": "1",
                     "meta": {
                       "keepAlive": false,

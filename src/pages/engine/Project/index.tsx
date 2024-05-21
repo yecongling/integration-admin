@@ -39,8 +39,8 @@ import {Project} from "./Project.ts";
 import "./index.less";
 import {useNavigate} from "react-router-dom";
 import {deleteProject, getAllProject} from "@/services/engine/project/projectMaintain/projectMaintain.ts";
-import ProjectTypeModal from "@/pages/engine/project/Design/components/ProjectTypeModal.tsx";
-import ProjectInfoModal from "@/pages/engine/project/Design/components/ProjectInfoModal.tsx";
+import ProjectTypeModal from "@/pages/engine/Project/components/ProjectTypeModal.tsx";
+import ProjectInfoModal from "@/pages/engine/Project/components/ProjectInfoModal.tsx";
 
 const Design: React.FC = () => {
   const [searchForm] = Form.useForm();
