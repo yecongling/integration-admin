@@ -11,8 +11,10 @@ export type SettingProps = {
 /* 系统配置界面 */
 const Setting: React.FC<SettingProps> = memo((props) => {
   const {open, setOpen} = props;
-  const {colorPrimary, setColorPrimary} = useGlobalStore(
+  const {colorPrimary, setColorPrimary, theme, setTheme} = useGlobalStore(
       useShallow((state) => ({
+        theme: state.theme,
+        setTheme: state.setTheme,
         colorPrimary: state.colorPrimary,
         setColorPrimary: state.setColorPrimary
       }))
@@ -24,7 +26,7 @@ const Setting: React.FC<SettingProps> = memo((props) => {
    * @param checked
    */
   const changeTheme = useCallback((checked: boolean) => {
-    setColorPrimary(checked ? 'light' : 'dark');
+    setTheme(checked ? 'light' : 'dark');
   }, [])
 
   return (
@@ -43,7 +45,7 @@ const Setting: React.FC<SettingProps> = memo((props) => {
                 侧边栏
               </Col>
               <Col span={17} offset={1}>
-                <Switch unCheckedChildren="黑暗" checkedChildren="明亮" defaultChecked
+                <Switch unCheckedChildren="黑暗" checkedChildren="明亮" defaultChecked checked={theme === 'light'}
                         onChange={(checked) => changeTheme(checked)}/>
               </Col>
             </Row>

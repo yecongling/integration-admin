@@ -70,3 +70,13 @@ export const addIcon = (name: string) => {
   }
   return React.createElement(customIcons[name]);
 };
+
+/**
+ * 判断两个数组是否存在交集
+ * @param arr1
+ * @param arr2
+ */
+export function hasIntersection(arr1: any[], arr2: any[]): boolean {
+  const set1 = new Set(arr1);
+  return arr2.some(item => set1.has(item));
+}
