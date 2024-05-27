@@ -1,23 +1,25 @@
-import { Form, Modal } from 'antd';
+import { Form, Modal, ModalProps } from 'antd';
 import React from 'react';
 import {
     CheckCircleOutlined,
     CloseCircleOutlined,
 } from "@ant-design/icons";
+import { UserModel } from '@/services/system/user/userModel';
 
 /**
  * 用户信息操作弹窗
  */
-const UserModal: React.FC = (props: any) => {
+const UserModal: React.FC<ModalProps & UserModel> = (props: ModalProps & UserModel) => {
 
-    const { open, formData } = props;
+    const { open, form, onCancel} = props;
+
     return (
         <Modal
             destroyOnClose
             centered
             maskClosable={false}
             open={open}
-            title="编辑菜单数据"
+            title="编辑用户数据"
             okText="确认"
             okButtonProps={{ icon: <CheckCircleOutlined /> }}
             cancelButtonProps={{ icon: <CloseCircleOutlined /> }}
@@ -25,15 +27,16 @@ const UserModal: React.FC = (props: any) => {
             style={{ top: '20px' }}
             width={800}
             styles={{ body: { padding: '10px 40px' } }}
+            onCancel={onCancel}
         >
             <Form
-                form={formData}
+                form={form}
                 layout="horizontal"
                 name="basic"
                 size="middle"
                 labelCol={{ span: 5 }}
             >
-
+                <div>用户数据</div>
             </Form>
         </Modal>
     )

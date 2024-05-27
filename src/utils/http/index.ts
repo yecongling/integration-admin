@@ -52,7 +52,7 @@ const transform: AxiosTransform = {
       case ResultEnum.TIMEOUT:
         timeoutMsg = "接口请求超时";
         // setToken("");
-        window.location.href = "/login";
+        // window.location.href = "/login";
         break;
       default:
         if (msg) {

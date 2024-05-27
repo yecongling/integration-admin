@@ -7,10 +7,11 @@ const user: Array<MockMethod> = [
     response: () => {
       return {
         code: 200,
-        msg: 'success',
+        msg: '',
         data: [
           {
-            username: '叶丛林'
+            username: '叶丛林',
+            role: 'admin'
           }
         ]
       }

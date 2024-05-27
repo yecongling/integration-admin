@@ -1,5 +1,5 @@
 import {MockMethod} from "vite-plugin-mock";
-import {Project} from "../src/pages/engine/project/Design/Project";
+import {Project} from "../src/pages/engine/Project/Project";
 import {Result} from "../src/types/axios";
 
 const projectData: Project[] = [
@@ -7,7 +7,7 @@ const projectData: Project[] = [
     key: "12312",
     id: "werwe",
     status: "1",
-    warning: true,
+    warning: '出现错误警告',
     projectType: 1,
     projectName: "测试使用的项目",
     description: '这是一个用来测试的项目',

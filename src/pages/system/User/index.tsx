@@ -15,6 +15,7 @@ const User: React.FC = () => {
   const focusInput = useRef<InputRef>(null);
   const [tableData, setTableData] = useState<UserModel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [openUserModal, setOpenUserModal] = useState<boolean>(false);
   // 初始时加载用户数据
   useEffect(() => {
     onSearch(form.getFieldsValue()).then((result) => {
@@ -54,6 +55,24 @@ const User: React.FC = () => {
       ellipsis: true
     }
   ]
+
+  //    事件
+
+  /**
+   * 新增用户信息弹窗
+   */
+  const onClickAdd = () => {
+    // 需要先清空form数据
+    form.resetFields();
+    setOpenUserModal(true);
+  }
+
+  /**
+   * 关闭用户信息编辑弹窗
+   */
+  const onCancel = () => {
+    setOpenUserModal(false);
+  }
 
   return (
     <>
@@ -95,9 +114,7 @@ const User: React.FC = () => {
       <Card>
         <section style={{marginBottom: '16px'}}>
           <Space wrap>
-            <Button type="primary" onClick={() => {
-              alert('新增用户')
-            }} icon={<PlusOutlined/>}>新增</Button>
+            <Button type="primary" onClick={onClickAdd} icon={<PlusOutlined/>}>新增</Button>
           </Space>
         </section>
         <section>
@@ -118,7 +135,7 @@ const User: React.FC = () => {
           />
         </section>
       </Card>
-      <UserModal />
+      <UserModal open={openUserModal} form={form} onCancel={onCancel}/>
     </>
   )
 }

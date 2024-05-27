@@ -3,7 +3,7 @@ export interface Project {
   key: string;
   id: string;
   status: string;
-  warning: boolean;
+  warning: string;
   projectName: string;
   projectPriority: number;
   log?: number;

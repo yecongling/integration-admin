@@ -300,7 +300,7 @@ const Menu: React.FC = () => {
               <Button type="primary" size="small" danger>{record.delFlag === 1 ? "启用" : "停用"}</Button>
             </Popconfirm>
             <Dropdown menu={{items, onClick: (e) => onClickMore(e, record)}}>
-              <Button>更多</Button>
+              <Button size="small">更多</Button>
             </Dropdown>
           </Space>
       )
