@@ -139,13 +139,13 @@ const permission: Array<MockMethod> = [
               {
                 "id": "11236",
                 "name": "sys-project",
-                "path": "/project/terminal",
-                "component": "engine/project/Terminal",
+                "path": "/project/endpoint",
+                "component": "engine/project/Endpoint",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
                   "icon": "HomeOutlined",
-                  "title": "终端管理",
+                  "title": "端点管理",
                   "internal": false
                 }
               }
