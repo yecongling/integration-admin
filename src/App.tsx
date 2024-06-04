@@ -4,8 +4,8 @@ import {useNavigate, useLocation} from "react-router-dom";
 import {App as AntdApp, ConfigProvider, Spin} from "antd"
 import ZhCN from "antd/locale/zh_CN";
 import dayjs from 'dayjs';
-import {RouteItem} from "@/services/system/permission/menuModel";
-import {getMenuList} from "@/services/system/permission/menu.ts";
+import {RouteItem} from "@/apis/system/permission/menuModel";
+import {getMenuList} from "@/apis/system/permission/menu.ts";
 
 import 'dayjs/locale/zh-cn';
 import {Router} from "@/router";

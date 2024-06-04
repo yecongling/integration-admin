@@ -1,6 +1,6 @@
 import {defHttp} from "@/utils/http";
-import {UserApi} from "@/services/system/user/userApi.ts";
-import {UserModel} from "@/services/system/user/userModel.ts";
+import {UserApi} from "@/apis/system/user/userApi.ts";
+import {UserModel} from "@/apis/system/user/userModel.ts";
 
 /**
  * 获取所有用户信息

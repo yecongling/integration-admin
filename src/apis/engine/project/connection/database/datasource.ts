@@ -1,6 +1,6 @@
 import {defHttp} from "@/utils/http";
 import {DataType} from "@/pages/engine/connection/Database/DataType.ts";
-import {datasourceApi} from "@/services/engine/project/connection/database/datasourceApi";
+import {datasourceApi} from "@/apis/engine/project/connection/database/datasourceApi";
 
 /**
  * 获取数据源

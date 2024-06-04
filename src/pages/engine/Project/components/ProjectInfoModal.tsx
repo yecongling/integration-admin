@@ -3,7 +3,7 @@ import {Button, Form, Input, InputRef, message, Modal, Select} from "antd";
 import {ArrowLeftOutlined, CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import {ProjectInfoProps} from "@/pages/engine/project/Design/components/ProjectState.ts";
-import {addProject, updateProject} from "@/services/engine/project/projectMaintain/projectMaintain.ts";
+import {addProject, updateProject} from "@/apis/engine/project/projectMaintain/projectMaintain.ts";
 
 const ProjectInfoModal: React.FC<ProjectInfoProps> = (props) => {
   const inputRef = useRef<InputRef>(null);

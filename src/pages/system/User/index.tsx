@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Button, Card, Col, Form, Input, InputRef, Row, Select, Space, Table} from "antd";
-import {UserModel} from "@/services/system/user/userModel.ts";
-import {getAllUser} from "@/services/system/user/user.ts";
+import {UserModel} from "@/apis/system/user/userModel.ts";
+import {getAllUser} from "@/apis/system/user/user.ts";
 import {ColumnsType} from "antd/es/table";
 import {PlusOutlined, SearchOutlined, SyncOutlined} from "@ant-design/icons";
 import UserModal from "./userModal";

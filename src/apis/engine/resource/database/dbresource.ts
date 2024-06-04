@@ -1,5 +1,5 @@
 import {defHttp} from "@/utils/http";
-import {DBResourceApi} from "@/services/engine/resource/database/dbresourceApi.ts";
+import {DBResourceApi} from "@/apis/engine/resource/database/dbresourceApi.ts";
 import {DBResource} from "@/pages/engine/resource/Database/DBResource.ts";
 
 /**

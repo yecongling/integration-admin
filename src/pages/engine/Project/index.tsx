@@ -38,7 +38,7 @@ import {ColumnsType} from "antd/es/table";
 import {Project} from "./Project.ts";
 import "./index.less";
 import {useNavigate} from "react-router-dom";
-import {deleteProject, getAllProject} from "@/services/engine/project/projectMaintain/projectMaintain.ts";
+import {deleteProject, getAllProject} from "@/apis/engine/project/projectMaintain/projectMaintain.ts";
 import ProjectTypeModal from "@/pages/engine/Project/components/ProjectTypeModal.tsx";
 import ProjectInfoModal from "@/pages/engine/Project/components/ProjectInfoModal.tsx";
 import { TableRowSelection } from "antd/es/table/interface";
@@ -60,7 +60,7 @@ const Design: React.FC = () => {
     onSearch(searchForm.getFieldsValue()).then((result) => {
       setProjectSource(result);
     });
-  }, [searchForm]);
+  }, []);
 
   /**
    * 完成检索

@@ -4,7 +4,7 @@ import "./index.less";
 import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
 import {Image, Menu, MenuProps, Spin, Tooltip} from "antd";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {RouteItem} from "@/services/system/permission/menuModel";
+import {RouteItem} from "@/apis/system/permission/menuModel";
 import {addIcon, getOpenKeys} from "@/utils/util.tsx";
 import useGlobalStore from "@/store/modules/global.ts";
 import favicon from "@/assets/svg/vite.svg";

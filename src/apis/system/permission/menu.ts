@@ -1,11 +1,11 @@
 import {defHttp} from "@/utils/http";
-import {Api} from "@/services/system/permission/menuApi";
+import {Api} from "@/apis/system/permission/menuApi";
 import {
   Directory,
   getMenuListResultModel,
   permission,
   permissionResult
-} from "@/services/system/permission/menuModel";
+} from "@/apis/system/permission/menuModel";
 
 /**
  * 获取菜单列表

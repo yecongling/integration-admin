@@ -1,6 +1,6 @@
 import {RouteObject} from "@/interface";
 import * as Icons from "@ant-design/icons";
-import {permission, RouteItem} from "@/services/system/permission/menuModel";
+import {permission, RouteItem} from "@/apis/system/permission/menuModel";
 import React from "react";
 import SvgIcon from "@/components/SvgIcon";
 import {lazyLoad} from "@/router/lazyLoad.tsx";

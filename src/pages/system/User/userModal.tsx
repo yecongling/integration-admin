@@ -4,7 +4,7 @@ import {
     CheckCircleOutlined,
     CloseCircleOutlined,
 } from "@ant-design/icons";
-import { UserModel } from '@/services/system/user/userModel';
+import { UserModel } from '@/apis/system/user/userModel';
 
 /**
  * 用户信息操作弹窗

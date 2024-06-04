@@ -14,7 +14,7 @@ import {
 import {ColumnsType} from "antd/es/table";
 import TextArea from "antd/es/input/TextArea";
 import {DataType} from "@/pages/engine/connection/Database/DataType.ts";
-import {getDatasource} from "@/services/engine/project/connection/database/datasource";
+import {getDatasource} from "@/apis/engine/project/connection/database/datasource";
 
 const Database: React.FC = () => {
 

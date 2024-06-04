@@ -5,8 +5,8 @@ import {LockOutlined, SecurityScanOutlined, UserOutlined} from "@ant-design/icon
 import "./login.less";
 import filing from '@/assets/images/filing.png';
 import {useNavigate} from "react-router-dom";
-import {login} from "@/services/login/loginApi.ts";
-import {getMenuList} from "@/services/system/permission/menu.ts";
+import {login} from "@/apis/login/loginApi.ts";
+import {getMenuList} from "@/apis/system/permission/menu.ts";
 import useMenuStore from "@/store/modules/menu.ts";
 import {useShallow} from "zustand/react/shallow";
 

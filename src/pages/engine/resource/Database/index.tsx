@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Card, Col, Form, Input, Popconfirm, Row, Select, Space, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {ColumnsType} from "antd/es/table";
-import {permission} from "@/services/system/permission/menuModel.ts";
+import {permission} from "@/apis/system/permission/menuModel.ts";
 import {addIcon} from "@/utils/util.tsx";
 
 const Database: React.FC = () => {

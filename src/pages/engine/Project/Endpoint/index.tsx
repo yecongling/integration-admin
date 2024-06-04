@@ -22,6 +22,7 @@ import {
 import React, {useEffect, useRef, useState} from "react";
 import {Endpoint} from "./Endpoint";
 import {ColumnsType, TableRowSelection} from "antd/es/table/interface";
+import { getEndpoints } from "@/apis/engine/project/endpoint/endpoint";
 
 const Index: React.FC = () => {
   const [searchForm] = Form.useForm();
@@ -35,14 +36,17 @@ const Index: React.FC = () => {
 
   useEffect(() => {
     // 调用查询接口查询表格数据
+    onSearch(searchForm.getFieldsValue()).then((result) => {
+      setEndpointSource(result);
+    })
   }, []);
 
   /**
    * 检索
    * @param values 检索条件
    */
-  const finishSearch = (values: any) => {
-    console.log(values);
+  const onSearch = async (values: any) => {
+    return await getEndpoints(values);
   }
 
   // 定义可多选
@@ -114,7 +118,7 @@ const Index: React.FC = () => {
       <>
         {/* 查询区域 */}
         <Card styles={{body: {height: '100%'}}} style={{marginBottom: '16px'}}>
-          <Form form={searchForm} onFinish={finishSearch} initialValues={{projectType: '-1', mode: '-1'}}>
+          <Form form={searchForm} onFinish={onSearch} initialValues={{projectType: '-1', mode: '-1'}}>
             <Row gutter={24}>
               <Col span={6}>
                 <Form.Item label="端点名称" name="name" style={{marginBottom: 0}}>
@@ -130,10 +134,10 @@ const Index: React.FC = () => {
                 <Form.Item label="模式" name="mode" style={{marginBottom: 0}}>
                   <Select options={[
                     {value: '-1', label: '请选择模式', disabled: true},
-                    {value: '1', label: 'IN'},
-                    {value: '2', label: 'IN_OUT'},
-                    {value: '3', label: 'OUT'},
-                    {value: '4', label: 'OUT_IN'}
+                    {value: 'IN', label: 'IN'},
+                    {value: 'IN_OUT', label: 'IN_OUT'},
+                    {value: 'OUT', label: 'OUT'},
+                    {value: 'OUT_IN', label: 'OUT_IN'}
                   ]}/>
                 </Form.Item>
               </Col>

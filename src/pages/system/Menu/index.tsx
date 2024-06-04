@@ -34,9 +34,9 @@ import {
   getDirectoryMenu, getMenus,
   updatePermission,
   validateFields
-} from "@/services/system/permission/menu.ts";
+} from "@/apis/system/permission/menu.ts";
 import {addIcon, handlePermission} from "@/utils/util.tsx";
-import {Directory, permission, permissionResult} from "@/services/system/permission/menuModel";
+import {Directory, permission, permissionResult} from "@/apis/system/permission/menuModel";
 import IconPicker from "@/components/menu/icon/IconPicker.tsx";
 import {TableRowSelection} from "antd/es/table/interface";
 import {MenuInfo} from "rc-menu/lib/interface";
