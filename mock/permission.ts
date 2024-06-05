@@ -148,6 +148,19 @@ const permission: Array<MockMethod> = [
                   "title": "端点管理",
                   "internal": false
                 }
+              },
+              {
+                "id": "12236",
+                "name": "sys-project",
+                "path": "/engine/endpointType",
+                "component": "engine/Project/EndpointType",
+                "route": "1",
+                "meta": {
+                  "keepAlive": false,
+                  "icon": "ProductOutlined",
+                  "title": "端点类型管理",
+                  "internal": false
+                }
               }
             ]
           },
