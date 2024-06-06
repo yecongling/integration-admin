@@ -216,6 +216,9 @@ const Menu: React.FC = () => {
     },
   ];
 
+  /**
+   * 获取所有菜单
+   */
   const getAllMenus = async () => {
     const formData = form.getFieldsValue();
     const result = await getMenus(formData);
