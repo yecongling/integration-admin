@@ -23,7 +23,7 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
         if (endpointRef?.current) {
             endpointRef.current.focus();
         }
-    }, [])
+    }, [open])
 
     /**
      * 查询支持的端点类型数据
@@ -52,6 +52,7 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
     if (chineseCharPattern.test(value)) {
       return Promise.reject("输入内容不能包含中文字符");
     }
+    setStatus("success");
     return Promise.resolve();
   };
 
