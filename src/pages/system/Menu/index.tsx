@@ -255,7 +255,8 @@ const Menu: React.FC = () => {
                     {value: '-1', label: '全部'},
                     {value: '0', label: '一级菜单'},
                     {value: '1', label: '字菜单'},
-                    {value: '2', label: '按钮'},
+                    {value: '2', label: '子路由'},
+                    {value: '3', label: '按钮（暂不支持）', disabled: true}
                   ]}/>
                 </Form.Item>
               </Col>
@@ -298,7 +299,7 @@ const Menu: React.FC = () => {
           </section>
         </Card>
         {/* 编辑弹窗 */}
-        <MenuModal menuData={menuData} open={open} onCancel={onCancel} afterOpenChange={handleAfterOpen}/>
+        <MenuModal setOpen={setOpen} menuData={menuData} open={open} onCancel={onCancel} afterOpenChange={handleAfterOpen}/>
       </>
   )
 }

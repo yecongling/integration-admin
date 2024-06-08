@@ -20,7 +20,6 @@ import {
   FormInstance,
   Input,
   InputNumber,
-  InputRef,
   Modal,
   ModalProps,
   Popover,
@@ -34,7 +33,7 @@ import React, { useEffect, useState } from "react";
 const MenuModal: React.FC<ModalProps & MenuModalProps> = (
   props: ModalProps & MenuModalProps
 ) => {
-  const { open, menuData, inputRef, afterOpenChange, onCancel } = props;
+  const { open, menuData, afterOpenChange, setOpen } = props;
   const [showParent, setShow] = useState(true);
   // 目录数据
   const [treeData, setTreeData] = useState<Directory[]>([]);
@@ -44,6 +43,12 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
   useEffect(() => {
     if (open) {
       getDirectory();
+      // 判定显示隐藏
+      if (menuData && menuData.getFieldValue("menuType") === 0) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
     }
   }, [open]);
 
@@ -63,7 +68,7 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
    * @param e
    */
   const changeMenuType = (e: RadioChangeEvent) => {
-    if (e.target.value === 0 || e.target.value === 2) {
+    if (e.target.value === 0) {
       setShow(false);
       return;
     }
@@ -89,7 +94,7 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
         if (result.code == 200) {
           message.success("保存成功");
           // 刷新
-        //   setOpen(false);
+          setOpen(false);
         }
       } else {
         menuData.setFields([
@@ -119,7 +124,6 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
         okButtonProps={{ icon: <CheckCircleOutlined /> }}
         cancelButtonProps={{ icon: <CloseCircleOutlined /> }}
         cancelText="取消"
-        style={{ top: "20px" }}
         width={800}
         onOk={() => {
           menuData.validateFields().then((values) => {
@@ -127,7 +131,9 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
             validate(values);
           });
         }}
-        onCancel={onCancel}
+        onCancel={() => {
+          setOpen(false);
+        }}
         afterOpenChange={afterOpenChange}
         styles={{ body: { padding: "10px 40px" } }}
       >
@@ -152,7 +158,9 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
               <Radio value={0}>一级菜单</Radio>
               <Radio value={1}>子菜单</Radio>
               <Radio value={2}>子路由</Radio>
-              <Radio value={3}>按钮</Radio>
+              <Radio value={3} disabled>
+                按钮
+              </Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item
@@ -160,7 +168,7 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
             label="菜单名称"
             rules={[{ required: true, message: "请输入菜单名称！" }]}
           >
-            <Input ref={inputRef} allowClear placeholder="菜单名称" />
+            <Input autoFocus allowClear placeholder="菜单名称" />
           </Form.Item>
           {showParent && (
             <Form.Item
@@ -231,5 +239,5 @@ export default MenuModal;
 // 菜单弹窗属性
 export interface MenuModalProps {
   menuData: FormInstance;
-  inputRef?: React.RefObject<InputRef>;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }

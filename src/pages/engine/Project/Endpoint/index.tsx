@@ -23,11 +23,17 @@ import React, {useEffect, useRef, useState} from "react";
 import {Endpoint} from "./Endpoint";
 import {ColumnsType, TableRowSelection} from "antd/es/table/interface";
 import { getEndpoints } from "@/apis/engine/project/endpoint/endpoint";
+import EndpointModal from "./EndpointModal";
 
 const Index: React.FC = () => {
+  // 检索表单
   const [searchForm] = Form.useForm();
+  // 弹窗需要的表单数据
+  const [endpointData] = Form.useForm();
   const endpointName = useRef<InputRef>(null);
 
+  // 窗口打开关闭
+  const [open, setOpen] = useState<boolean>(false);
   // 表格数据
   const [endpointSource, setEndpointSource] = useState<Endpoint[]>([]);
   // 表格中选中的行
@@ -114,6 +120,13 @@ const Index: React.FC = () => {
     },
   ]
 
+  /**
+   * 新增
+   */
+  const onAdd = ()=> {
+    setOpen(true);
+  }
+
   return (
       <>
         {/* 查询区域 */}
@@ -154,8 +167,7 @@ const Index: React.FC = () => {
             <Row>
               <Col span={22}>
                 <Space wrap>
-                  <Button type="primary" onClick={() => {
-                  }} icon={<PlusOutlined/>}>新建</Button>
+                  <Button type="primary" onClick={onAdd} icon={<PlusOutlined/>}>新增</Button>
                   <Button type="primary" onClick={() => {
                     alert('批量操作')
                   }} icon={<DeleteOutlined style={{color: selectRow.length === 0 ? '#ccc' : 'red'}}/>}
@@ -191,6 +203,8 @@ const Index: React.FC = () => {
                 dataSource={endpointSource}
             /></section>
         </Card>
+        {/* 编辑弹窗 */}
+        <EndpointModal open={open} setOpen={setOpen} endpointData={endpointData}/>
       </>
   );
 }

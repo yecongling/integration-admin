@@ -13,6 +13,7 @@ import useMenuStore from "@/store/modules/menu.ts";
 import {useShallow} from "zustand/react/shallow";
 
 const LeftMenu: React.FC = memo(() => {
+  // 获取状态库中登录后请求的菜单
   const {menus} = useMenuStore(
       useShallow((state) => ({
         menus: state.menus
@@ -74,7 +75,7 @@ const LeftMenu: React.FC = memo(() => {
     const route = searchRoute(key, menus);
     const title = route.meta?.title;
     if (title) {
-      document.title = title;
+      document.title = title + '-integration';
     }
   }, []);
 
@@ -86,9 +87,13 @@ const LeftMenu: React.FC = memo(() => {
     if (!route || Object.keys(route).length === 0) {
       return;
     }
+    const title = route.meta?.title;
+    if (title) {
+      document.title = title + '-integration';
+    }
     !collapse && setOpenKeys(openKey);
     setSelectedKeys(openKey.concat([pathname]));
-  }, [collapse, pathname]);
+  }, [collapse, pathname, menus]);
 
   // 设置当前展开的 subMenu
   const onOpenChange = useCallback((openKeys: string[]) => {
