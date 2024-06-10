@@ -605,7 +605,7 @@ const permission: Array<MockMethod> = [
               }
             ]
           },
-          /*{
+          {
             "id": "11273553239",
             "name": "sys-emr",
             "path": "/editor",
@@ -658,7 +658,7 @@ const permission: Array<MockMethod> = [
               "internal": false
             },
             "children": []
-          },*/
+          },
         ]
       }
     }

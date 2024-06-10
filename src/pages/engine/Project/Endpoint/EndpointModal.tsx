@@ -110,6 +110,7 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
               { required: true, message: "端点名称必填" },
               { validator: noChineseCharacters, message: "端点名称不能为中文" },
             ]}
+            style={{marginTop: '16px'}}
           >
             <Input ref={endpointRef} autoFocus allowClear onBlur={() => handleBlur("name")} />
           </Form.Item>
@@ -122,6 +123,9 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
           <Form.Item name="type" label="描述">
             <Input.TextArea allowClear showCount/>
           </Form.Item>
+          <h3 style={{ borderBottom: "1px solid #ccc" }}>
+            <SnippetsOutlined /> 属性
+          </h3>
         </Form>
       </Modal>
     </>
