@@ -11,7 +11,7 @@ import { UserModel } from '@/apis/system/user/userModel';
  */
 const UserModal: React.FC<ModalProps & UserModel> = (props: ModalProps & UserModel) => {
 
-    const { open, form, onCancel} = props;
+    const { open, onCancel} = props;
 
     return (
         <Modal
@@ -30,7 +30,6 @@ const UserModal: React.FC<ModalProps & UserModel> = (props: ModalProps & UserMod
             onCancel={onCancel}
         >
             <Form
-                form={form}
                 layout="horizontal"
                 name="basic"
                 size="middle"

@@ -11,7 +11,8 @@ const user: Array<MockMethod> = [
         data: [
           {
             key: '12',
-            username: '叶丛林',
+            realName: '叶丛林',
+            username: 'admin',
             role: 'admin'
           }
         ]
