@@ -36,7 +36,7 @@ jobs:
           PORT: ${{ secrets.ALIYUN_PORT }}
           PRIVATE_KEY: ${{ secrets.ALIYUN_PRIVATE_KEY }}
         run: |
-          echo "$PRIVATE_KEY" > private_key.pem
+          echo "${{ secrets.ALIYUN_PRIVATE_KEY }}" | tr -d '\r' > private_key.pem
           chmod 600 private_key.pem
           scp -i private_key.pem -r dist/* $USERNAME@$HOST:/work/integration
           ssh -i private_key.pem $USERNAME@$HOST "sudo systemctl reload nginx"
