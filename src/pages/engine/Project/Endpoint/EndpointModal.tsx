@@ -43,11 +43,11 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
 
   /**
    * 校验不能输入中文
-   * @param rule 校验规则
+   * @param _rule 校验规则
    * @param value 值
    * @returns 结果
    */
-  const noChineseCharacters = (rule: RuleObject, value: string) => {
+  const noChineseCharacters = (_rule: RuleObject, value: string) => {
     const chineseCharPattern = /[\u4e00-\u9fa5]/; // 匹配中文字符的正则表达式
     if (chineseCharPattern.test(value)) {
       return Promise.reject("输入内容不能包含中文字符");
