@@ -39,5 +39,5 @@ jobs:
           echo "${{ secrets.ALIYUN_PRIVATE_KEY }}" | tr -d '\r' > private_key.pem
           chmod 600 private_key.pem
           scp -i private_key.pem -r integration/* $USERNAME@$HOST:/work/integration
-          ssh -i private_key.pem $USERNAME@$HOST "sudo systemctl reload nginx"
+          ssh -i private_key.pem $USERNAME@$HOST "nginx -s reload"
           rm private_key.pem
