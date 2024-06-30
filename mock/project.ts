@@ -1,5 +1,5 @@
 import {MockMethod} from "vite-plugin-mock";
-import {Project} from "../src/pages/engine/Project/Project";
+import {Project} from "../src/pages/engine/project/Project";
 import {Result} from "../src/types/axios";
 
 const projectData: Project[] = [

@@ -1,4 +1,4 @@
-import { Endpoint } from "@/pages/engine/Project/Endpoint/Endpoint"
+import { Endpoint } from "@/pages/engine/project/Endpoint/Endpoint"
 import { defHttp } from "@/utils/http"
 import { EndpointApi } from "./endpointApi"
 

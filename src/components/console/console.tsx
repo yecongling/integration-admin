@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Modal} from "antd";
 import Draggable, {DraggableData, DraggableEvent} from 'react-draggable';
 import './console.less';
-import {io, Socket} from "socket.io-client";
+import {io} from "socket.io-client";
 
 /**
  * 前端使用的SQL、错误监控台
@@ -13,7 +13,7 @@ const Console: React.FC = () => {
   const [disabled, setDisabled] = useState(true);
   const draggleRef = useRef<HTMLDivElement>(null);
   // 控制台需要显示的消息
-  const [messges, setMessges] = useState<any[]>([]);
+  const [message, setMessage] = useState<any[]>([]);
   // 初始化的时候绑定键盘事件
   useEffect(() => {
     // 监听键盘事件
@@ -121,7 +121,7 @@ const Console: React.FC = () => {
                 </Draggable>
             )}
         >
-          {messges}
+          {message}
           console监控台，这里填写监控到的执行的SQL
           console监控台，这里填写监控到的执行的SQL
           console监控台，这里填写监控到的执行的SQL

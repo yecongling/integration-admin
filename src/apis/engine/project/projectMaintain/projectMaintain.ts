@@ -1,4 +1,4 @@
-import {Project} from "@/pages/engine/Project/Project";
+import {Project} from "@/pages/engine/project/Project";
 import {defHttp} from "@/utils/http";
 import {ProjectApi} from "@/apis/engine/project/projectMaintain/projectApi.ts";
 import {Result} from "@/types/global";

@@ -110,7 +110,7 @@ const permission: Array<MockMethod> = [
                 "id": "11335",
                 "name": "sys-project",
                 "path": "/engine/project",
-                "component": "engine/Project",
+                "component": "engine/project/Project.tsx",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
@@ -124,7 +124,7 @@ const permission: Array<MockMethod> = [
                     "id": "16335",
                     "name": "sys-project-design",
                     "path": "/project/designer",
-                    "component": "engine/Project/Designer",
+                    "component": "engine/project/Designer",
                     "route": "1",
                     "meta": {
                       "keepAlive": false,
@@ -140,7 +140,7 @@ const permission: Array<MockMethod> = [
                 "id": "11236",
                 "name": "sys-project",
                 "path": "/engine/endpoint",
-                "component": "engine/Project/Endpoint",
+                "component": "engine/project/Endpoint",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
@@ -153,7 +153,7 @@ const permission: Array<MockMethod> = [
                 "id": "12236",
                 "name": "sys-project",
                 "path": "/engine/endpointType",
-                "component": "engine/Project/EndpointType",
+                "component": "engine/project/EndpointType",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,

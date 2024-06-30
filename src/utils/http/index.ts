@@ -188,7 +188,7 @@ function createAxios(opts?: Partial<CreateAxiosOptions>) {
               // 格式化提交参数时间
               formatDate: true,
               // 异常消息提示类型
-              errorMessageMode: 'message',
+              errorMessageMode: 'modal',
               // 成功消息提示类型
               successMessageMode: 'success',
               // 接口地址（默认）

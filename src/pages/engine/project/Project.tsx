@@ -39,8 +39,8 @@ import {Project} from "./Project.ts";
 import "./index.less";
 import {useNavigate} from "react-router-dom";
 import {deleteProject, getAllProject} from "@/apis/engine/project/projectMaintain/projectMaintain.ts";
-import ProjectTypeModal from "@/pages/engine/Project/components/ProjectTypeModal.tsx";
-import ProjectInfoModal from "@/pages/engine/Project/components/ProjectInfoModal.tsx";
+import ProjectTypeModal from "@/pages/engine/project/components/ProjectTypeModal.tsx";
+import ProjectInfoModal from "@/pages/engine/project/components/ProjectInfoModal.tsx";
 import { TableRowSelection } from "antd/es/table/interface";
 
 const Design: React.FC = () => {
@@ -55,7 +55,7 @@ const Design: React.FC = () => {
   const navigate = useNavigate();
   // 表格中选中的行
   const [selectRow, setSelectRow] = useState<Project[]>([]);
-  
+
   useEffect(() => {
     onSearch(searchForm.getFieldsValue()).then((result) => {
       setProjectSource(result);

@@ -18,8 +18,8 @@ import {
   TableOutlined,
   UndoOutlined
 } from "@ant-design/icons";
-import Setting from "@/pages/engine/Project/Designer/Setting";
-import Endpoint from "@/pages/engine/Project/Designer/components/server/Endpoint";
+import Setting from "@/pages/engine/project/Designer/Setting";
+import Endpoint from "@/pages/engine/project/Designer/components/server/Endpoint";
 
 const Designer: React.FC = () => {
   const navigate = useNavigate();
@@ -96,13 +96,13 @@ const Designer: React.FC = () => {
       {contextHolder}
       <Endpoint open={openEndpointModal} onCancel={cancelEndpointModal}/>
       <Row style={{height: '100%'}} gutter={6}>
-        <Col span={4}>
+        <Col span={5}>
           <section style={{height: '100%', padding: '10px'}}>
             <Input.Search autoFocus placeholder="通过名称检索" enterButton onSearch={() => alert("检索")}/>
             <Tabs tabBarStyle={{marginTop: '6px'}} items={items}/>
           </section>
         </Col>
-        <Col span={20} style={{borderLeft: '1px solid #f5f5f5'}}>
+        <Col span={19} style={{borderLeft: '1px solid #f5f5f5'}}>
           <Row className="designer-toolbar">
             <section style={{
               height: '50px',

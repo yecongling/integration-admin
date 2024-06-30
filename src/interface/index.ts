@@ -4,6 +4,7 @@ export interface MetaProps {
     keepAlive?: boolean;
     requiresAuth?: boolean;
     title: string;
+    isLeaf?: string;
     key?: string;
 }
 
