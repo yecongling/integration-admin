@@ -32,7 +32,6 @@
     "recharts": "^2.10.3",
     "screenfull": "^6.0.2",
     "socket.io-client": "^4.7.5",
-    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-mock": "^2.9.6",
     "zustand": "^4.5.2"
   },
