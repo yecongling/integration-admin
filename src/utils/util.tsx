@@ -80,3 +80,13 @@ export function hasIntersection(arr1: any[], arr2: any[]): boolean {
   const set1 = new Set(arr1);
   return arr2.some(item => set1.has(item));
 }
+
+/**
+ * 根据路径生成面包屑的路径内容
+ * @param routerList 菜单集合
+ * @param pathname 路径
+ * @returns 面包屑内容集合
+ */
+export function patchBreadcrumb(routerList: RouteItem[], pathname: string): Record<string, any>[] {
+  return [];
+}

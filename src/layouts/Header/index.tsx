@@ -64,7 +64,7 @@ const Header: React.FC = () => {
       disabled: false,
       onClick: function () {
         modal.confirm({
-          title: 'Confirm',
+          title: '退出登录',
           icon: <ExclamationCircleOutlined/>,
           content: '确认退出登录吗？',
           okText: '确认',

@@ -1,27 +1,27 @@
-import {useRoutes, Navigate} from "react-router-dom";
-import React, {Suspense, useState, useEffect} from 'react'
-import {App, Skeleton} from "antd";
-import {antdUtils} from "@/utils/antd.ts";
-import {lazyLoad} from "@/router/lazyLoad.tsx";
-import {RouteObject} from "@/interface";
-import {handleRouter} from "@/utils/util"
+import { useRoutes, Navigate } from "react-router-dom";
+import React, { Suspense, useState, useEffect } from 'react'
+import { App, Skeleton } from "antd";
+import { antdUtils } from "@/utils/antd.ts";
+import { lazyLoad } from "@/router/lazyLoad.tsx";
+import { RouteObject } from "@/interface";
+import { handleRouter } from "@/utils/util"
 import useMenuStore from "@/store/modules/menu.ts";
 
 const errorRoutes: RouteObject[] = [{
     path: '*',
     auth: false,
-    component: () => <Navigate replace to="/404"/>
+    component: () => <Navigate replace to="/404" />
 },
-    {
-        path: '/404',
-        auth: false,
-        component: lazyLoad('404.tsx').type
-    },
-    {
-        path: '/500',
-        auth: false,
-        component: lazyLoad('500.tsx').type
-    }]
+{
+    path: '/404',
+    auth: false,
+    component: lazyLoad('404.tsx').type
+},
+{
+    path: '/500',
+    auth: false,
+    component: lazyLoad('500.tsx').type
+}]
 
 const routes: RouteObject[] = [
     {
@@ -117,13 +117,13 @@ const generateRouter = (routers: any) => {
         if (item.index) {
             return item;
         }
-        item.element = (<Suspense fallback={<Skeleton/>}>
-            <item.component/>
+        item.element = (<Suspense fallback={<Skeleton />}>
+            <item.component />
         </Suspense>);
         if (item.children) {
             item.children = generateRouter(item.children)
             if (item.children.length) {
-                item.children.unshift({index: true, element: <Navigate to={item.children[0].path} replace/>})
+                item.children.unshift({ index: true, element: <Navigate to={item.children[0].path} replace /> })
             }
         }
         return item
@@ -131,7 +131,7 @@ const generateRouter = (routers: any) => {
 }
 
 const Router = () => {
-    const {notification, message, modal} = App.useApp();
+    const { notification, message, modal } = App.useApp();
     useEffect(() => {
         antdUtils.setMessageInstance(message);
         antdUtils.setNotificationInstance(notification);
@@ -140,7 +140,7 @@ const Router = () => {
 
     // 从store中获取后台获取到的路由
     const [route, setRoute] = useState([...routes])
-    const {menus} = useMenuStore();
+    const { menus } = useMenuStore();
     useEffect(() => {
         route[0].children = [...handleRouter(menus), ...errorRoutes];
         setRoute([...route]);
@@ -162,4 +162,4 @@ const checkRouterAuth = (path: string) => {
 //
 // }
 
-export {Router, checkRouterAuth}
+export { Router, checkRouterAuth }
