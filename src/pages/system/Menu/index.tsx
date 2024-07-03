@@ -197,7 +197,7 @@ const Menu: React.FC = () => {
       fixed: 'right',
       align: 'center',
       render: (_text, record) => (
-          <Space size="small">
+          <Space size={0}>
             <Button type="link" size="small" onClick={() => edit(record)}>编辑</Button>
             <Popconfirm
                 title={record.delFlag === 1 ? "启用菜单" : "停用菜单"}

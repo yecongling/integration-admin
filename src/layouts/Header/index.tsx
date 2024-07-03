@@ -13,11 +13,11 @@ import {
   UserOutlined
 } from "@ant-design/icons";
 import avatar from "@/assets/images/avatar.png";
-// import BreadcrumbNav from "@/components/header/BreadcrumbNav";
+import BreadcrumbNav from "@/components/header/BreadcrumbNav";
 import FullScreen from "@/components/header/FullScreen";
 import {useNavigate} from "react-router-dom";
-import Setting from "@/components/header/Setting.tsx";
-/*import Setting from "@/component/header/Setting.tsx";*/
+import Setting from "@/components/header/Setting";
+// import FloatBtn from "@/components/header/FloatBtn.tsx";
 
 const Header: React.FC = () => {
   const [modal, contextHolder] = Modal.useModal();
@@ -85,7 +85,7 @@ const Header: React.FC = () => {
   return (
     <>
       <Layout.Header
-        className="ant-layout-header dis-fl jc-fe"
+        className="ant-layout-header dis-fl jc-sb"
         style={{
           padding: '0 16px 0 0',
           height: '50px',
@@ -93,7 +93,7 @@ const Header: React.FC = () => {
           borderBottom: ' 1px solid #e9edf0',
           backgroundColor: '#fff',
         }}>
-        {/*<BreadcrumbNav/>*/}
+        <div className="dis-fl js-sb ai-ct"><BreadcrumbNav/></div>
         <div className="dis-fl js-sb ai-ct toolbox">
           <Space size="large">
             <Tooltip placement="bottom" title="搜索">

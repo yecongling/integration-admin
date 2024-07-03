@@ -7,15 +7,14 @@ const BreadcrumbNav: React.FC = () => {
     <>
       <Breadcrumb items={[
         {
-          title: 'Location',
+          title: '导航条',
         },
         {
           key: 'home',
           title: <Link to="/home">首页</Link>,
         }
       ]} style={{
-        marginLeft: '44px',
-        position: 'absolute'
+        marginLeft: '24px'
       }}>
       </Breadcrumb>
     </>
