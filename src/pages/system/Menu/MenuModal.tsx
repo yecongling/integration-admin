@@ -6,7 +6,7 @@ import {
 } from "@/apis/system/permission/menu";
 import {
   Directory,
-  permission,
+  MenuModel,
   permissionResult,
 } from "@/apis/system/permission/menuModel";
 import IconPicker from "@/components/menu/icon/IconPicker";
@@ -80,7 +80,7 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
    *
    * @param values
    */
-  const validate = async (values: permission) => {
+  const validate = async (values: MenuModel) => {
     try {
       const res = validateFields();
       if (res.success) {

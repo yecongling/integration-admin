@@ -3,7 +3,7 @@ import {Api} from "@/apis/system/permission/menuApi";
 import {
   Directory,
   getMenuListResultModel,
-  permission,
+  MenuModel,
   permissionResult
 } from "@/apis/system/permission/menuModel";
 
@@ -27,7 +27,7 @@ export const getMenuList = (params: any) => {
  * @param params
  */
 export const getMenus = (params: any) => {
-  return defHttp.post<permission[]>({url: Api.getAllMenus, data: params});
+  return defHttp.post<MenuModel[]>({url: Api.getAllMenus, data: params});
 }
 
 /**
@@ -49,7 +49,7 @@ export function validateFields() {
  * 添加菜单
  * @param param
  */
-export const addPermission = (param: permission) => {
+export const addPermission = (param: MenuModel) => {
   return defHttp.post<permissionResult>({url: Api.addPermission, data: param}, {isTransformResponse: false});
 }
 
@@ -57,7 +57,7 @@ export const addPermission = (param: permission) => {
  * 编辑菜单
  * @param param
  */
-export const updatePermission = (param: permission) => {
+export const updatePermission = (param: MenuModel) => {
   return defHttp.post<permissionResult>({url: Api.updatePermission, data: param}, {isTransformResponse: false});
 }
 

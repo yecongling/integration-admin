@@ -19,7 +19,7 @@ export interface RouteItem {
 /**
  * 菜单
  */
-export interface permission {
+export interface MenuModel {
   id: string;
   parentId: string;
   name: string;
@@ -43,12 +43,12 @@ export interface permission {
   ruleFlag: number;
   status: string;
   internalOrExternal: boolean;
-  children?: permission[]
+  children?: MenuModel[]
 }
 
 export type permissionResult = {
   code: number;
-  data: permission[]
+  data: MenuModel[]
 }
 
 /**

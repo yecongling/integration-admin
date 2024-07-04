@@ -23,7 +23,7 @@ import {
   deletePermission,getMenus,
 } from "@/apis/system/permission/menu.ts";
 import {addIcon, handlePermission} from "@/utils/util.tsx";
-import {permission} from "@/apis/system/permission/menuModel";
+import {MenuModel} from "@/apis/system/permission/menuModel";
 import {TableRowSelection} from "antd/es/table/interface";
 import {MenuInfo} from "rc-menu/lib/interface";
 import MenuModal from "./MenuModal";
@@ -40,11 +40,11 @@ const Menu: React.FC = () => {
   const [open, setOpen] = useState(false);
   
   // 表格数据
-  const [tableData, setTableData] = useState<permission[]>([]);
+  const [tableData, setTableData] = useState<MenuModel[]>([]);
   // 表格加载中
   const [loading, setLoading] = useState(true);
   // 表格中选中的行
-  const [selectRow, setSelectRow] = useState<permission[]>([]);
+  const [selectRow, setSelectRow] = useState<MenuModel[]>([]);
 
   // const [checkStrictly, setCheckStrictly] = useState<boolean>(false);
 
@@ -131,13 +131,13 @@ const Menu: React.FC = () => {
    * @param e
    * @param param
    */
-  const onClickMore = (e: MenuInfo, param: permission) => {
+  const onClickMore = (e: MenuInfo, param: MenuModel) => {
     console.log(e)
     console.log(param)
   }
 
   // 定义列
-  const columns: ColumnsType<permission> = [
+  const columns: ColumnsType<MenuModel> = [
     {
       title: '菜单名称',
       dataIndex: 'name',
@@ -223,7 +223,7 @@ const Menu: React.FC = () => {
     const formData = form.getFieldsValue();
     const result = await getMenus(formData);
     if (result) {
-      const tableData: permission[] = [...result];
+      const tableData: MenuModel[] = [...result];
       // 处理数据，当children没有时不要这个节点
       handlePermission(tableData);
       setTableData(tableData);
@@ -232,7 +232,7 @@ const Menu: React.FC = () => {
   }
 
   // 定义可多选
-  const rowSelection: TableRowSelection<permission> = {
+  const rowSelection: TableRowSelection<MenuModel> = {
     onChange: (_selectedRowKeys, selectedRows) => {
       setSelectRow(selectedRows);
     }

@@ -1,6 +1,6 @@
 import { RouteObject } from "@/interface";
 import * as Icons from "@ant-design/icons";
-import { permission, RouteItem } from "@/apis/system/permission/menuModel";
+import { MenuModel, RouteItem } from "@/apis/system/permission/menuModel";
 import React from "react";
 import SvgIcon from "@/components/SvgIcon";
 import { lazyLoad } from "@/router/lazyLoad.tsx";
@@ -56,8 +56,8 @@ export const getOpenKeys = (path: string) => {
  *
  * @param permissions 菜单数据
  */
-export const handlePermission = (permissions: permission[]) => {
-  permissions.forEach((item: permission) => {
+export const handlePermission = (permissions: MenuModel[]) => {
+  permissions.forEach((item: MenuModel) => {
     if (item.children && item.children.length > 0) {
       handlePermission(item.children);
     } else {
