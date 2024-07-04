@@ -9,9 +9,7 @@ export default defineConfig({
   plugins: [
     react(),
     terser(),
-    viteCompression({
-      algorithm: "gzip",
-    }),
+    viteCompression(),
     viteMockServe({
       mockPath: "./mock/", //设置模拟数据的存储文件夹
       logger: true, // 是否在控制台显示请求日志
@@ -20,7 +18,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    sourcemap: true,
+    // sourcemap: true,
     outDir: "integration",
     rollupOptions: {
       output: {
