@@ -24,10 +24,12 @@ const BreadcrumbNav: React.FC = () => {
   ]);
   useEffect(() => {
     // 将menu里面的内容和path进行对照获取
-    console.log('菜单数据条数', menus.length)
     const breadItems = patchBreadcrumb(menus, location.pathname);
+    if (breadItems.length > 0) {
+      setItems(breadItems);
+    }
     // 设置面包屑内容
-  }, [location.pathname]);
+  }, [location.pathname, menus]);
 
   // 组件的DOM内容
   return (
