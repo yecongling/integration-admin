@@ -1,12 +1,19 @@
-import { defineConfig } from "vite";
+import {defineConfig} from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { viteMockServe } from "vite-plugin-mock";
-
+import {viteMockServe} from "vite-plugin-mock";
+import {terser} from "rollup-plugin-terser";
+import {imagetools} from "vite-imagetools";
+import viteCompression from "vite-plugin-compression";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    terser(),
+    imagetools(),
+    viteCompression({
+      algorithm: "gzip",
+    }),
     viteMockServe({
       mockPath: "./mock/", //设置模拟数据的存储文件夹
       logger: true, // 是否在控制台显示请求日志
