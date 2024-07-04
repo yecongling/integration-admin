@@ -1,9 +1,9 @@
-import {RouteObject} from "@/interface";
+import { RouteObject } from "@/interface";
 import * as Icons from "@ant-design/icons";
-import {permission, RouteItem} from "@/apis/system/permission/menuModel";
+import { permission, RouteItem } from "@/apis/system/permission/menuModel";
 import React from "react";
 import SvgIcon from "@/components/SvgIcon";
-import {lazyLoad} from "@/router/lazyLoad.tsx";
+import { lazyLoad } from "@/router/lazyLoad.tsx";
 
 /**
  * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断
@@ -11,12 +11,15 @@ import {lazyLoad} from "@/router/lazyLoad.tsx";
  * @param newArr
  * @return array
  */
-export function handleRouter(routerList: RouteItem[], newArr: RouteObject[] = []) {
+export function handleRouter(
+  routerList: RouteItem[],
+  newArr: RouteObject[] = []
+) {
   routerList.forEach((item: RouteItem) => {
     const menu: RouteObject = {};
-    if (typeof item === "object" && item.path && item.route == '1') {
-      menu['path'] = item.path
-      menu['component'] = lazyLoad(item.component).type;
+    if (typeof item === "object" && item.path && item.route == "1") {
+      menu["path"] = item.path;
+      menu["component"] = lazyLoad(item.component).type;
       newArr.push(menu);
     }
     if (item.children && item.children.length) {
@@ -39,7 +42,7 @@ export function handleRouter(routerList: RouteItem[], newArr: RouteObject[] = []
 export const getOpenKeys = (path: string) => {
   let newStr: string = "";
   const newArr: any[] = [];
-  const arr = path.split("/").map(i => "/" + i);
+  const arr = path.split("/").map((i) => "/" + i);
   for (let i = 1; i < arr.length - 1; i++) {
     newStr += arr[i];
     newArr.push(newStr);
@@ -59,14 +62,14 @@ export const handlePermission = (permissions: permission[]) => {
     } else {
       delete item.children;
     }
-  })
-}
+  });
+};
 
 // 动态渲染 Icon 图标
 const customIcons: { [key: string]: any } = Icons;
 export const addIcon = (name: string) => {
-  if (name.startsWith('icon')) {
-    return <SvgIcon type={name}/>;
+  if (name.startsWith("icon")) {
+    return <SvgIcon type={name} />;
   }
   return React.createElement(customIcons[name]);
 };
@@ -78,7 +81,7 @@ export const addIcon = (name: string) => {
  */
 export function hasIntersection(arr1: any[], arr2: any[]): boolean {
   const set1 = new Set(arr1);
-  return arr2.some(item => set1.has(item));
+  return arr2.some((item) => set1.has(item));
 }
 
 /**
@@ -87,6 +90,23 @@ export function hasIntersection(arr1: any[], arr2: any[]): boolean {
  * @param pathname 路径
  * @returns 面包屑内容集合
  */
-export function patchBreadcrumb(routerList: RouteItem[], pathname: string): Record<string, any>[] {
+export function patchBreadcrumb(
+  routerList: RouteItem[],
+  pathname: string
+): Record<string, any>[] {
+  if (routerList) {
+    for (let i = 0; i < routerList.length; i++) {
+      const item = routerList[i];
+      if (item.path === pathname) {
+        return [item];
+      }
+      if (item.children && item.children.length > 0) {
+        const result = patchBreadcrumb(item.children, pathname);
+        if (result.length > 0) {
+          return [item, ...result];
+        }
+      }
+    }
+  }
   return [];
 }
