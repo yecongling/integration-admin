@@ -4,6 +4,7 @@ import { permission, RouteItem } from "@/apis/system/permission/menuModel";
 import React from "react";
 import SvgIcon from "@/components/SvgIcon";
 import { lazyLoad } from "@/router/lazyLoad.tsx";
+import { Link } from "react-router-dom";
 
 /**
  * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断
@@ -94,19 +95,27 @@ export function patchBreadcrumb(
   routerList: RouteItem[],
   pathname: string
 ): Record<string, any>[] {
+  const result: Record<string, any>[] = [];
   if (routerList) {
     for (let i = 0; i < routerList.length; i++) {
       const item = routerList[i];
-      if (item.path === pathname) {
-        return [item];
+      if (pathname.includes(item.path)) {
+        const pth: Record<string, any> = {};
+        const icon: JSX.Element = addIcon(item.meta.icon as any);
+        pth['title'] = (<>{icon}<span style={{padding: "0 4px"}}>{item.meta.title}</span></>);
+        pth['key'] = item.path;
+        if (pathname === item.path) {
+          pth['title'] = (<>{icon}<Link to={item.path}>{item.meta.title}</Link></>)
+        }
+        result.push(pth);
       }
       if (item.children && item.children.length > 0) {
-        const result = patchBreadcrumb(item.children, pathname);
-        if (result.length > 0) {
-          return [item, ...result];
+        const rst = patchBreadcrumb(item.children, pathname);
+        if (rst.length > 0) {
+          return [...result, ...rst];
         }
       }
     }
   }
-  return [];
+  return result;
 }

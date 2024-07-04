@@ -50,7 +50,7 @@ const MenuModal: React.FC<ModalProps & MenuModalProps> = (
         setShow(true);
       }
     }
-  }, [open]);
+  }, [menuData, open]);
 
   /**
    * 获取目录
