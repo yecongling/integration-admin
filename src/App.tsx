@@ -52,12 +52,6 @@ const App: React.FC = () => {
         token: {
           colorPrimary: colorPrimary,
         },
-        components: {
-          Modal: {
-            borderRadius: 4,
-            borderRadiusLG: 4
-          }
-        }
       }} locale={ZhCN}>
         <AntdApp style={{height: '100%'}}>
           {loading ? <Spin/> : <Router/>}
