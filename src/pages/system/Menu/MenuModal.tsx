@@ -30,27 +30,29 @@ import {
   message,
 } from "antd";
 import React, { useEffect, useState } from "react";
+
+/**
+ * 弹窗编辑菜单数据
+ * @param props 传过来的菜单参数
+ * @constructor
+ */
 const MenuModal: React.FC<ModalProps & MenuModalProps> = (
   props: ModalProps & MenuModalProps
 ) => {
   const { open, menuData, afterOpenChange, setOpen } = props;
-  const [showParent, setShow] = useState(true);
+  const showParentProp = menuData && menuData.getFieldValue("menuType") !== 0;
+  const [showParent, setShow] = useState(showParentProp);
   // 目录数据
   const [treeData, setTreeData] = useState<Directory[]>([]);
   // 上级菜单
   const [value, setValue] = useState<string>();
 
+  // 组件挂载
   useEffect(() => {
     if (open) {
       getDirectory();
-      // 判定显示隐藏
-      if (menuData && menuData.getFieldValue("menuType") === 0) {
-        setShow(false);
-      } else {
-        setShow(true);
-      }
     }
-  }, [menuData, open]);
+  }, []);
 
   /**
    * 获取目录

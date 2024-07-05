@@ -573,20 +573,20 @@ const permission: Array<MockMethod> = [
             "meta": {
               "keepAlive": false,
               "icon": "CommentOutlined",
-              "title": "消息中心",
+              "title": "消息管理",
               "internal": false
             },
             "children": [
               {
                 "id": "1122345666479",
                 "name": "sys-message",
-                "path": "/message/messageManager",
-                "component": "message/MessageManager",
+                "path": "/message/msgCenter",
+                "component": "message/MsgCenter",
                 "route": "1",
                 "meta": {
                   "keepAlive": false,
                   "icon": "HomeOutlined",
-                  "title": "消息管理",
+                  "title": "消息中心",
                   "internal": false
                 }
               },

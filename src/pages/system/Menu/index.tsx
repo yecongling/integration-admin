@@ -48,18 +48,10 @@ const Menu: React.FC = () => {
 
   // const [checkStrictly, setCheckStrictly] = useState<boolean>(false);
 
-  useEffect(() => {
+  useEffect( () => {
     menuName.current && menuName.current.focus();
     getAllMenus();
   }, []);
-
-
-  /**
-   * 检索菜单
-   */
-  const onFinish = () => {
-    getAllMenus();
-  }
 
   /**
    * 窗口打开关闭操作
@@ -242,7 +234,7 @@ const Menu: React.FC = () => {
       <>
         {/* 查询区域 */}
         <Card styles={{body: {height: '100%'}}} style={{marginBottom: '16px'}}>
-          <Form form={form} onFinish={onFinish}>
+          <Form form={form} onFinish={getAllMenus}>
             <Row gutter={24}>
               <Col span={5}>
                 <Form.Item label="菜单名称" name="name" initialValue="" style={{marginBottom: 0}}>
