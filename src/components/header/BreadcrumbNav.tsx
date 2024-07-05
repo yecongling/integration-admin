@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import useMenuStore from "@/store/modules/menu";
 import { patchBreadcrumb } from "@/utils/util";
 
@@ -13,15 +13,7 @@ const BreadcrumbNav: React.FC = () => {
   const location = useLocation();
   // 从后台获取的路由菜单
   const { menus } = useMenuStore();
-  const [items, setItems] = useState<Record<string, any>[]>([
-    {
-      title: '导航条',
-    },
-    {
-      key: 'home',
-      title: <Link to="/home">首页</Link>,
-    }
-  ]);
+  const [items, setItems] = useState<Record<string, any>[]>([]);
   useEffect(() => {
     // 将menu里面的内容和path进行对照获取
     const breadItems = patchBreadcrumb(menus, location.pathname);
@@ -29,7 +21,7 @@ const BreadcrumbNav: React.FC = () => {
       setItems(breadItems);
     }
     // 设置面包屑内容
-  }, [location.pathname, menus]);
+  }, [location.pathname]);
 
   // 组件的DOM内容
   return (

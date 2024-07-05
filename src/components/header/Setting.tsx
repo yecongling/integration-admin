@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useState} from "react";
+import React, {memo, useState} from "react";
 import {Col, ColorPicker, ColorPickerProps, Divider, Drawer, Row, Space, Switch} from "antd";
 import useGlobalStore from "@/store/modules/global.ts";
 import {useShallow} from "zustand/react/shallow";
@@ -25,9 +25,9 @@ const Setting: React.FC<SettingProps> = memo((props) => {
    * 改变主题
    * @param checked
    */
-  const changeTheme = useCallback((checked: boolean) => {
+  const changeTheme = (checked: boolean) => {
     setTheme(checked ? 'light' : 'dark');
-  }, [])
+  }
 
   return (
       <>
