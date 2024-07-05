@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
 import {App as AntdApp, ConfigProvider, Spin} from "antd"
 import ZhCN from "antd/locale/zh_CN";
-import dayjs from 'dayjs';
 import {RouteItem} from "@/apis/system/permission/menuModel";
 import {getMenuList} from "@/apis/system/permission/menu.ts";
 
@@ -16,7 +15,6 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  dayjs.locale('zh-cn');
   const {colorPrimary} = useGlobalStore();
   const {setMenus} = useMenuStore();
 
