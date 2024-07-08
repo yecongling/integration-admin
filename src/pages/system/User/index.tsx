@@ -150,6 +150,7 @@ const User: React.FC = () => {
             <Col span={6}>
               <Form.Item label="性别" name="sex" style={{ marginBottom: 0 }}>
                 <Select
+                  placeholder="请选择性别"
                   options={[
                     { value: "1", label: "男" },
                     { value: "2", label: "女" },
@@ -161,6 +162,7 @@ const User: React.FC = () => {
             <Col span={6}>
               <Form.Item label="状态" name="status" style={{ marginBottom: 0 }}>
                 <Select
+                  placeholder="请选择状态"
                   options={[
                     { value: "1", label: "冻结" },
                     { value: "2", label: "正常" },
