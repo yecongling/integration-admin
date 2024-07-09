@@ -13,6 +13,7 @@
     "@ant-design/charts": "^1.4.2",
     "@ant-design/colors": "^7.0.0",
     "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-components": "^2.7.10",
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^20.4.5",
     "antd": "^5.19.0",
