@@ -11,7 +11,7 @@ const Role: React.FC = () => {
    * @param value
    */
   const finishSearch = (value: any) => {
-
+    console.log(value);
   };
   return (
     <>

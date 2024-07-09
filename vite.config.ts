@@ -3,15 +3,15 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import {viteMockServe} from "vite-plugin-mock";
 import {terser} from "rollup-plugin-terser";
-import viteCompression from "vite-plugin-compression";
+// import viteCompression from "vite-plugin-compression";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     terser(),
-    viteCompression({
-      algorithm: "gzip",
-    }),
+    // viteCompression({
+    //   algorithm: "gzip",
+    // }),
     viteMockServe({
       mockPath: "./mock/", //设置模拟数据的存储文件夹
       logger: true, // 是否在控制台显示请求日志
@@ -20,7 +20,6 @@ export default defineConfig({
     }),
   ],
   build: {
-    sourcemap: true,
     outDir: "integration",
     rollupOptions: {
       output: {

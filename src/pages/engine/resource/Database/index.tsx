@@ -2,8 +2,8 @@ import React from "react";
 import {Button, Card, Col, Form, Input, Popconfirm, Row, Select, Space, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {ColumnsType} from "antd/es/table";
-import {permission} from "@/apis/system/permission/menuModel.ts";
 import {addIcon} from "@/utils/util.tsx";
+import {MenuModel} from "@/apis/system/permission/menuModel.ts";
 
 const Database: React.FC = () => {
   const [form] = Form.useForm();
@@ -18,7 +18,7 @@ const Database: React.FC = () => {
 
 
   // 定义列
-  const columns: ColumnsType<permission> = [
+  const columns: ColumnsType<MenuModel> = [
     {
       title: '菜单名称',
       dataIndex: 'name',
