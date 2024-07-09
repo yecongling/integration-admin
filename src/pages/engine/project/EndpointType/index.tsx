@@ -173,7 +173,7 @@ const EndpointType: React.FC = () => {
         </Card>
         <Card
           style={{ height: "calc(100% - 256px)", marginTop: "6px" }}
-          styles={{ body: { height: "100%" } }}
+          styles={{ body: { height: "100%", padding: "0"} }}
         >
           <EditableProTable<DataSourceType>
             rowKey="id"
