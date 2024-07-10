@@ -177,6 +177,7 @@ const EndpointType: React.FC = () => {
         >
           <EditableProTable<DataSourceType>
             rowKey="id"
+            bordered
             headerTitle="端点类型属性"
             maxLength={5}
             scroll={{ x: 960 }}
