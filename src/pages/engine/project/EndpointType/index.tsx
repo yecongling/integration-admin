@@ -1,11 +1,11 @@
-import { Card, Col, Row, Input, Table } from "antd";
-import React, { useState } from "react";
-import { ColumnsType } from "antd/es/table";
-import { DataSourceType, EndpointTypeModel } from "./endpointType";
-import type { ProColumns } from "@ant-design/pro-components";
-import { EditableProTable } from "@ant-design/pro-components";
+import {Card, Col, Row, Input, Table} from "antd";
+import React, {useState} from "react";
+import {ColumnsType} from "antd/es/table";
+import {DataSourceType, EndpointTypeModel} from "./endpointType";
+import type {ProColumns} from "@ant-design/pro-components";
+import {EditableProTable} from "@ant-design/pro-components";
 
-const { Search } = Input;
+const {Search} = Input;
 import "./index.less";
 
 
@@ -61,7 +61,7 @@ const EndpointType: React.FC = () => {
       dataIndex: "name",
       formItemProps: () => {
         return {
-          rules: [{ required: true, message: "属性名称必填" }]
+          rules: [{required: true, message: "属性名称必填"}]
         }
       },
     },
@@ -70,7 +70,7 @@ const EndpointType: React.FC = () => {
       dataIndex: "type",
       valueType: "select",
       valueEnum: {
-        all: { text: '全部', status: 'Default' },
+        all: {text: '全部', status: 'Default'},
         open: {
           text: '未解决',
           status: 'Error',
@@ -87,7 +87,7 @@ const EndpointType: React.FC = () => {
       dataIndex: 'state',
       valueType: 'select',
       valueEnum: {
-        all: { text: '全部', status: 'Default' },
+        all: {text: '全部', status: 'Default'},
         open: {
           text: '未解决',
           status: 'Error',
@@ -110,16 +110,17 @@ const EndpointType: React.FC = () => {
       width: 200,
       render: (_text, record, _, action) => [
         <a
-          key="editable"
-          onClick={() => {
-            action?.startEditable?.(record.id);
-          }}
+            key="editable"
+            onClick={() => {
+              action?.startEditable?.(record.id);
+            }}
         >
           编辑
         </a>,
         <a
-          key="delete"
-          onClick={() => { }}
+            key="delete"
+            onClick={() => {
+            }}
         >
           删除
         </a>,
@@ -135,74 +136,74 @@ const EndpointType: React.FC = () => {
     console.log(params);
   };
   return (
-    <Row gutter={8} style={{ height: "100%" }}>
-      {/* 左边表格布局 */}
-      <Col span={6}>
-        <Card style={{ height: "100%" }} styles={{ body: { height: "100%", padding: '24px 24px 0 24px' } }}>
-          <section style={{ marginBottom: "16px" }}>
-            <Search
-              autoFocus
-              placeholder="请输入端点类型名或支持模式进行检索"
-              onSearch={onSearch}
-              enterButton
+      <Row gutter={8} style={{height: "100%"}}>
+        {/* 左边表格布局 */}
+        <Col span={6}>
+          <Card style={{height: "100%"}} styles={{body: {height: "100%", padding: '24px 24px 0 24px'}}}>
+            <section style={{marginBottom: "16px"}}>
+              <Search
+                  autoFocus
+                  placeholder="请输入端点类型名或支持模式进行检索"
+                  onSearch={onSearch}
+                  enterButton
+              />
+            </section>
+            <section style={{height: "calc(100% - 48px)", display: "flex", flexDirection: "column"}}>
+              <Table
+                  bordered
+                  className="endpointTypeTable"
+                  scroll={{x: "100", y: "calc(100vh - 240px)"}}
+                  style={{marginTop: "6px", height: '100%'}}
+                  size="middle"
+                  pagination={{
+                    showQuickJumper: true,
+                    showSizeChanger: true,
+                    defaultPageSize: 25,
+                    total: 1,
+                    showTotal: (total) => `共 ${total} 条`,
+                  }}
+                  columns={typeTableColumn}
+              />
+            </section>
+          </Card>
+        </Col>
+        {/* 右边表单布局 */}
+        <Col span={18}>
+          <Card style={{height: "250px"}} styles={{body: {height: "100%"}}}>
+            基础配置，名称-类型
+          </Card>
+          <Card
+              style={{height: "calc(100% - 256px)", marginTop: "6px"}}
+              styles={{body: {height: "100%", padding: "0"}}}
+          >
+            <EditableProTable<DataSourceType>
+                rowKey="id"
+                bordered
+                headerTitle="端点类型属性"
+                maxLength={5}
+                scroll={{x: 960}}
+                loading={false}
+                value={properties}
+                columns={propertiesColumns}
+                onChange={setProperties}
+                editable={{
+                  type: "multiple",
+                  editableKeys,
+                  onSave: async (rowKey, data, row) => {
+                    console.log(rowKey, data, row);
+                  },
+                  onChange: setEditableRowKeys
+                }}
+                recordCreatorProps={
+                  {
+                    position: "bottom",
+                    record: () => ({id: (Math.random() * 1000000).toFixed(0)}),
+                  }
+                }
             />
-          </section>
-          <section style={{ height: "calc(100% - 48px)", display: "flex", flexDirection: "column" }}>
-            <Table
-              bordered
-              className="endpointTypeTable"
-              scroll={{ x: "100", y: "calc(100vh - 240px)" }}
-              style={{ marginTop: "6px", height: '100%' }}
-              size="middle"
-              pagination={{
-                showQuickJumper: true,
-                showSizeChanger: true,
-                defaultPageSize: 25,
-                total: 1,
-                showTotal: (total) => `共 ${total} 条`,
-              }}
-              columns={typeTableColumn}
-            />
-          </section>
-        </Card>
-      </Col>
-      {/* 右边表单布局 */}
-      <Col span={18}>
-        <Card style={{ height: "250px" }} styles={{ body: { height: "100%" } }}>
-          基础配置，名称-类型
-        </Card>
-        <Card
-          style={{ height: "calc(100% - 256px)", marginTop: "6px" }}
-          styles={{ body: { height: "100%", padding: "0"} }}
-        >
-          <EditableProTable<DataSourceType>
-            rowKey="id"
-            bordered
-            headerTitle="端点类型属性"
-            maxLength={5}
-            scroll={{ x: 960 }}
-            loading={false}
-            value={properties}
-            columns={propertiesColumns}
-            onChange={setProperties}
-            editable={{
-              type: "multiple",
-              editableKeys,
-              onSave: async (rowKey, data, row) => {
-                console.log(rowKey, data, row);
-              },
-              onChange: setEditableRowKeys
-            }}
-            recordCreatorProps={
-              {
-                position: "bottom",
-                record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
-              }
-            }
-          />
-        </Card>
-      </Col>
-    </Row>
+          </Card>
+        </Col>
+      </Row>
   );
 };
 export default EndpointType;
