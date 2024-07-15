@@ -1,10 +1,10 @@
-import { RouteObject } from "@/interface";
+import {RouteObject} from "@/interface";
 import * as Icons from "@ant-design/icons";
-import { MenuModel, RouteItem } from "@/apis/system/permission/menuModel";
+import {MenuModel, RouteItem} from "@/apis/system/permission/menuModel";
 import React from "react";
 import SvgIcon from "@/components/SvgIcon";
-import { lazyLoad } from "@/router/lazyLoad.tsx";
-import { Link } from "react-router-dom";
+import {lazyLoad} from "@/router/lazyLoad.tsx";
+import {Link} from "react-router-dom";
 
 /**
  * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断
@@ -70,7 +70,7 @@ export const handlePermission = (permissions: MenuModel[]) => {
 const customIcons: { [key: string]: any } = Icons;
 export const addIcon = (name: string) => {
   if (name.startsWith("icon")) {
-    return <SvgIcon type={name} />;
+    return <SvgIcon type={name}/>;
   }
   return React.createElement(customIcons[name]);
 };
@@ -99,7 +99,7 @@ export function patchBreadcrumb(
   if (routerList) {
     for (let i = 0; i < routerList.length; i++) {
       const item = routerList[i];
-      if (pathname.includes(item.path)) {
+      if (pathname === item.path || pathname.includes(item.path) && pathname.length > item.path.length && pathname.substring(item.path.length, item.path.length + 1) === '/') {
         const pth: Record<string, any> = {};
         const icon: JSX.Element = addIcon(item.meta.icon as any);
         pth['title'] = (<>{icon}<span style={{padding: "0 4px"}}>{item.meta.title}</span></>);
