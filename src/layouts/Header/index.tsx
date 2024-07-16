@@ -6,7 +6,7 @@ import {
   ExclamationCircleOutlined,
   GithubOutlined,
   LockOutlined,
-  LogoutOutlined,
+  LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined,
   SearchOutlined,
   SettingOutlined,
   SyncOutlined,
@@ -17,6 +17,8 @@ import BreadcrumbNav from "@/components/header/BreadcrumbNav";
 import FullScreen from "@/components/header/FullScreen";
 import {useNavigate} from "react-router-dom";
 import Setting from "@/components/header/Setting";
+import useGlobalStore from "@/store/modules/global.ts";
+import {useShallow} from "zustand/react/shallow";
 // import FloatBtn from "@/components/header/FloatBtn.tsx";
 
 const Header: React.FC = () => {
@@ -30,6 +32,15 @@ const Header: React.FC = () => {
     window.open('https://github.com/yecongling/integration-admin', '_blank');
     // window.open('https://www.baidu.com', '_blank');
   }
+
+  // 通过useSelector直接拿到store中定义的value
+  const {collapse, theme, setCollapse} = useGlobalStore(
+      useShallow((state) => ({
+        collapse: state.collapse,
+        theme: state.theme,
+        setCollapse: state.setCollapse,
+      }))
+  );
 
   const items: MenuProps['items'] = [
     {
@@ -83,63 +94,99 @@ const Header: React.FC = () => {
   ]
 
   return (
-    <>
-      <Layout.Header
-        className="ant-layout-header dis-fl jc-sb"
-        style={{
-          padding: '0 16px 0 0',
-          height: '50px',
-          minHeight: '50px',
-          borderBottom: ' 1px solid #e9edf0',
-          backgroundColor: '#fff',
-        }}>
-        <div className="dis-fl js-sb ai-ct"><BreadcrumbNav/></div>
-        <div className="dis-fl js-sb ai-ct toolbox">
-          <Space size="large">
-            <Tooltip placement="bottom" title="搜索">
-              <SearchOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={() => {
-                alert('显示搜索框')
-              }}/>
-            </Tooltip>
-            <Tooltip placement="bottom" title="github">
-              <GithubOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={routeGitHub}/>
-            </Tooltip>
-            <Tooltip placement="bottom" title="锁屏">
-              <LockOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={() => {
-                alert('进行锁屏操作')
-              }}/>
-            </Tooltip>
-            <Tooltip placement="bottom" title="通知">
-              <Badge count={5}>
-                <BellOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={() => {
-                  alert('显示通知面板')
+      <>
+        <Layout.Header
+            className="ant-layout-header dis-fl jc-sb"
+            style={{
+              padding: '0 16px 0 0',
+              height: '50px',
+              minHeight: '50px',
+              borderBottom: ' 1px solid #e9edf0',
+              backgroundColor: '#fff',
+            }}>
+
+          <div className="dis-fl js-sb ai-ct">
+            <div className="collapse">
+              <span
+                  style={{
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                  onClick={() => setCollapse(!collapse)}
+                  className="btnbor"
+              >
+                <div
+                    style={{
+                      padding: "10px 20px 10px 10px",
+                      display: "flex",
+                      justifyContent: "end",
+                    }}
+                >
+                  {collapse ? (
+                      <Tooltip title="展开">
+                        <MenuUnfoldOutlined
+                            style={{color: theme === "dark" ? "white" : "black"}}
+                        />
+                      </Tooltip>
+                  ) : (
+                      <Tooltip title="收起">
+                        <MenuFoldOutlined
+                            style={{color: theme === "dark" ? "white" : "black"}}
+                        />
+                      </Tooltip>
+                  )}
+                </div>
+              </span>
+            </div>
+            {/* 面包屑 */}
+            <BreadcrumbNav/>
+          </div>
+          <div className="dis-fl js-sb ai-ct toolbox">
+            <Space size="large">
+              <Tooltip placement="bottom" title="搜索">
+                <SearchOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={() => {
+                  alert('显示搜索框')
                 }}/>
-              </Badge>
-            </Tooltip>
-            <Tooltip placement="bottom" title="系统设置">
-              <SettingOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={() => setOpenSetting(true)}/>
-            </Tooltip>
-            <FullScreen/>
-            <Dropdown menu={{items}} placement="bottom">
-              <div className="login-user" style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                height: 50,
-                transition: 'all 0.3s'
-              }}>
-                <Avatar size="default" src={avatar}/>
-                <span style={{margin: '0 0 0 6px'}}>叶丛林</span>
-              </div>
-            </Dropdown>
-          </Space>
-        </div>
-      </Layout.Header>
-      {/*<FloatBtn/>*/}
-      <Setting open={openSetting} setOpen={setOpenSetting}/>
-      {contextHolder}
-    </>
+              </Tooltip>
+              <Tooltip placement="bottom" title="github">
+                <GithubOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={routeGitHub}/>
+              </Tooltip>
+              <Tooltip placement="bottom" title="锁屏">
+                <LockOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={() => {
+                  alert('进行锁屏操作')
+                }}/>
+              </Tooltip>
+              <Tooltip placement="bottom" title="通知">
+                <Badge count={5}>
+                  <BellOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={() => {
+                    alert('显示通知面板')
+                  }}/>
+                </Badge>
+              </Tooltip>
+              <Tooltip placement="bottom" title="系统设置">
+                <SettingOutlined style={{cursor: 'pointer', fontSize: '18px'}} onClick={() => setOpenSetting(true)}/>
+              </Tooltip>
+              <FullScreen/>
+              <Dropdown menu={{items}} placement="bottom">
+                <div className="login-user" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  height: 50,
+                  transition: 'all 0.3s'
+                }}>
+                  <Avatar size="default" src={avatar}/>
+                  <span style={{margin: '0 0 0 6px'}}>叶丛林</span>
+                </div>
+              </Dropdown>
+            </Space>
+          </div>
+        </Layout.Header>
+        {/*<FloatBtn/>*/}
+        <Setting open={openSetting} setOpen={setOpenSetting}/>
+        {contextHolder}
+      </>
   )
 }
 export default Header;

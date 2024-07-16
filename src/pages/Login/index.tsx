@@ -73,7 +73,7 @@ const Login: React.FC = () => {
                     form={form}
                     name="login"
                     labelCol={{span: 5}}
-                    initialValues={{username: 'admin', password: '12345678', captcha: code, remember: true}}
+                    initialValues={{username: 'admin', password: '123qwe,.', captcha: code, remember: true}}
                     size="large"
                     autoComplete="off"
                     onFinish={submit}
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
                            prefix={<UserOutlined/>}/>
                   </Form.Item>
                   <Form.Item name="password" rules={[{required: true, message: "请输入密码"}]}>
-                    <Input.Password size="large" allowClear autoComplete="new-password" placeholder="密码：123123"
+                    <Input.Password size="large" allowClear autoComplete="new-password" placeholder="密码：123qwe,."
                                     prefix={<LockOutlined/>}/>
                   </Form.Item>
                   <Form.Item>

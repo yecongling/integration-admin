@@ -1,37 +1,35 @@
-import React, { memo, useEffect, useState } from "react";
+import React, {memo, useEffect, useState} from "react";
 import Sider from "antd/es/layout/Sider";
 import "./index.less";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Image, Menu, MenuProps, Spin, Tooltip } from "antd";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { RouteItem } from "@/apis/system/permission/menuModel";
-import { addIcon, getOpenKeys } from "@/utils/util.tsx";
+import {Image, Menu, MenuProps, Spin} from "antd";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import {RouteItem} from "@/apis/system/permission/menuModel";
+import {addIcon, getOpenKeys} from "@/utils/util.tsx";
 import useGlobalStore from "@/store/modules/global.ts";
 import favicon from "@/assets/svg/vite.svg";
-import { searchRoute } from "@/utils";
+import {searchRoute} from "@/utils";
 import useMenuStore from "@/store/modules/menu.ts";
-import { useShallow } from "zustand/react/shallow";
+import {useShallow} from "zustand/react/shallow";
 
 /**
  * 左边的菜单列表
  */
 const LeftMenu: React.FC = memo(() => {
   // 获取状态库中登录后请求的菜单
-  const { menus } = useMenuStore(
-    useShallow((state) => ({
-      menus: state.menus,
-    }))
+  const {menus} = useMenuStore(
+      useShallow((state) => ({
+        menus: state.menus,
+      }))
   );
   // 通过useSelector直接拿到store中定义的value
-  const { collapse, theme, setCollapse } = useGlobalStore(
-    useShallow((state) => ({
-      collapse: state.collapse,
-      theme: state.theme,
-      setCollapse: state.setCollapse,
-    }))
+  const {collapse, theme} = useGlobalStore(
+      useShallow((state) => ({
+        collapse: state.collapse,
+        theme: state.theme,
+      }))
   );
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const {pathname} = useLocation();
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
@@ -39,11 +37,11 @@ const LeftMenu: React.FC = memo(() => {
   // 定义 menu 类型
   type MenuItem = Required<MenuProps>["items"][number];
   const getItem = (
-    label: React.ReactNode,
-    key?: React.Key | null,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    type?: "group"
+      label: React.ReactNode,
+      key?: React.Key | null,
+      icon?: React.ReactNode,
+      children?: MenuItem[],
+      type?: "group"
   ): MenuItem => {
     return {
       key,
@@ -64,22 +62,22 @@ const LeftMenu: React.FC = memo(() => {
       // 下面判断代码解释 *** !item?.children?.length   ==>   (!item.children || item.children.length === 0)
       if (!item?.children?.length) {
         return newArr.push(
-          getItem(item.meta.title, item.path, addIcon(item.meta.icon!))
+            getItem(item.meta.title, item.path, addIcon(item.meta.icon!))
         );
       }
       newArr.push(
-        getItem(
-          item.meta.title,
-          item.path,
-          addIcon(item.meta.icon!),
-          deepLoopFloat(item.children)
-        )
+          getItem(
+              item.meta.title,
+              item.path,
+              addIcon(item.meta.icon!),
+              deepLoopFloat(item.children)
+          )
       );
     });
     return newArr;
   };
 
-  const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => {
+  const clickMenu: MenuProps["onClick"] = ({key}: { key: string }) => {
     // 配置外置跳转路由
     // if (route.meta.isLink) window.open(route.meta.isLink, "_blank");
     navigate(key);
@@ -126,87 +124,55 @@ const LeftMenu: React.FC = memo(() => {
   const titleColor = theme === "dark" ? "#fff" : "#1890ff";
 
   return (
-    <Sider
-      trigger={null}
-      collapsedWidth={64}
-      className="scroll ant-menu"
-      style={{
-        overflowX: "hidden",
-        zIndex: 1000,
-        borderRight: "1px solid #e9edf0",
-      }}
-      theme={theme}
-      collapsed={collapse}
-      collapsible
-    >
-      <div className="dis-fl js-sb ai-ct toolbox">
-        <Link to="/home" style={{ width: "100%" }}>
-          <div
-            className="hd-64 mgr-01 dis-fl ai-ct jc-ct"
-            style={{ justifyContent: "space-around" }}
-          >
-            <Image width={25} src={favicon} preview={false} />
-            {collapse ? (
-              ""
-            ) : (
-              <p
-                style={{
-                  fontWeight: "bold",
-                  margin: "0 12px",
-                  fontSize: "20px",
-                  color: titleColor,
-                }}
-              >
-                integration
-              </p>
-            )}
-          </div>
-        </Link>
-      </div>
-      <Spin wrapperClassName="side-menu" spinning={loading} tip="Loading...">
-        <Menu
-          mode="inline"
-          theme={theme}
-          selectedKeys={selectedKeys}
-          openKeys={openKeys}
-          items={menuList}
-          onClick={clickMenu}
-          onOpenChange={onOpenChange}
-        />
-      </Spin>
-      <div className="collapse">
-        <span
+      <Sider
+          trigger={null}
+          collapsedWidth={64}
+          className="scroll ant-menu"
           style={{
-            cursor: "pointer",
-            fontSize: "16px",
+            overflowX: "hidden",
+            zIndex: 1000,
+            borderRight: "1px solid #e9edf0",
           }}
-          onClick={() => setCollapse(!collapse)}
-          className="btnbor"
-        >
-          <div
-            style={{
-              padding: "10px 20px 10px 10px",
-              display: "flex",
-              justifyContent: "end",
-            }}
-          >
-            {collapse ? (
-              <Tooltip title="展开">
-                <MenuUnfoldOutlined
-                  style={{ color: theme === "dark" ? "white" : "black" }}
-                />
-              </Tooltip>
-            ) : (
-              <Tooltip title="收起">
-                <MenuFoldOutlined
-                  style={{ color: theme === "dark" ? "white" : "black" }}
-                />
-              </Tooltip>
-            )}
-          </div>
-        </span>
-      </div>
-    </Sider>
+          theme={theme}
+          collapsed={collapse}
+          collapsible
+      >
+        <div className="dis-fl js-sb ai-ct toolbox">
+          <Link to="/home" style={{width: "100%"}}>
+            <div
+                className="hd-64 mgr-01 dis-fl ai-ct jc-ct"
+                style={{justifyContent: "space-around"}}
+            >
+              <Image width={25} src={favicon} preview={false}/>
+              {collapse ? (
+                  ""
+              ) : (
+                  <p
+                      style={{
+                        fontWeight: "bold",
+                        margin: "0 12px",
+                        fontSize: "20px",
+                        color: titleColor,
+                      }}
+                  >
+                    integration
+                  </p>
+              )}
+            </div>
+          </Link>
+        </div>
+        <Spin wrapperClassName="side-menu" spinning={loading} tip="Loading...">
+          <Menu
+              mode="inline"
+              theme={theme}
+              selectedKeys={selectedKeys}
+              openKeys={openKeys}
+              items={menuList}
+              onClick={clickMenu}
+              onOpenChange={onOpenChange}
+          />
+        </Spin>
+      </Sider>
   );
 });
 export default LeftMenu;
