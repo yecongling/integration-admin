@@ -31,7 +31,7 @@ const permission: Array<MockMethod> = [
             {
               id: "11232",
               name: "sys-data",
-              path: "/dataStatics",
+              path: "/statics",
               component: "",
               route: "1",
               meta: {
@@ -44,8 +44,8 @@ const permission: Array<MockMethod> = [
                 {
                   id: "11234",
                   name: "sys-message",
-                  path: "/dataStatics/messageSearch",
-                  component: "dataStatics/MessageSearch",
+                  path: "/statics/messageSearch",
+                  component: "engine/statics/MessageSearch",
                   route: "1",
                   meta: {
                     keepAlive: false,
@@ -57,8 +57,8 @@ const permission: Array<MockMethod> = [
                 {
                   id: "11235",
                   name: "sys-error",
-                  path: "/dataStatics/errorStatics",
-                  component: "dataStatics/ErrorStatics",
+                  path: "/statics/errorStatics",
+                  component: "engine/statics/ErrorStatics",
                   route: "1",
                   meta: {
                     keepAlive: false,
@@ -70,8 +70,8 @@ const permission: Array<MockMethod> = [
                 {
                   id: "11236",
                   name: "sys-terminal",
-                  path: "/dataStatics/terminal",
-                  component: "dataStatics/Terminal",
+                  path: "/statics/terminal",
+                  component: "engine/statics/Terminal",
                   route: "1",
                   meta: {
                     keepAlive: false,
@@ -83,8 +83,8 @@ const permission: Array<MockMethod> = [
                 {
                   id: "11235",
                   name: "sys-test",
-                  path: "/dataStatics/testMessage",
-                  component: "dataStatics/TestMessage",
+                  path: "/statics/testMessage",
+                  component: "engine/statics/TestMessage",
                   route: "1",
                   meta: {
                     keepAlive: false,
