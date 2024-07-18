@@ -502,9 +502,9 @@ code {
 }*/
 
 /* 侧边栏默认的颜色 */
-.ant-layout .ant-layout-sider-light {
+/* .ant-layout .ant-layout-sider-light {
     background: #f2f5f7;
-}
+} */
 
 .ant-layout-header {
     -webkit-app-region: drag;

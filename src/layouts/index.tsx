@@ -12,7 +12,7 @@ const Layouts: React.FC = memo(() => {
       <Console/>
       <Layout style={{height: "100%"}}>
         <LeftMenu/>
-        <Layout style={{backgroundColor: '#fff'}}>
+        <Layout>
           <Header/>
           <Content/>
         </Layout>
