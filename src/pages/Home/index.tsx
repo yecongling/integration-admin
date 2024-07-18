@@ -1,12 +1,16 @@
 import React from "react";
-import { Calendar, Card, Col, Row, Statistic } from "antd";
+import { Avatar, Calendar, Card, Col, Row, Statistic } from "antd";
 import './index.less';
 
-import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
+import { ArrowDownOutlined, ArrowUpOutlined, UserOutlined } from "@ant-design/icons";
 import type { CalendarProps } from 'antd';
 import type { Dayjs } from 'dayjs';
+import BrokenLine from "@/components/chart/BrokenLine";
 
-
+/**
+ * 首页
+ * @returns 
+ */
 const Index: React.FC = () => {
 
   /**
@@ -23,7 +27,8 @@ const Index: React.FC = () => {
       <Row style={{ marginBottom: '8px' }}>
         <Col span={24}>
           <Card bordered={false}>
-            下午好
+            <Avatar size={64} icon={<UserOutlined />} />
+            <h2>下午好，欢迎登录</h2>
           </Card>
         </Col>
       </Row>
@@ -49,7 +54,7 @@ const Index: React.FC = () => {
         </Col>
         <Col span={10}>
           <Card bordered={false}>
-            下午好
+            <BrokenLine/>
           </Card>
         </Col>
       </Row>
