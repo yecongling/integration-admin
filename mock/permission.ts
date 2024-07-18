@@ -276,7 +276,7 @@ const permission: Array<MockMethod> = [
                   id: "11239",
                   name: "sys-connection",
                   path: "/connection/database",
-                  component: "connection/Database",
+                  component: "engine/connection/Database",
                   route: "1",
                   meta: {
                     keepAlive: false,
