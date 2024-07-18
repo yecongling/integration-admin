@@ -180,8 +180,8 @@ const Index: React.FC = () => {
                 </Space>
               </Col>
               <Col span={2} style={{textAlign: 'right'}}>
-                <Tooltip title="回收站" color="blue" key="blue">
-                  <Button type="primary" shape="circle" icon={<HomeOutlined/>} onClick={() => {alert('打开回收站')}}/>
+                <Tooltip title="回收站">
+                  <Button type="primary" shape="circle" danger icon={<HomeOutlined/>} onClick={() => {alert('打开回收站')}}/>
                 </Tooltip>
               </Col>
             </Row>
