@@ -12,7 +12,7 @@ const Index: React.FC = () => {
                       overflowY: 'auto',
                       // backgroundColor: theme === 'dark' ? '#f2f5f7' : '#fff',
                       overflowX: 'hidden',
-                      padding: '6px'
+                      padding: '8px'
                     }}>
       <Suspense fallback={
         <div className="dis-fl jc-ct ai-ct" style={{height: '100vh'}}>

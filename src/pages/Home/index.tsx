@@ -10,10 +10,10 @@ const Index: React.FC = () => {
 
   return (
     <>
-      <Row gutter={16} style={{ height: '160px', marginBottom: '16px' }}>
+      <Row gutter={8} style={{ height: '160px', marginBottom: '8px' }}>
         <Col className="gutter-row" span={6}>
           <Card>
-            <Row gutter={16}>
+            <Row gutter={8}>
               <Col span={12} style={{ textAlign: 'center' }}>
                 <h3 style={{ color: '#959595' }}>事项总数</h3>
                 <div className="number">
@@ -28,7 +28,7 @@ const Index: React.FC = () => {
         </Col>
         <Col className="gutter-row" span={6}>
           <Card>
-            <Row gutter={16}>
+            <Row gutter={8}>
               <Col span={12} style={{ textAlign: 'center' }}>
                 <h3 style={{ color: '#959595' }}>事项总数</h3>
                 <div className="number">
@@ -43,7 +43,7 @@ const Index: React.FC = () => {
         </Col>
         <Col className="gutter-row" span={6}>
           <Card>
-            <Row gutter={16}>
+            <Row gutter={8}>
               <Col span={12} style={{ textAlign: 'center' }}>
                 <h3 style={{ color: '#959595' }}>事项总数</h3>
                 <div className="number">
@@ -58,7 +58,7 @@ const Index: React.FC = () => {
         </Col>
         <Col className="gutter-row" span={6}>
           <Card>
-            <Row gutter={16}>
+            <Row gutter={8}>
               <Col span={12} style={{ textAlign: 'center' }}>
                 <h3 style={{ color: '#959595' }}>事项总数</h3>
                 <div className="number">
@@ -73,7 +73,7 @@ const Index: React.FC = () => {
         </Col>
       </Row>
 
-      <Row gutter={16} style={{ height: '300px', marginBottom: '16px' }}>
+      <Row gutter={8} style={{ height: '300px', marginBottom: '8px' }}>
         <Col className="gutter-row" span={6}>
           <Card styles={{ body: { height: '100%' } }}>
             <PieChart />
@@ -86,7 +86,7 @@ const Index: React.FC = () => {
         </Col>
       </Row>
 
-      <Row gutter={16} style={{ height: '400px' }}>
+      <Row gutter={8} style={{ height: '400px' }}>
         <Col className="gutter-row" span={6}>
           <Card styles={{ body: { height: '100%' } }}>
             <div className="eventTitle">
