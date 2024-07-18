@@ -15,7 +15,8 @@ const RouterBeforeEach: React.FC = () => {
         } else {
             if (obj != null) {
                 // 需要判定菜单列表里面是否有这个路径（二级路由不能刷新直接进）会导致二次刷新
-                navigate(obj.path);
+                // 这段代码需要优化掉，不然会进行二次渲染，没得必要
+                // navigate(obj.path);
             } else {
                 navigate("/home");
             }
