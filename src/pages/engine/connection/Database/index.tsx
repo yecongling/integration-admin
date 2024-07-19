@@ -121,7 +121,7 @@ const Database: React.FC = () => {
    * 取消
    */
   const handCancel = () => {
-    data.resetFields();
+    // data.resetFields();
     setOpen(false);
   };
 

@@ -50,7 +50,7 @@ const DataModal: React.FC<DataModalProps & ModalProps> = (
           数据库类型
         </Sider>
         <Content
-          style={{ background: "#fff", height: "100%", overflowY: "scroll" }}
+          style={{ background: "#fff", padding: '16px', height: "100%", overflowY: "scroll" }}
         >
           <Form
             form={data}
@@ -58,7 +58,7 @@ const DataModal: React.FC<DataModalProps & ModalProps> = (
             name="basic"
             size="middle"
             labelCol={{ span: 4 }}
-            wrapperCol={{ span: 18 }}
+            wrapperCol={{span: 18}}
             initialValues={{
               datasourceType: "2",
               connectionTimeout: 30,
