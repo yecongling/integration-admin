@@ -274,10 +274,7 @@ const Database: React.FC = () => {
         </Form>
       </Card>
       <Card>
-        <section
-          className="layout-operation-bar"
-          style={{ margin: "0 0 16px 0" }}
-        >
+        <section style={{marginBottom: '8px'}}>
           <Space>
             <Button type="primary" onClick={add}>
               <PlusOutlined />
@@ -293,7 +290,7 @@ const Database: React.FC = () => {
             </Button>
           </Space>
         </section>
-        <section style={{ margin: "0" }}>
+        <section>
           <Table
             style={{ marginTop: "6px" }}
             scroll={{ x: "100", y: "calc(100vh - 270px)" }}

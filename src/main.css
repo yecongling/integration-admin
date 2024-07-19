@@ -474,48 +474,23 @@ code {
     monospace;
 }
 
-/*.ant-modal:not(.ant-modal-confirm) .ant-modal-content {
+/* 调整整个系统Modal的样式 */
+.ant-modal:not(.ant-modal-confirm) .ant-modal-content {
     padding: 0;
-    !*border-radius: 4px;*!
 }
 
-.ant-modal-header {
-    padding: 10px 20px 10px;
-    height: 50px;
+.ant-modal:not(.ant-modal-confirm) .ant-modal-header {
+    padding: 20px 24px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e8e8e8;
-}*/
+}
 
-/*.ant-modal .ant-modal-title {
-    font-weight: 500;
-}*/
 
-/*.ant-modal-footer {
-    padding: 12px 20px 10px;
+.ant-modal:not(.ant-modal-confirm) .ant-modal-footer {
+    padding: 20px 24px;
     margin-top: 0 !important;
     border-top: 1px solid #e8e8e8;
-}*/
-
-/*.ant-modal .ant-modal-close {
-    top: 12px;
-}*/
-
-/* 侧边栏默认的颜色 */
-/* .ant-layout .ant-layout-sider-light {
-    background: #f2f5f7;
-} */
-
-.ant-layout-header {
-    -webkit-app-region: drag;
-}
-
-.ant-breadcrumb {
-    -webkit-app-region: no-drag;
-}
-
-.toolbox {
-    -webkit-app-region: no-drag;
 }
 
 .layout-operation-bar {
