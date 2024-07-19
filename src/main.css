@@ -314,6 +314,7 @@ code {
     padding: 20px 24px;
     display: flex;
     align-items: center;
+    margin-bottom: 0;
     border-bottom: 1px solid #e8e8e8;
 }
 
