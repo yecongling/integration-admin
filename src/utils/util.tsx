@@ -101,11 +101,10 @@ export function patchBreadcrumb(
       const item = routerList[i];
       if (pathname === item.path || pathname.includes(item.path) && pathname.length > item.path.length && pathname.substring(item.path.length, item.path.length + 1) === '/') {
         const pth: Record<string, any> = {};
-        const icon: JSX.Element = addIcon(item.meta.icon as any);
-        pth['title'] = (<>{icon}<span style={{padding: "0 4px"}}>{item.meta.title}</span></>);
+        pth['title'] = (<><span style={{padding: "0 4px"}}>{item.meta.title}</span></>);
         pth['key'] = item.path;
         if (pathname === item.path) {
-          pth['title'] = (<>{icon}<Link to={item.path}>{item.meta.title}</Link></>)
+          pth['title'] = (<><Link to={item.path}>{item.meta.title}</Link></>)
         }
         result.push(pth);
       }
