@@ -140,7 +140,7 @@ const EndpointType: React.FC = () => {
         {/* 左边表格布局 */}
         <Col span={6}>
           <Card style={{height: "100%"}} styles={{body: {height: "100%", padding: '24px 24px 0 24px'}}}>
-            <section style={{marginBottom: "16px"}}>
+            <section style={{marginBottom: "8px"}}>
               <Search
                   autoFocus
                   placeholder="请输入端点类型名或支持模式进行检索"
@@ -173,7 +173,7 @@ const EndpointType: React.FC = () => {
             基础配置，名称-类型
           </Card>
           <Card
-              style={{height: "calc(100% - 256px)", marginTop: "6px"}}
+              style={{height: "calc(100% - 258px)", marginTop: "8px"}}
               styles={{body: {height: "100%", padding: "0"}}}
           >
             <EditableProTable<DataSourceType>
