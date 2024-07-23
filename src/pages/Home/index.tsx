@@ -44,17 +44,23 @@ const Index: React.FC = () => {
 
       <Row gutter={8} style={{ marginBottom: "8px" }}>
         <Col span={7}>
-          <Card bordered={false}>下午好</Card>
+          <Card bordered={false} style={{ height: "100%" }}>
+            下午好
+          </Card>
         </Col>
         <Col span={7}>
-          <Row style={{marginBottom: '8px'}}>
+          <Row style={{ marginBottom: "8px", height: "calc(50% - 4px)" }}>
             <Col span={24}>
-              <Card bordered={false}>下午好2</Card>
+              <Card bordered={false} style={{ height: "100%" }}>
+                下午好2
+              </Card>
             </Col>
           </Row>
-          <Row>
+          <Row style={{ height: "calc(50% - 4px)" }}>
             <Col span={24}>
-              <Card bordered={false}>下午好3</Card>
+              <Card bordered={false} style={{ height: "100%" }}>
+                下午好3
+              </Card>
             </Col>
           </Row>
         </Col>
@@ -67,7 +73,9 @@ const Index: React.FC = () => {
 
       <Row gutter={8}>
         <Col span={14}>
-          <Card bordered={false}>下午好</Card>
+          <Card bordered={false} style={{ height: "100%" }}>
+            下午好
+          </Card>
         </Col>
         <Col span={10}>
           <Row gutter={8} style={{ marginBottom: "8px" }}>
