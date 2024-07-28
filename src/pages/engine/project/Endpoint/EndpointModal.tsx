@@ -3,7 +3,15 @@ import {
   CloseCircleOutlined,
   SnippetsOutlined,
 } from "@ant-design/icons";
-import { Form, FormInstance, Input, InputRef, Modal, ModalProps, Select } from "antd";
+import {
+  Form,
+  FormInstance,
+  Input,
+  InputRef,
+  Modal,
+  ModalProps,
+  Select,
+} from "antd";
 import { RuleObject } from "antd/es/form";
 import React, { useEffect, useRef, useState } from "react";
 /**
@@ -19,18 +27,24 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
   >("success");
   const endpointRef = useRef<InputRef>(null);
 
-    useEffect(() => {
-        if (endpointRef?.current) {
-            endpointRef.current.focus();
-        }
-    }, [open])
+  useEffect(() => {
+    // 查询支持的端点类型
+    queryEndpointTypes
+  }, []);
 
-    /**
-     * 查询支持的端点类型数据
-     */
-    const queryEndpointTypes = () => {
+  /**
+   * 查询支持的端点类型数据
+   */
+  const queryEndpointTypes = () => {};
 
+  /**
+   * 窗口关闭打开切换
+   */
+  const afterOpenChange = (open: boolean) => {
+    if (open) {
+      endpointRef.current?.focus();
     }
+  }
 
   /**
    * 保存的值
@@ -64,7 +78,7 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
     try {
       await endpointData.validateFields([field]);
       // 验证通过
-      setStatus("success")
+      setStatus("success");
     } catch (errorInfo) {
       // 这里可以处理校验错误的信息
       setStatus("error");
@@ -90,6 +104,7 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
             onSave(values);
           });
         }}
+        afterOpenChange={afterOpenChange}
         styles={{ body: { padding: "10px 40px" } }}
       >
         <Form
@@ -110,18 +125,31 @@ const EndpointModal: React.FC<ModalProps & EndpointModalProps> = (
               { required: true, message: "端点名称必填" },
               { validator: noChineseCharacters, message: "端点名称不能为中文" },
             ]}
-            style={{marginTop: '16px'}}
+            style={{ marginTop: "16px" }}
           >
-            <Input ref={endpointRef} autoFocus allowClear onBlur={() => handleBlur("name")} />
+            <Input
+              ref={endpointRef}
+              autoFocus
+              allowClear
+              onBlur={() => handleBlur("name")}
+            />
           </Form.Item>
-          <Form.Item name="type" label="类型" rules={[{required: true, message: '端点类型不能为空'}]}>
-            <Select/>
+          <Form.Item
+            name="type"
+            label="类型"
+            rules={[{ required: true, message: "端点类型不能为空" }]}
+          >
+            <Select />
           </Form.Item>
-          <Form.Item name="mode" label="模式" rules={[{required: true, message: '端点模式不能为空'}]}>
-            <Select/>
+          <Form.Item
+            name="mode"
+            label="模式"
+            rules={[{ required: true, message: "端点模式不能为空" }]}
+          >
+            <Select />
           </Form.Item>
           <Form.Item name="type" label="描述">
-            <Input.TextArea allowClear showCount/>
+            <Input.TextArea allowClear showCount />
           </Form.Item>
           <h3 style={{ borderBottom: "1px solid #ccc" }}>
             <SnippetsOutlined /> 属性
