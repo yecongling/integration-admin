@@ -84,6 +84,10 @@ const EndpointTypeTable: React.FC = () => {
   // 行点击事件
   const onRowClick = (record: EndpointType) => {
     setSelectedRowKey(record.id);
+    dispatch({
+      type: "SET_SELECTED_ROW",
+      payload: [record],
+    });
   };
 
   return (
