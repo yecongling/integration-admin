@@ -20,7 +20,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ["react", "react-dom", "react-router-dom", "zustand"],
+          react: ["react", "react-dom"],
+          reactRouterDom: ["react-router-dom"],
+          mobx: ["mobx", "mobx-react-lite"],
           antd: ["antd"],
         },
       },
