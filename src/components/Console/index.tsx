@@ -33,6 +33,7 @@ const Console: React.FC = () => {
 
       // 收到消息
       socket.on('message', (data) => {
+        setMessage(data);
         console.log('收到socket消息', data);
       })
 

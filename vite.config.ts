@@ -14,6 +14,18 @@ export default defineConfig({
       prodEnabled: false, // 生产环境不启用
     }),
   ],
+  build: {
+    // sourcemap: true,
+    outDir: "integration",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom", "react-router-dom", "zustand"],
+          antd: ["antd"],
+        },
+      },
+    },
+  },
   // 配置路径别名解析
   resolve: {
     alias: {
