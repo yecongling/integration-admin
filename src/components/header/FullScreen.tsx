@@ -3,6 +3,10 @@ import screenfull from "screenfull";
 import {FullscreenExitOutlined, FullscreenOutlined} from "@ant-design/icons";
 import {Tooltip, message} from "antd";
 
+/**
+ * 全屏展示组件
+ * @returns 组件内容
+ */
 const FullScreen: React.FC = () => {
   const [fullScreen, setFullScreen] = useState<boolean>(screenfull.isFullscreen);
   useEffect(() => {

@@ -1,0 +1,108 @@
+import { MockMethod } from "vite-plugin-mock";
+
+const project: Array<MockMethod> = [
+  {
+    url: "/api/project/endpoint/getEndpoints",
+    method: "get",
+    response: () => {
+      return {
+        code: 200,
+        message: "",
+        data: [
+          {
+            id: "EP00000000001",
+            name: "queryService",
+            type: "SOAP(CXF)",
+            mode: "IN_OUT",
+            status: 1,
+            projectId: "PJ00000000001",
+            updateTime: "2023-05-08 09:09:09",
+            description: "查询服务",
+          },
+          {
+            id: "EP00000000002",
+            name: "postHTTPService",
+            type: "HTTP(Netty)",
+            mode: "IN_OUT",
+            status: 2,
+            projectId: "PJ00000000001",
+            updateTime: "2023-05-08 09:09:09",
+            description: "发送HTTP请求服务",
+          },
+          {
+            id: "EP00000000003",
+            name: "queryMySQL",
+            type: "MySQL",
+            mode: "IN_OUT",
+            status: 1,
+            projectId: "",
+            updateTime: "2023-05-08 09:09:09",
+            description: "查询mysql",
+          },
+          {
+            id: "EP00000000004",
+            name: "getMsgFromMQ",
+            type: "kafka",
+            mode: "IN_OUT",
+            status: 3,
+            projectId: "PJ00000000001",
+            updateTime: "2023-05-08 09:09:09",
+            description: "从kafa中获取消息",
+          },
+          {
+            id: "EP00000000005",
+            name: "getMsgFromMQ",
+            type: "kafka",
+            mode: "IN_OUT",
+            status: 3,
+            projectId: "PJ00000000001",
+            updateTime: "2023-05-08 09:09:09",
+            description: "从kafa中获取消息",
+          },
+          {
+            id: "EP00000000006",
+            name: "getMsgFromMQ",
+            type: "kafka",
+            mode: "IN_OUT",
+            status: 2,
+            projectId: "PJ00000000001",
+            updateTime: "2023-05-08 09:09:09",
+            description: "从kafa中获取消息",
+          },
+          {
+            id: "EP00000000007",
+            name: "getMsgFromMQ",
+            type: "kafka",
+            mode: "IN_OUT",
+            status: 1,
+            projectId: "PJ00000000001",
+            updateTime: "2023-05-08 09:09:09",
+            description: "从kafa中获取消息",
+          },
+          {
+            id: "EP00000000008",
+            name: "getMsgFromMQ",
+            type: "kafka",
+            mode: "IN_OUT",
+            status: 3,
+            projectId: "PJ00000000001",
+            updateTime: "2023-05-08 09:09:09",
+            description: "从kafa中获取消息",
+          },
+          {
+            id: "EP00000000009",
+            name: "getMsgFromMQ",
+            type: "kafka",
+            mode: "IN_OUT",
+            status: 1,
+            projectId: "PJ00000000001",
+            updateTime: "2023-05-08 09:09:09",
+            description: "从kafa中获取消息",
+          },
+        ],
+      };
+    },
+  },
+];
+
+export default project;

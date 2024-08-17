@@ -24,11 +24,6 @@ export interface RequestOptions {
   joinTime?: boolean;
   //是否在标头中发送令牌
   withToken?: boolean;
-}
-
-export interface Result<T = any> {
-  code: number;
-  msg: string;
-  data: T;
-
+  // 是否加密数据 1 加密 0 不加密 默认1
+  encrypt?: number;
 }

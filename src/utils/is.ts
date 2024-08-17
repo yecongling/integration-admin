@@ -8,7 +8,7 @@ export function isObject(val: any): val is Record<any, any> {
     return val !== null && is(val, 'Object');
 }
 
-export function isFunction(val: unknown): val is Function {
+export function isFunction(val: unknown): boolean {
     return typeof val === 'function';
 }
 
