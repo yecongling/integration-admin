@@ -16,4 +16,12 @@ export interface EndpointType {
 export interface EndpointTypeConfig {
   id: string;
   typeId: string;
+  name: string;
+  title: string;
+  description?: string;
+  type: string;
+  defaultValue?: string;
+  options?: any[];
+  validationRules?: Record<string, any>;
+  appliesTo: "consumer" | "producer";
 }

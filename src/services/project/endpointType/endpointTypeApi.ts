@@ -17,7 +17,7 @@ export enum EndpointTypeApi {
  */
 export const getEndpointTypeTree = (type?: string) => {
   return HttpRequest.get<EndpointType[]>(
-    { url: EndpointTypeApi.getEndpointTypeTree, params: { type } },
+    { url: EndpointTypeApi.getEndpointTypeTree, params: { name: type } },
     { successMessageMode: "none" }
   );
 };
