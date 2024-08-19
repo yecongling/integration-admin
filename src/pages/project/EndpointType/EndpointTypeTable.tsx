@@ -25,7 +25,7 @@ const EndpointTypeTable: React.FC = () => {
 
   /**
    * 获取类型数据
-   * @param search 查询条件
+   * @param search 查询条件(通过端点类型名称检索的)
    */
   const getTypes = async (search?: string) => {
     setLoading(true);

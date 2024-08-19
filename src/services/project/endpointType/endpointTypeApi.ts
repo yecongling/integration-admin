@@ -7,7 +7,7 @@ export enum EndpointTypeApi {
   // 获取端点类型 行数据
   getEndpointTypes = "/project/endpointType/getEndpointTypes",
   // 查询端点类型配置项
-  getEndpointTypeConfig = "/project/endpointType/getEndpointTypeConfig"
+  getEndpointTypeConfig = "/project/endpointType/getEndpointTypeConfig",
 }
 
 /**
@@ -27,8 +27,11 @@ export const getEndpointTypeTree = (type?: string) => {
  * @param title 查询条件
  */
 export const getEndpointTypes = (title?: string) => {
-  return HttpRequest.get<EndpointType[]>({ url: EndpointTypeApi.getEndpointTypes, params: { title } }, { successMessageMode: "none" })
-}
+  return HttpRequest.post<EndpointType[]>(
+    { url: EndpointTypeApi.getEndpointTypes, data: { name: title } },
+    { successMessageMode: "none" }
+  );
+};
 
 /**
  * 根据端点类型获取他的相关配置项
@@ -36,5 +39,8 @@ export const getEndpointTypes = (title?: string) => {
  * @returns 配置
  */
 export const getEndpointTypeConfig = (typeId: string) => {
-  return HttpRequest.get<EndpointTypeConfig[]>({ url: EndpointTypeApi.getEndpointTypeConfig, params: { typeId } }, { successMessageMode: "none" })
-}
+  return HttpRequest.get<EndpointTypeConfig[]>(
+    { url: EndpointTypeApi.getEndpointTypeConfig, params: { typeId } },
+    { successMessageMode: "none" }
+  );
+};

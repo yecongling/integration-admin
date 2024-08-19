@@ -1,8 +1,9 @@
 import React, { memo, useEffect, useState } from "react";
 import { useEndpointContext } from "./endpointState";
-import { Card, Input, Tree } from "antd";
+import { Button, Card, Empty, Input, Tree } from "antd";
 import { getEndpointTypeTree } from "@/services/project/endpointType/endpointTypeApi";
 import { addKeyToData } from "@/utils/utils";
+import { useNavigate } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -10,6 +11,8 @@ const { Search } = Input;
  * 端点类型树
  */
 const EndpointTypeTree: React.FC = memo(() => {
+  // 导航
+  const navigate = useNavigate();
   const { state, dispatch } = useEndpointContext();
   const [endpointTypes, setEndpointTypes] = useState<any[]>([]);
   useEffect(() => {
@@ -79,7 +82,7 @@ const EndpointTypeTree: React.FC = memo(() => {
             paddingTop: "16px",
           }}
         >
-          {endpointTypes.length > 0 && (
+          {endpointTypes.length > 0 ? (
             <Tree
               treeData={endpointTypes}
               selectedKeys={state.selectedKeys}
@@ -89,6 +92,17 @@ const EndpointTypeTree: React.FC = memo(() => {
               blockNode
               onSelect={onTreeSelect}
             />
+          ) : (
+            <Empty description="暂无端点类型数据">
+              <Button
+                type="primary"
+                onClick={() => {
+                  navigate("/project/endpointType");
+                }}
+              >
+                前往维护
+              </Button>
+            </Empty>
           )}
         </section>
       </Card>
