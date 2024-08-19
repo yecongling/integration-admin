@@ -3,7 +3,7 @@ import { Card, Input, Table, Tag } from "antd";
 import type { TableProps } from "antd";
 import React, { useEffect, useState } from "react";
 import { useEndpointContext } from "../Endpoint/endpointState";
-import { getEndpointType } from "@/services/project/endpointType/endpointTypeApi";
+import { getEndpointTypes } from "@/services/project/endpointType/endpointTypeApi";
 import { addKeyToData } from "@/utils/utils";
 const { Search } = Input;
 /**
@@ -30,7 +30,7 @@ const EndpointTypeTable: React.FC = () => {
   const getTypes = async (search?: string) => {
     setLoading(true);
     try {
-      const types = await getEndpointType(search);
+      const types = await getEndpointTypes(search);
       // 数据添加key
       const transform = addKeyToData(types, "id");
       setTypes(transform);
