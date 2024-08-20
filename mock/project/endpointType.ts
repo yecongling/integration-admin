@@ -99,7 +99,7 @@ const project: Array<MockMethod> = [
   },
   {
     url: "/api/project/endpointType/getEndpointTypes",
-    method: "get",
+    method: "post",
     response: () => {
       return {
         code: 200,

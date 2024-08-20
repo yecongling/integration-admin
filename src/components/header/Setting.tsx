@@ -12,7 +12,7 @@ export type SettingProps = {
 const Setting: React.FC<SettingProps> = observer((props) => {
   // 从全局状态库中获取数据
   const { globalStore } = useStore();
-  const { theme, colorPrimary, setTheme, setColorPrimary } = globalStore;
+  const { theme, colorPrimary } = globalStore;
   const { open, setOpen } = props;
   const [value, setValue] = useState<ColorPickerProps['value']>(colorPrimary);
 
@@ -21,7 +21,7 @@ const Setting: React.FC<SettingProps> = observer((props) => {
    * @param checked
    */
   const changeTheme = (checked: boolean) => {
-    setTheme(checked ? 'light' : 'dark');
+    globalStore.setTheme(checked ? 'light' : 'dark');
   }
 
   return (
@@ -60,10 +60,10 @@ const Setting: React.FC<SettingProps> = observer((props) => {
                 allowClear
                 onChangeComplete={(color) => {
                   setValue(color);
-                  setColorPrimary(color.toHexString())
+                  globalStore.setColorPrimary(color.toHexString())
                 }}
                 onClear={() => {
-                  setColorPrimary(colorPrimary)
+                  globalStore.setColorPrimary(colorPrimary)
                 }}
               />
             </Col>
