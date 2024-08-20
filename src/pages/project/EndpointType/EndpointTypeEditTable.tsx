@@ -178,15 +178,16 @@ const EndpointTypeEditTable: React.FC = () => {
       align: "center",
       fixed: "right",
       render: (_text, record, _, action) => [
-        <a
-          key="editable"
-          onClick={() => {
-            action?.startEditable?.(record.id);
-          }}
-        >
-          编辑
-        </a>,
-        <a key="delete">删除</a>,
+        <div className="edit" key="editable" style={{width: "100%"}}>
+          <a
+            key="editable"
+            onClick={() => {
+              action?.startEditable?.(record.id);
+            }}
+          >
+            编辑
+          </a>
+        </div>
       ],
     },
   ];
@@ -215,14 +216,14 @@ const EndpointTypeEditTable: React.FC = () => {
         recordCreatorProps={
           position !== "hidden"
             ? {
-                position: position as "top",
-                record: {
-                  id: (Math.random() * 1000000).toFixed(0).toString(),
-                  type: "text",
-                  appliesTo: "producer",
-                },
-                creatorButtonText: "新增一条配置",
-              }
+              position: position as "top",
+              record: {
+                id: (Math.random() * 1000000).toFixed(0).toString(),
+                type: "text",
+                appliesTo: "producer",
+              },
+              creatorButtonText: "新增一条配置",
+            }
             : false
         }
       />
