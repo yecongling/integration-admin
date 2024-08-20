@@ -7,7 +7,7 @@ class GlobalStore {
     // 主题
     theme: 'dark' | 'light' = "light";
     // 侧边栏收缩
-    collapse: boolean = true;
+    collapse: boolean = false;
     // 默认颜色
     colorPrimary: string = "#1677ff";
     // 菜单
