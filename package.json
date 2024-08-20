@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
-    "antd": "^5.20.1",
+    "@ant-design/pro-components": "^2.7.15",
+    "antd": "^5.20.2",
     "axios": "^1.7.3",
     "crypto-js": "^4.2.0",
     "echarts": "^5.5.1",

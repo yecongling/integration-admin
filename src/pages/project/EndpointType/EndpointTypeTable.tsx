@@ -64,6 +64,20 @@ const EndpointTypeTable: React.FC = () => {
       width: 120,
       align: "left",
       ellipsis: true,
+      render(value) {
+        switch (value) {
+          case "1":
+            return <>协议组件</>;
+          case "2":
+            return "文件系统";
+          case "3":
+            return "消息队列";
+          case "4":
+            return "数据库";
+          case "5":
+            return "云服务";
+        }
+      },
     },
     {
       title: "状态",
