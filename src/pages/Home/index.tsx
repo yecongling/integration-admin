@@ -65,7 +65,7 @@ const Home: React.FC = () => {
 
       <Row style={{ marginBottom: "8px" }}>
         <Col span={24}>
-          <Card bordered={false}>
+          <Card bordered={false} hoverable>
             <Row style={{ marginBottom: "16px" }}>
               <Col span={4}>
                 <h3>今日核心指标</h3>
