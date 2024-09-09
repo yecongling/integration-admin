@@ -2,16 +2,16 @@ import { EndpointType } from "@/services/project/endpointType/endpointTypeModel"
 import { Card, Input, Table, Tag } from "antd";
 import type { TableProps } from "antd";
 import React, { useEffect, useState } from "react";
-import { useEndpointContext } from "../Endpoint/endpointState";
 import { getEndpointTypes } from "@/services/project/endpointType/endpointTypeApi";
 import { addKeyToData } from "@/utils/utils";
+import { useEndpointTypeContext } from "./EndpointTypeState";
 const { Search } = Input;
 /**
  * 端点类型表格
  */
 const EndpointTypeTable: React.FC = () => {
   // 获取全局的状态
-  const { dispatch } = useEndpointContext();
+  const { dispatch } = useEndpointTypeContext();
 
   const [selectedRowKey, setSelectedRowKey] = useState<React.Key | null>(null);
 
@@ -22,6 +22,16 @@ const EndpointTypeTable: React.FC = () => {
     // 查询表格数据
     getTypes();
   }, []);
+
+  useEffect(() => {
+    if (types.length > 0) {
+      setSelectedRowKey(types[0].id);
+      dispatch({
+        type: "SET_SELECTED_ROW",
+        payload: types[0]
+      });
+    }
+  }, [types]);
 
   /**
    * 获取类型数据
@@ -100,7 +110,7 @@ const EndpointTypeTable: React.FC = () => {
     setSelectedRowKey(record.id);
     dispatch({
       type: "SET_SELECTED_ROW",
-      payload: [record],
+      payload: record,
     });
   };
 

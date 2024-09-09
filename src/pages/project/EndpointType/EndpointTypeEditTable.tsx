@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useEndpointTypeContext } from "./EndpointTypeState";
 import { getEndpointTypeConfig } from "@/services/project/endpointType/endpointTypeApi";
 import { addKeyToData } from "@/utils/utils";
-import { EndpointTypeConfig } from "@/services/project/endpointType/endpointTypeModel";
-import { Divider } from "antd";
+import { EndpointType, EndpointTypeConfig } from "@/services/project/endpointType/endpointTypeModel";
+import { Button, Divider } from "antd";
 import { EditableProTable, type ProColumns } from "@ant-design/pro-components";
 import "./endpointType.scss";
 
@@ -27,24 +27,23 @@ const EndpointTypeEditTable: React.FC = () => {
     },
   ]);
 
-  const [position] = useState<string>("bottom");
 
   useEffect(() => {
-    if (state.selectedRow.length > 0) {
+    if (state.selectedRow) {
       queryConfig();
     }
-  }, state.selectedRow);
+  }, [state.selectedRow]);
 
   /**
    * 查询配置数据
    */
   const queryConfig = async () => {
     // 获取选中行
-    const { id } = state.selectedRow[0];
-    const data = await getEndpointTypeConfig(id);
+    const { id } = state.selectedRow as EndpointType;
+    // const data = await getEndpointTypeConfig(id);
     // 给数据添加key
-    const format = addKeyToData(data, "id");
-    setConfigData(format);
+    // const format = addKeyToData(data, "id");
+    // setConfigData(format);
   };
 
   // 定义表格的列
@@ -178,15 +177,18 @@ const EndpointTypeEditTable: React.FC = () => {
       align: "center",
       fixed: "right",
       render: (_text, record, _, action) => [
-        <div className="edit" key="editable" style={{width: "100%"}}>
-          <a
+        <div className="edit" key="editable" style={{ width: "100%" }}>
+          <Button
+            disabled={state.disabled}
+            type="link"
             key="editable"
             onClick={() => {
               action?.startEditable?.(record.id);
             }}
+
           >
             编辑
-          </a>
+          </Button>
         </div>
       ],
     },
@@ -214,9 +216,9 @@ const EndpointTypeEditTable: React.FC = () => {
           });
         }}
         recordCreatorProps={
-          position !== "hidden"
+          !state.disabled
             ? {
-              position: position as "top",
+              position: "bottom",
               record: {
                 id: (Math.random() * 1000000).toFixed(0).toString(),
                 type: "text",

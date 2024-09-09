@@ -1,5 +1,6 @@
 import { Col, Divider, Form, Input, Row, Select } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import { useEndpointTypeContext } from "./EndpointTypeState";
 
 /**
  * 端点类型基础配置（端点类型名称，描述）
@@ -7,6 +8,15 @@ import React from "react";
 const EndpointTypeProperties: React.FC = () => {
 
   const [form] = Form.useForm();
+
+  const { state } = useEndpointTypeContext();
+
+  useEffect(() => {
+    if (state.selectedRow) {
+      const selectedRow = state.selectedRow;
+      form.setFieldsValue(selectedRow)
+    }
+  }, [state]);
 
   // 表单提交
   const onFinish = (value: any) => {
@@ -18,7 +28,7 @@ const EndpointTypeProperties: React.FC = () => {
     <>
       <div className="title" style={{ fontSize: '18px', fontWeight: 'bold' }}>基础信息</div>
       <Divider style={{ margin: "12px 0" }} />
-      <Form form={form} onFinish={onFinish} initialValues={{ supportedMode: "IN_OUT" }}>
+      <Form form={form} onFinish={onFinish} initialValues={{ supportedMode: "IN_OUT" }} disabled={state.disabled}>
         <Row gutter={16}>
           <Col span={8}>
             <Form.Item name={"name"} label="名称" labelCol={{ span: 5 }} rules={[{ required: true, message: "类型名称不能为空" }]}>

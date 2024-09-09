@@ -117,7 +117,7 @@ const project: Array<MockMethod> = [
             id: "TP00002",
             supportedModes: "IN/IN_OUT",
             parentId: "FL0001",
-            status: 1
+            status: 0
           },
           {
             name: "FTP",

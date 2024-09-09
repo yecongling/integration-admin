@@ -8,6 +8,7 @@ import { Card, Col, Row } from "antd";
 import EndpointTypeTable from "./EndpointTypeTable";
 import EndpointTypeProperties from "./EndpointTypeProperties";
 import EndpointTypeEditTable from "./EndpointTypeEditTable";
+import EndpointTypeOperation from "./EndpointTypeOperation";
 
 /**
  * 端点类型配置，配置出来的东西用于端点维护界面新增端点的时候的端点配置项
@@ -40,6 +41,8 @@ const EndpointType: React.FC = () => {
             <EndpointTypeProperties />
             {/* 规则集 */}
             <EndpointTypeEditTable />
+            {/* 操作项 */}
+            <EndpointTypeOperation />
           </Card>
         </Col>
       </Row>
