@@ -5,7 +5,7 @@ import {
   reducer,
 } from "./EndpointTypeState";
 import { Card, Col, Row } from "antd";
-import EndpointTypeTable from "./EndpointTypeTable";
+import EndpointTypeTree from "./EndpointTypeTree";
 import EndpointTypeProperties from "./EndpointTypeProperties";
 import EndpointTypeEditTable from "./EndpointTypeEditTable";
 import EndpointTypeOperation from "./EndpointTypeOperation";
@@ -23,12 +23,12 @@ const EndpointType: React.FC = () => {
       <Row gutter={8} style={{ height: "100%" }}>
         <Col span={6} xl={10} xxl={6}>
           {/* 左边分类表格 */}
-          <EndpointTypeTable />
+          <EndpointTypeTree />
         </Col>
         {/* 右边配置项 */}
-        <Col span={18} xl={14} xxl={18} style={{ height: "100%" }}>
+        <Col span={18} xl={14} xxl={18} style={{ display: "flex", flexDirection: "column" }}>
           <Card
-            style={{ height: "100%" }}
+            style={{ marginBottom: "6px" }}
             styles={{
               body: {
                 height: "100%",
@@ -39,10 +39,12 @@ const EndpointType: React.FC = () => {
           >
             {/* 基础信息 */}
             <EndpointTypeProperties />
-            {/* 规则集 */}
-            <EndpointTypeEditTable />
+          </Card>
+          <Card style={{flex: '1'}}>
             {/* 操作项 */}
             <EndpointTypeOperation />
+            {/* 规则集 */}
+            <EndpointTypeEditTable />
           </Card>
         </Col>
       </Row>

@@ -1,4 +1,4 @@
-import { Button, Col, Divider, Row, Space } from "antd";
+import { Button, Col, Row, Space } from "antd";
 import React from "react";
 import { useEndpointTypeContext } from "./EndpointTypeState";
 import { CheckCircleOutlined, DeleteOutlined, EditOutlined, PlusOutlined, SaveOutlined, StopOutlined } from "@ant-design/icons";
@@ -10,8 +10,7 @@ const EndpointTypeOperation: React.FC = () => {
     const { state } = useEndpointTypeContext();
     return (
         <>
-            <Divider style={{ margin: "12px 0" }} />
-            <Row justify="end">
+            <Row justify="start" style={{ marginBottom: '8px' }}>
                 <Col>
                     <Space>
                         <Button type="primary" icon={<PlusOutlined />}>新增</Button>
