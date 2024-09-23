@@ -8,6 +8,11 @@ export enum LoginApi {
    * 登录
    */
   login = "/login",
+
+  /**
+   * 退出登录
+   */
+  logout = "/logout",
   /**
    * 获取验证码
    */
@@ -32,4 +37,12 @@ export const getCode = () => {
   return HttpRequest.get({
     url: LoginApi.getCode,
   });
+};
+
+/**
+ * 用户退出登录
+ * @param userId 用户ID
+ */
+export const logout = (userId: string) => {
+  HttpRequest.delete({ url: LoginApi.logout, params: { userId } });
 };

@@ -30,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 import Setting from "@/components/header/Setting";
 import { observer } from "mobx-react-lite";
 import MessageBox from "./component/MessageBox";
+import { logout } from "@/services/login/loginApi";
 
 const Header: React.FC = observer(() => {
   const [modal, contextHolder] = Modal.useModal();
@@ -80,10 +81,14 @@ const Header: React.FC = observer(() => {
           content: "确认退出登录吗？",
           okText: "确认",
           onOk: function () {
+            const token = sessionStorage.getItem("token");
+            
+            // 清除后端的信息
+            logout(token as string);
             // 清空token
-            localStorage.removeItem("token");
-            localStorage.removeItem("roleId");
-            localStorage.removeItem("isLogin");
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("roleId");
+            sessionStorage.removeItem("isLogin");
             // 退出到登录页面
             navigate("/login");
           },
