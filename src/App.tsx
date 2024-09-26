@@ -53,7 +53,7 @@ const App: React.FC = () => {
         theme={{
           token: {
             colorPrimary: colorPrimary,
-          },
+          }
         }}
         locale={zhCN}
       >
