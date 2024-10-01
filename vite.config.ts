@@ -10,8 +10,7 @@ export default defineConfig({
     viteMockServe({
       mockPath: "./mock/",
       logger: true,
-      localEnabled: true, // 开发环境开启
-      prodEnabled: false, // 生产环境不启用
+      enable: true,
     }),
   ],
   build: {
