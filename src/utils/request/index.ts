@@ -23,7 +23,7 @@ function createAxios(opts?: Partial<CreateAxiosOptions>) {
           isReturnNativeResponse: false,
           // 需要对返回数据进行处理
           isTransformResponse: true,
-          // post请求的时候添加参数到url
+          // post请求的时候添加参数到url（delete请求也需要添加）
           joinParamsToUrl: false,
           // 格式化提交参数时间
           formatDate: true,
@@ -31,7 +31,7 @@ function createAxios(opts?: Partial<CreateAxiosOptions>) {
           errorMessageMode: "modal",
           // 成功消息提示类型
           successMessageMode: "success",
-          // 接口地址（默认）
+          // 接口地址（默认前缀）
           apiUrl: "/api",
           // 接口拼接地址前缀
           urlPrefix: "",

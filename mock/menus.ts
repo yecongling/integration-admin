@@ -138,7 +138,7 @@ const permission: Array<MockMethod> = [
                   id: "11335",
                   name: "sys-project",
                   path: "/project/design",
-                  component: "project/Design",
+                  component: "project/Project",
                   route: "1",
                   meta: {
                     keepAlive: false,

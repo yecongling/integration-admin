@@ -1,5 +1,13 @@
 // 项目模型
 export interface ProjectModel {
-    id: string;
-    name: string;
+  key: string;
+  id: string;
+  status: string;
+  warning: boolean;
+  projectName: string;
+  projectPriority: number;
+  log?: number;
+  description?: string;
+  projectType: number;
+  chart: number;
 }
