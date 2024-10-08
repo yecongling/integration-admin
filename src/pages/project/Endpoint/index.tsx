@@ -43,10 +43,10 @@ const Endpoint: React.FC = () => {
     };
     const endpoints = await getEndpoints(endpoint);
     // 数据添加key
-    const tranformData = addKeyToData(endpoints, "id");
+    const transformData = addKeyToData(endpoints, "id");
     dispatch({
       type: "SET_ENDPOINTS",
-      payload: tranformData,
+      payload: transformData,
     });
   };
 

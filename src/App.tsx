@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StoreProvider } from "./context/storeContext";
 import { App as AntdApp, ConfigProvider, Spin } from "antd";
-import { useStore } from "./hooks/sotreContext";
+import { useGlobalStore } from "./hooks/sotreContext";
 import zhCN from "antd/locale/zh_CN";
 
 import "dayjs/locale/zh-cn";
@@ -15,7 +15,7 @@ import { getMenuListByRoleId } from "./services/system/menu/menuApi";
  */
 const App: React.FC = () => {
   // 全局状态
-  const { globalStore } = useStore();
+  const { globalStore } = useGlobalStore();
   const { colorPrimary } = globalStore;
 
   const [loading, setLoading] = useState<boolean>(false);

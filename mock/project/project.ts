@@ -2,7 +2,7 @@ import { MockMethod } from "vite-plugin-mock";
 
 const project: Array<MockMethod> = [
   {
-    url: "/api/project/design/getProjects",
+    url: "/api/project/getProjects",
     method: "get",
     response: () => {
       return {
@@ -10,7 +10,7 @@ const project: Array<MockMethod> = [
         message: "",
         data: [
           {
-            name: "web服务",
+            projectName: "web服务",
             id: "0-0",
           },
         ],

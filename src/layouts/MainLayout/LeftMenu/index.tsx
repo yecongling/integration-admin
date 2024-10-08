@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import favicon from "/vite.svg";
 import { RouteItem } from "@/types/route";
 import { addIcon, getOpenKeys, searchRoute } from "@/utils/utils";
-import { useStore } from "@/hooks/sotreContext";
+import { useGlobalStore } from "@/hooks/sotreContext";
 import { observer } from "mobx-react-lite";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
@@ -15,7 +15,7 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
  */
 const LeftMenu: React.FC = observer(() => {
   // 获取状态库中登录后请求的菜单
-  const { globalStore } = useStore();
+  const { globalStore } = useGlobalStore();
   const { menus, collapse, theme } = globalStore;
   const navigate = useNavigate();
   const { pathname } = useLocation();

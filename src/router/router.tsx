@@ -3,7 +3,7 @@ import { lazyLoad } from "./lazyLoad";
 import { Suspense, useEffect, useState } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { App, Skeleton } from "antd";
-import { useStore } from "@/hooks/sotreContext";
+import { useGlobalStore } from "@/hooks/sotreContext";
 import { handleRouter } from "@/utils/utils";
 import { antdUtils } from "@/utils/antd";
 import React from "react";
@@ -75,7 +75,7 @@ export const Router = observer(() => {
   const [route, setRoute] = useState([...routes]);
 
   // 从Store中获取Menu
-  const { globalStore } = useStore();
+  const { globalStore } = useGlobalStore();
   const { menus } = globalStore;
 
   useEffect(() => {

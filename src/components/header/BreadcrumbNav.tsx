@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Breadcrumb } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import { RouteItem } from "@/types/route";
-import { useStore } from "@/hooks/sotreContext";
+import { useGlobalStore } from "@/hooks/sotreContext";
 
 /**
  * 面包屑
@@ -12,7 +12,7 @@ const BreadcrumbNav: React.FC = () => {
   // 获取路由的地址，地址变化的时候去获取对应的菜单项，以此来拼接面包屑
   const location = useLocation();
   // 从后台获取的路由菜单
-  const { globalStore } = useStore();
+  const { globalStore } = useGlobalStore();
   const { menus } = globalStore;
   const [items, setItems] = useState<Record<string, any>[]>([]);
   useEffect(() => {

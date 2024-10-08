@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Col, ColorPicker, ColorPickerProps, Divider, Drawer, Row, Space, Switch } from "antd";
-import { useStore } from "@/hooks/sotreContext";
+import { useGlobalStore } from "@/hooks/sotreContext";
 import { observer } from "mobx-react-lite";
 
 export type SettingProps = {
@@ -11,7 +11,7 @@ export type SettingProps = {
 /* 系统配置界面 */
 const Setting: React.FC<SettingProps> = observer((props) => {
   // 从全局状态库中获取数据
-  const { globalStore } = useStore();
+  const { globalStore } = useGlobalStore();
   const { theme, colorPrimary } = globalStore;
   const { open, setOpen } = props;
   const [value, setValue] = useState<ColorPickerProps['value']>(colorPrimary);

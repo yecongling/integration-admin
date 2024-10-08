@@ -9,7 +9,7 @@ import {
 import "./login.scss";
 import filing from "@/assets/images/filing.png";
 import { useNavigate } from "react-router-dom";
-import { useStore } from "@/hooks/sotreContext";
+import { useGlobalStore } from "@/hooks/sotreContext";
 import { login } from "@/services/login/loginApi";
 import { getMenuListByRoleId } from "@/services/system/menu/menuApi";
 
@@ -18,7 +18,7 @@ import { getMenuListByRoleId } from "@/services/system/menu/menuApi";
  * @returns 组件内容
  */
 const Login: React.FC = () => {
-  const { globalStore } = useStore();
+  const { globalStore } = useGlobalStore();
   const [form] = Form.useForm();
   const inputRef = useRef(null);
   const navigate = useNavigate();
