@@ -71,7 +71,7 @@ const ProjectTypeModal: React.FC<ProjectTypeProps> = (props) => {
               <li>高性能路由处理</li>
               <li>消息内容以及处理流程记录可选择性开关</li>
               <li>同步消息处理、支持事务</li>
-              <li>终端及路由以项目味单位统一开关</li>
+              <li>终端及路由以项目为单位统一开关</li>
               <li>终端不可和其他项目共享</li>
             </ul>
           </Col>

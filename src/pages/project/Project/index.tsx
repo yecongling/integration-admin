@@ -20,6 +20,7 @@ import { ProjectModel } from "@/services/project/design/projectModel";
 import { getProjects } from "@/services/project/design/designApi.ts";
 import { addKeyToData } from "@/utils/utils.ts";
 import { useGlobalStore } from "@/hooks/sotreContext";
+import { useNavigate } from "react-router-dom";
 
 /**
  *
@@ -29,6 +30,8 @@ const Design: React.FC = () => {
   // 从全局状态库中获取数据
   const { globalStore } = useGlobalStore();
   const { colorPrimary } = globalStore;
+  // 路由跳转
+  const navigate = useNavigate();
   // 项目信息
   const [projects, setProjects] = useState<ProjectModel[]>([]);
   // 分段器选中的值
@@ -37,10 +40,6 @@ const Design: React.FC = () => {
   const inputRef = useRef<InputRef>(null);
   // 分段器上的选项
   const items: SegmentedProps["options"] = [
-    {
-      label: "全部",
-      value: "all",
-    },
     {
       label: "接口项目",
       value: "interface",
@@ -103,7 +102,7 @@ const Design: React.FC = () => {
       <Row style={{ marginTop: "8px" }}>
         <Col span={20}>
           <Segmented
-            defaultValue="all"
+            defaultValue="interface"
             options={items}
             value={projectType}
             onChange={onSegmentedChange}
@@ -163,6 +162,7 @@ const Design: React.FC = () => {
                 size="small"
                 extra={<Switch checked={project.status === "1"} />}
                 style={{ width: 225, height: 256, cursor: "pointer" }}
+                onClick={() => navigate("/project/designer", {state: project})}
               >
                 <p>这里面是项目内容</p>
               </Card>
