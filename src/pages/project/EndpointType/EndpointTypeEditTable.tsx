@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useEndpointTypeContext } from "./EndpointTypeState";
-import { getEndpointTypeConfig } from "@/services/project/endpointType/endpointTypeApi";
-import { addKeyToData } from "@/utils/utils";
 import { EndpointType, EndpointTypeConfig } from "@/services/project/endpointType/endpointTypeModel";
 import { Button, Divider } from "antd";
 import { EditableProTable, type ProColumns } from "@ant-design/pro-components";

@@ -25,7 +25,7 @@ const EndpointSearch: React.FC<EndpointSearchProps> = memo((props) => {
     getProjects().then((projects) => {
       setProjects(
         projects.map((item) => ({
-          label: item.name,
+          label: item.projectName,
           value: item.id,
         }))
       );

@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
-import { Button, Form, Input, InputRef, message, Modal, Select } from "antd";
+import React, { useEffect, useRef } from "react";
+import { Form, Input, InputRef, message, Modal, Select } from "antd";
 import {
-  ArrowLeftOutlined,
   CheckCircleOutlined,
   CloseCircleOutlined,
 } from "@ant-design/icons";
@@ -21,30 +20,22 @@ const ProjectInfoModal: React.FC<ProjectInfoProps> = (props) => {
     open,
     setOpen,
     isEdit,
-    changeModal,
-    projectName,
-    editInfo,
-    projectData,
-    searchForm,
-    onSearch,
+    projectId,
+    projectType
   } = props;
   const [messageApi, contextHolder] = message.useMessage();
-  /**
-   * 窗口打开关闭
-   * @param open
-   */
-  const handleAfterOpen = (open: boolean) => {
-    if (open) {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-      return;
-    }
-    if (projectName.current) {
-      projectName.current.focus();
-    }
-  };
 
+  // 表单数据
+  const [projectData] = Form.useForm();
+  // 输入框
+  // 查询项目信息
+  useEffect(() => {
+    console.log("弹窗渲染一次")
+    if (projectId) {
+      // 查询项目信息
+
+    }
+  }, [projectId]);
   /**
    * 关闭弹窗
    */
@@ -72,7 +63,6 @@ const ProjectInfoModal: React.FC<ProjectInfoProps> = (props) => {
       if (result.code === 200) {
         messageApi.success(result.message);
         setOpen(false);
-        onSearch(searchForm.getFieldsValue());
       }
     }
   };
@@ -85,21 +75,10 @@ const ProjectInfoModal: React.FC<ProjectInfoProps> = (props) => {
         centered
         maskClosable={false}
         title={
-          <>
-            {" "}
-            {!isEdit && (
-              <Button
-                size="middle"
-                style={{ marginRight: "12px" }}
-                icon={<ArrowLeftOutlined />}
-                onClick={() => changeModal("3")}
-              ></Button>
-            )}
-            <span className="title">
-              {editInfo.opr}
-              {editInfo.title}项目
-            </span>
-          </>
+          <span className="title">
+            编辑项目
+          </span>
+
         }
         okText="确认"
         okButtonProps={{ icon: <CheckCircleOutlined /> }}
@@ -115,7 +94,11 @@ const ProjectInfoModal: React.FC<ProjectInfoProps> = (props) => {
           });
         }}
         onCancel={onCancel}
-        afterOpenChange={handleAfterOpen}
+        afterOpenChange={(open: boolean) => {
+          if (open && inputRef.current) {
+            inputRef.current?.focus()
+          }
+        }}
       >
         <Form
           form={projectData}
@@ -139,12 +122,12 @@ const ProjectInfoModal: React.FC<ProjectInfoProps> = (props) => {
             label="项目名称"
             rules={[{ required: true, message: "请输入项目名称" }]}
           >
-            <Input ref={inputRef} placeholder="项目名称" />
+            <Input ref={inputRef} placeholder="项目名称" autoFocus />
           </Form.Item>
           <Form.Item name="description" label="描述">
             <Input.TextArea rows={4} placeholder="描述" />
           </Form.Item>
-          {editInfo.projectType === 1 ? (
+          {projectType === "integration" ? (
             <Form.Item name="log" label="消息日志记录">
               <Select
                 options={[

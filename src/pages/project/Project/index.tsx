@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./index.scss";
 import {
+  Button,
   Card,
   Col,
   Flex,
@@ -10,9 +11,13 @@ import {
   Segmented,
   SegmentedProps,
   Switch,
+  Tooltip,
 } from "antd";
 import {
+  CloseCircleOutlined,
+  EditOutlined,
   FileDoneOutlined,
+  NodeIndexOutlined,
   PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
@@ -21,6 +26,7 @@ import { getProjects } from "@/services/project/design/designApi.ts";
 import { addKeyToData } from "@/utils/utils.ts";
 import { useGlobalStore } from "@/hooks/sotreContext";
 import { useNavigate } from "react-router-dom";
+import ProjectInfoModal from "./ProjectInfoModal";
 
 /**
  *
@@ -35,7 +41,13 @@ const Design: React.FC = () => {
   // 项目信息
   const [projects, setProjects] = useState<ProjectModel[]>([]);
   // 分段器选中的值
-  const [projectType, setProjectType] = useState<string>("all");
+  const [projectType, setProjectType] = useState<string>("interface");
+  const [open, setopen] = useState<boolean>(false);
+
+  // 当前点击的项目
+  const [projectId, setProjectId] = useState<string>("");
+  // 判定是不是编辑操作
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   // 检索框
   const inputRef = useRef<InputRef>(null);
   // 分段器上的选项
@@ -93,83 +105,143 @@ const Design: React.FC = () => {
     return addKeyToData(result, "id");
   };
 
+  /**
+   * 新增项目
+   */
+  const addProject = () => {
+    setopen(true);
+    setIsEdit(false);
+  };
+
+  /**
+   * 更新项目
+   */
+  const updateProject = (project: ProjectModel) => {};
+
   return (
-    <Card
-      style={{ height: "100%", display: "flex", flexDirection: "column" }}
-      styles={{ body: { height: "100%" } }}
-    >
-      <h3 style={{ margin: "0" }}>项目列表</h3>
-      <Row style={{ marginTop: "8px" }}>
-        <Col span={20}>
-          <Segmented
-            defaultValue="interface"
-            options={items}
-            value={projectType}
-            onChange={onSegmentedChange}
-          />
-        </Col>
-        <Col span={4} style={{ textAlign: "right" }}>
-          <Input
-            autoFocus
-            placeholder="搜索"
-            variant="filled"
-            suffix={<SearchOutlined />}
-            ref={inputRef}
-            onPressEnter={onPressEnter}
-          />
-        </Col>
-      </Row>
-      <Row
-        style={{
-          flex: 1,
-          marginTop: "16px",
-          justifyContent: projects.length === 0 ? "center" : "",
-        }}
-        gutter={16}
+    <>
+      <Card
+        style={{ height: "100%", display: "flex", flexDirection: "column" }}
+        styles={{ body: { height: "100%" } }}
       >
-        <Flex wrap gap={16} style={{ alignContent: "flex-start" }}>
-          {/* 这里需要添加一个新增的 */}
-          <Card
-            style={{
-              width: 225,
-              height: 256,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            styles={{ body: { textAlign: "center" } }}
-          >
-            <PlusOutlined style={{ color: colorPrimary, fontSize: 44 }} />
-            <p>新建项目</p>
-          </Card>
-          {projects.length > 0 &&
-            projects.map((project: ProjectModel) => (
-              <Card
-                key={project.id}
-                title={
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <FileDoneOutlined
-                      style={{
-                        fontSize: "18px",
-                        color: colorPrimary,
-                        marginRight: "8px",
-                      }}
-                    />{" "}
-                    {project.projectName}
+        <h3 style={{ margin: "0" }}>项目列表</h3>
+        <Row style={{ marginTop: "8px" }}>
+          <Col span={20}>
+            <Segmented
+              defaultValue="interface"
+              options={items}
+              value={projectType}
+              onChange={onSegmentedChange}
+            />
+          </Col>
+          <Col span={4} style={{ textAlign: "right" }}>
+            <Input
+              autoFocus
+              placeholder="搜索"
+              variant="filled"
+              suffix={<SearchOutlined />}
+              ref={inputRef}
+              onPressEnter={onPressEnter}
+            />
+          </Col>
+        </Row>
+        <Row
+          style={{
+            flex: 1,
+            marginTop: "16px",
+            justifyContent: projects.length === 0 ? "center" : "",
+          }}
+          gutter={16}
+        >
+          <Flex wrap gap={24} style={{ alignContent: "flex-start" }}>
+            {/* 这里需要添加一个新增的 */}
+            <Card
+              style={{
+                width: 225,
+                height: 256,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              styles={{ body: { textAlign: "center" } }}
+              onClick={addProject}
+            >
+              <PlusOutlined style={{ color: colorPrimary, fontSize: 44 }} />
+              <p>新建项目</p>
+            </Card>
+            {projects.length > 0 &&
+              projects.map((project: ProjectModel) => (
+                <Card
+                  key={project.id}
+                  className="project-card"
+                  title={
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <FileDoneOutlined
+                        style={{
+                          fontSize: "18px",
+                          color: colorPrimary,
+                          marginRight: "8px",
+                        }}
+                      />{" "}
+                      {project.projectName}
+                    </div>
+                  }
+                  size="small"
+                  extra={
+                    <div style={{ display: "flex" }}>
+                      <Tooltip title="放入回收站" className="toRecrycle">
+                        <Button
+                          type="text"
+                          shape="circle"
+                          style={{
+                            position: "absolute",
+                            top: "-16px",
+                            right: "-16px",
+                          }}
+                          icon={
+                            <CloseCircleOutlined
+                              style={{
+                                color: "red",
+                                fontSize: 18,
+                              }}
+                            />
+                          }
+                        />
+                      </Tooltip>
+                      <Switch defaultChecked />
+                    </div>
+                  }
+                  style={{ width: 225, height: 256, cursor: "pointer" }}
+                >
+                  <p>这里面是项目内容</p>
+                  {/* 操作按钮 */}
+                  <div className="buttonGroup">
+                    <Button
+                      icon={<NodeIndexOutlined />}
+                      type="primary"
+                      onClick={() =>
+                        navigate("/project/designer", { state: project })
+                      }
+                    >
+                      设计
+                    </Button>
+                    <Button icon={<EditOutlined />}>编辑</Button>
                   </div>
-                }
-                size="small"
-                extra={<Switch checked={project.status === "1"} />}
-                style={{ width: 225, height: 256, cursor: "pointer" }}
-                onClick={() => navigate("/project/designer", {state: project})}
-              >
-                <p>这里面是项目内容</p>
-              </Card>
-            ))}
-        </Flex>
-      </Row>
-    </Card>
+                </Card>
+              ))}
+          </Flex>
+        </Row>
+      </Card>
+      {/* 新增项目的弹窗界面 */}
+      <ProjectInfoModal
+        open={open}
+        setOpen={setopen}
+        projectId={projectId}
+        projectType={projectType}
+        isEdit={isEdit}
+      />
+    </>
   );
 };
 export default Design;

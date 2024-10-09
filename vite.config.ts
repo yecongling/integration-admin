@@ -2,7 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { viteMockServe } from "vite-plugin-mock";
+import { randomBytes } from "crypto";
 
+// 自定义生成随机字符串的函数
+function randomString(length: number) {
+  return randomBytes(Math.ceil(length / 2))
+    .toString("hex")
+    .slice(0, length);
+}
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -18,6 +25,8 @@ export default defineConfig({
     outDir: "integration",
     rollupOptions: {
       output: {
+        chunkFileNames: () => `${randomString(8)}.[hash].[ext]`,
+        // 分包出来的
         manualChunks: {
           react: ["react", "react-dom"],
           reactRouterDom: ["react-router-dom"],
