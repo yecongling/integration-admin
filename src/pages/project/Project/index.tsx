@@ -202,7 +202,7 @@ const Design: React.FC = () => {
                           icon={
                             <CloseCircleOutlined
                               style={{
-                                color: "red",
+                                color: "#FF0000",
                                 fontSize: 18,
                               }}
                             />
