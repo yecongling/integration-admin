@@ -78,7 +78,7 @@ const Login: React.FC = () => {
                     fontWeight: 700,
                   }}
                 >
-                  集成信息管理平台
+                  集成信息管理平台 - 即将替换成官网
                 </span>
               </p>
               <p style={{ fontSize: "14px", margin: 0 }}>
